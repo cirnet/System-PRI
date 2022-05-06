@@ -1,5 +1,7 @@
 import psycopg2
 import psycopg2.extras
+from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
 
 hostname = 'localhost'
 database = 'postgres'
@@ -11,14 +13,13 @@ cur = None
 
 try:
     with psycopg2.connect(
-                host = hostname,
-                dbname = database,
-                user = username,
-                password = pwd,
-                port = port_id) as conn:
+            host=hostname,
+            dbname=database,
+            user=username,
+            password=pwd,
+            port=port_id) as conn:
 
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-
             cur.execute('DROP TABLE IF EXISTS employee')
 
             create_script = ''' CREATE TABLE IF NOT EXISTS users (
@@ -29,17 +30,18 @@ try:
                                     role varchar(10))'''
             cur.execute(create_script)
 
-            insert_script  = 'INSERT INTO users (id, name, surname, index, role) VALUES (%s, %s, %s, %s, %s)'
-            insert_values = [(1, 'Piotr', 'Walczak', '440555', 1), (2, 'Arkadiusz', 'Nowakowski', 123456, 1), (3, 'Małgorzata', 'Bąk', 123452, 1)]
-            for record in insert_values:
-                cur.execute(insert_script, record)
-
-
-
+            #insert_script = 'INSERT INTO users (id, name, surname, index, role) VALUES (%s, %s, %s, %s, %s)'
+            # insert_values = [(1, 'Piotr', 'Walczak', '440555', 1),
+            #                  (2, 'Arkadiusz', 'Nowakowski', 123456, 1),
+            #                  (3, 'Małgorzata', 'Bąk', 123452, 1)]
+            # for record in insert_values:
+            #     cur.execute(insert_script, record)
 
             cur.execute('SELECT * FROM users')
             for record in cur.fetchall():
                 print(record['name'], record['surname'])
+
+
 except Exception as error:
     print(error)
 finally:

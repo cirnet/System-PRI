@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Calendar from "./Calendar";
-import OrganizacjaZapisów from "./OrganizacjaZapisów";
+import OrganizacjaZapisow from "./OrganizacjaZapisow";
 function Tools() {
   const [state, setState] = useState(undefined);
   return (
@@ -22,7 +22,7 @@ function Tools() {
           </>
         ) : state === false ? (
           <>
-            <OrganizacjaZapisów />
+            <OrganizacjaZapisow />
           </>
         ) : (
           <></>

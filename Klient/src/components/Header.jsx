@@ -33,7 +33,7 @@ function Header() {
               </button>
             </li>
             <li>
-              <button className="btn" onClick={() => navigate("/protectors")}>
+              <button className="btn" onClick={() => navigate("/opiekunowie")}>
                 Opiekunowie
               </button>
             </li>

@@ -4,15 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { format, startOfWeek, addWeeks, subWeeks } from "date-fns";
 import { pl } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
-import Spinner from "../components/Spinner";
-import Schedule from "../components/Schedule";
+import Spinner from "../../components/Spinner";
+import Schedule from "../../components/Schedule";
+
 import "react-datepicker/dist/react-datepicker.css";
-import formatDate from "../features/schedule/formatDate";
+import formatDate from "../../features/schedule/formatDate";
 import {
   updateSchedule,
   getSchedule,
   reset,
-} from "../features/schedule/scheduleSlice";
+} from "../../features/schedule/scheduleSlice";
 
 registerLocale("pl", pl);
 function Calendar() {
@@ -32,19 +33,7 @@ function Calendar() {
   // console.log("schedule:", schedule);
 
   //const [scheduleLocal, setScheduleLocal] = useState(schedule);
-  const [scheduleLocal, setScheduleLocal] = useState([
-    '2022-05-18T10:00:00.000Z',
-    '2022-05-19T10:00:00.000Z',
-    '2022-05-20T10:00:00.000Z',
-    '2022-05-19T09:30:00.000Z',
-    '2022-05-19T08:30:00.000Z',
-    '2022-05-19T07:30:00.000Z',
-    '2022-05-19T08:00:00.000Z',
-    '2022-05-19T09:00:00.000Z',
-    '2022-05-18T09:30:00.000Z',
-    '2022-05-20T09:30:00.000Z',
-    '2022-05-19T07:00:00.000Z'
-  ],)
+  const [scheduleLocal, setScheduleLocal] = useState([]);
 
   const onSubmit = (e) => {
     dispatch(updateSchedule(scheduleLocal));

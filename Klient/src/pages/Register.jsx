@@ -8,13 +8,12 @@ import Spinner from "../components/Spinner";
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password2: "",
+    imie: "",
+    nazwisko: "",
+    rola: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { imie, nazwisko, rola } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ function Register() {
       navigate("/");
     }
 
-    dispatch(reset());
+    //dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -45,18 +44,24 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (password !== password2) {
-      toast.error("Passwords do not match");
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-        schedule: [],
-      };
+    // if (password !== password2) {
+    //   toast.error("Passwords do not match");
+    // } else {
+    //   const userData = {
+    //     name,
+    //     email,
+    //     password,
+    //     schedule: [],
+    //   };
 
-      dispatch(register(userData));
-    }
+    // }
+    const userData = {
+      imie,
+      nazwisko,
+      rola,
+    };
+    console.log("userdata daje:", userData);
+    dispatch(register(userData));
   };
 
   if (isLoading) {
@@ -78,43 +83,32 @@ function Register() {
             <input
               type="text"
               className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              placeholder="Enter your name"
+              id="imie"
+              name="imie"
+              value={imie}
+              placeholder="Enter your imie"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              type="email"
+              type="text"
               className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
+              id="nazwisko"
+              name="nazwisko"
+              value={nazwisko}
+              placeholder="Enter your nazwisko"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              type="password"
+              type="text"
               className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password2"
-              name="password2"
-              value={password2}
-              placeholder="Confirm password"
+              id="rola"
+              name="rola"
+              value={rola}
+              placeholder="Enter your rola"
               onChange={onChange}
             />
           </div>

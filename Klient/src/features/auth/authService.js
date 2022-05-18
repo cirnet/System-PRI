@@ -4,8 +4,9 @@ const API_URL = "/api/users/";
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL, userData);
-
+  console.log("userData dostałam:", userData);
+  const response = await axios.post('/api/prowadzacy/', userData);
+  console.log(response.data);
   if (response.data) {
     console.log(response.data);
     localStorage.setItem("user", JSON.stringify(response.data));
@@ -16,8 +17,9 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
+  console.log(userData);
   const response = await axios.post(API_URL + "login", userData);
-
+  console.log(response.data);
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }

@@ -6,7 +6,10 @@ import Header from './components/Header'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import MyProfile from './pages/MyProfile'
-import Tools from './pages/Tools'
+import Tools from './pages/Tools/Tools'
+import Opiekunowie from './pages/Opiekunowie'
+import Teams from './pages/Teams'
+ 
 
 function App() {
 
@@ -21,6 +24,8 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/profile' element={<MyProfile />} />
             <Route path='/tools' element={<Tools />} />
+            <Route path='/opiekunowie' element={<Opiekunowie />} />
+            <Route path='/teams' element={<Teams />} />
           </Routes>
         </div>
       </Router>

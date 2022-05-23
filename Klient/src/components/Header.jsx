@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaRegLightbulb } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
@@ -17,40 +17,42 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">System-PRI</Link>
+        <Link to="/">
+          <FaRegLightbulb size="15px" /> System PRI 
+        </Link> 
       </div>
       <ul>
         {user ? (
           <>
             <li>
-              <button className="btn" onClick={() => navigate("/profile")}>
+              <button className="btn-header" onClick={() => navigate("/profile")}>
                 Mój profil
               </button>
             </li>
             <li>
-              <button className="btn" onClick={() => navigate("/tools")}>
+              <button className="btn-header" onClick={() => navigate("/tools")}>
                 Narzędzia
               </button>
             </li>
             <li>
-              <button className="btn" onClick={() => navigate("/opiekunowie")}>
+              <button className="btn-header" onClick={() => navigate("/opiekunowie")}>
                 Opiekunowie
               </button>
             </li>
             <li>
-              <button className="btn" onClick={() => navigate("/teams")}>
+              <button className="btn-header" onClick={() => navigate("/teams")}>
                 Zespoły
               </button>
             </li>
             <li>
-              <button className="btn" onClick={onLogout}>
+              <button className="btn-header" onClick={onLogout}>
                 <FaSignOutAlt /> Wyloguj
               </button>
             </li>
           </>
         ) : (
           <>
-            <li>
+            <li style={{marginRight: "20px"}}>
               <Link to="/login">
                 <FaSignInAlt /> Login
               </Link>

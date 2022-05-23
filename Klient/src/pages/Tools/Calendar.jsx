@@ -29,8 +29,6 @@ function Calendar() {
     (state) => state.schedule
   );
 
-  // console.log("user:", user);
-  // console.log("schedule:", schedule);
 
   //const [scheduleLocal, setScheduleLocal] = useState(schedule);
   const [scheduleLocal, setScheduleLocal] = useState([]);
@@ -43,10 +41,12 @@ function Calendar() {
     if (jump > 0) {
       setStartDate(startOfWeek(addWeeks(startDate, 1), { weekStartsOn: 1 }));
       setEndDate(startOfWeek(addWeeks(startDate, 2), { weekStartsOn: 0 }));
-    } else if (jump < 0) {
+    }
+    else if (jump < 0) {
       setStartDate(startOfWeek(subWeeks(startDate, 1), { weekStartsOn: 1 }));
       setEndDate(startOfWeek(startDate, { weekStartsOn: 0 }));
-    } else {
+    }
+    else {
       setStartDate(startOfWeek(date, { weekStartsOn: 1 }));
       setEndDate(startOfWeek(addWeeks(date, 1), { weekStartsOn: 0 }));
     }
@@ -79,10 +79,6 @@ function Calendar() {
 
   return (
     <>
-      <section className="heading">
-        <h1>Welcome {user && user.name}</h1>
-        <p>Organizacja harmonogramu</p>
-      </section>
       <div>
         <div
           style={{
@@ -94,35 +90,37 @@ function Calendar() {
           <div
             style={{
               width: "900px",
-              height: "600px",
-              overflow: "auto",
+              paddingBottom: "50px",
+              // height: "900px",
+              // overflow: "auto",
             }}
           >
             <div>
-              od {formatDate(startDate)} do {formatDate(endDate)}
+              <p>{formatDate(startDate)} - {formatDate(endDate)}</p>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-center",
-                  paddingBottom: "20px",
+                  paddingBottom: "10px",
                 }}
               >
                 <button
-                  className="btn "
+                  className="btn-arrow "
                   onClick={(date) => {
                     handleDateChange(date, -1);
                   }}
                 >
-                  &lt;
+                  &#x025C2;
                 </button>
+
                 <button
-                  className="btn "
+                  className="btn-arrow "
                   onClick={(date) => {
                     handleDateChange(date, 1);
                   }}
                 >
-                  &gt;
+                  &#x025B8;
                 </button>
               </div>
               <DatePicker
@@ -137,14 +135,16 @@ function Calendar() {
                 locale={pl}
               ></DatePicker>
             </div>
+            <div className="schedule">
             <Schedule
               startDate={startDate}
               schedule={scheduleLocal}
               setSchedule={setScheduleLocal}
-            />
+              />
+              </div>
           </div>
         </div>
-        <button className="btn " onClick={onSubmit}>
+        <button className="btn-confirm " onClick={onSubmit}>
           Confirm
         </button>
       </div>

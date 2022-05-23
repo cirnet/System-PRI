@@ -7,7 +7,7 @@ function Tools() {
   const [state, setState] = useState(undefined);
   return (
     <>
-      <div className="header">
+      <div >
         <button className="btn " onClick={() => setState(true)}>
           Organizacja Harmonogramu
         </button>

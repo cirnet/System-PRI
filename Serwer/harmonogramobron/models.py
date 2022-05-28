@@ -1,13 +1,14 @@
 from django.db import models
 
+#index, dzien, miesiac, nr dnia, rok, godzina(hh:mm:ss), str_czas, prowadzacy
+from django.contrib.postgres.fields import ArrayField
+
 class Harmonogram(models.Model):
     id = models.BigAutoField(primary_key=True)
-    czas_start = models.DateTimeField(blank=True, null=True)
-    czas_koniec = models.DateTimeField(blank=True, null=True)
-    typ = models.CharField(max_length=1, blank=True, null=True)
-
+    schedule = ArrayField(models.CharField(max_length=200), blank=True)
+    opiekun = models.TextField(max_length=50, blank=True, null=True)
     class Meta:
-        managed = False
+        managed = True
         db_table = 'harmonogram'
 
 
@@ -18,5 +19,5 @@ class Prowadzacy(models.Model):
     rola = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'prowadzacy'

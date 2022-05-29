@@ -30,6 +30,12 @@ Na przykładzie Ubuntu:
 
 `pip install psycopg2`
 
+### LDAP:
+
+`sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev`
+
+`pip install python-ldap`
+
 ### React:
 
 `sudo apt install nodejs`

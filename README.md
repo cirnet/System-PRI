@@ -38,7 +38,7 @@ Na przykładzie Ubuntu:
 
 `npm install`
 
-'npm '
+'npm start'
 
 ### Django:
 

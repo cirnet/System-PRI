@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../features/auth/authSlice";
+import { login, reset, loginTymczasowy } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Login() {
@@ -47,7 +47,8 @@ function Login() {
       password,
     };
 
-    dispatch(login(userData));
+    //dispatch(login(userData));
+    dispatch(loginTymczasowy(1));
   };
 
   if (isLoading) {

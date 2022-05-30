@@ -7,6 +7,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import Spinner from "../../components/Spinner";
 import Schedule from "../../components/Schedule";
 
+
 import "react-datepicker/dist/react-datepicker.css";
 import formatDate from "../../features/schedule/formatDate";
 import {
@@ -23,6 +24,7 @@ function Calendar() {
   const date = startOfWeek(new Date(), { weekStartsOn: 1 });
   const [startDate, setStartDate] = useState(date);
   const [endDate, setEndDate] = useState(new Date());
+  const [scheduleLocal, setScheduleLocal] = useState([]);
 
   const { user } = useSelector((state) => state.auth);
   const { schedule, isUpdated, isLoading, isError, message } = useSelector(
@@ -30,11 +32,13 @@ function Calendar() {
   );
 
 
-  //const [scheduleLocal, setScheduleLocal] = useState(schedule);
-  const [scheduleLocal, setScheduleLocal] = useState([]);
-
   const onSubmit = (e) => {
-    dispatch(updateSchedule(scheduleLocal));
+
+    const schedulePostBody = {
+      schedule: scheduleLocal,
+      opiekun: user.imie + " " + user.nazwisko,
+    }
+    dispatch(updateSchedule({ scheduleId: user.id, scheduleData: schedulePostBody }));
   };
 
   function handleDateChange(date, jump) {
@@ -57,16 +61,22 @@ function Calendar() {
       console.log(message);
     }
 
-    // if (!user) {
-    //    navigate("/login");
-    //  }
+    if (!user) {
+      navigate("/login");
+    }
 
-    // if (schedule === undefined) {
-    //   dispatch(getSchedule()).then((value) => {
-    //     setScheduleLocal(value.payload);
-    //   });
-    //   setScheduleLocal(schedule);
-    // }
+    if (schedule === undefined && !isError) {;
+      dispatch(getSchedule(user.id)).then((value) => {
+        const what = value.payload.schedule.map((date) => { return new Date(date) })
+        setScheduleLocal(what)
+
+      });
+     
+      
+    } else {
+      setScheduleLocal(schedule.schedule)
+    }
+
 
     return () => {
       dispatch(reset());

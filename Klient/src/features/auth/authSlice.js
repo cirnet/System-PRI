@@ -43,28 +43,25 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+export const loginTymczasowy = createAsyncThunk("auth/loginTymczasowy", async (prowadzacyId, user, thunkAPI) => {
+  try {
+    return await authService.loginTymczasowy(prowadzacyId, user);
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
 
-// update new schedule
-export const updateSchedule = createAsyncThunk(
-  "user/update",
-  async (scheduleData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await authService.updateSchedule(scheduleData, token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
+
 
 export const authSlice = createSlice({
   name: "auth",
@@ -102,6 +99,20 @@ export const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(loginTymczasowy.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginTymczasowy.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(loginTymczasowy.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -9,6 +9,7 @@ import MyProfile from './pages/MyProfile'
 import Tools from './pages/Tools/Tools'
 import Opiekunowie from './pages/Opiekunowie'
 import Teams from './pages/Teams'
+import Calendar from './pages/Tools/Calendar'
  
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='/profile' element={<MyProfile />} />
             <Route path='/tools' element={<Tools />} />
             <Route path='/opiekunowie' element={<Opiekunowie />} />
+            <Route path='/calendar' element={<Calendar />} />
             <Route path='/teams' element={<Teams />} />
           </Routes>
         </div>

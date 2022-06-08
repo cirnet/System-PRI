@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import GłównyHarmonogram from "./Tools/GłównyHarmonogram";
 function MyProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +21,11 @@ function MyProfile() {
     setSkill(skill + text);
     setText("");
   };
-  return (
+  //TODO auth
+  // user 1 jest koordynatorem
+  return user.id === 1 ? (
+    <GłównyHarmonogram />
+  ) : (
     <div>
       <card>
         <div>

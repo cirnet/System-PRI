@@ -1,6 +1,6 @@
-
 * {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,22 +17,22 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  white-space: nowrap;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   align-items: center;
   border-bottom: 1px solid #e6e6e6;
-
+  z-index: 100;
 }
-
+.logo {
+  margin-right: 10px;
+}
 a {
   text-decoration: none;
   color: rgb(0, 0, 0);
 }
-
-
 
 ul {
   list-style: none;
@@ -45,15 +45,6 @@ ul {
   padding: 0 20px;
   text-align: center;
 }
-
-/* .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
-} */
 
 .header ul {
   display: flex;
@@ -128,11 +119,6 @@ ul {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  /* text-align: center;
-  appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
 .btn-header {
@@ -142,18 +128,13 @@ ul {
 .btn-confirm {
   font-size: 19px;
   padding: 10px 30px;
-  margin-bottom: 80px;
+  margin: 20px;
   display: inline-block;
   text-align: center;
 }
 
 .btn svg {
   margin-right: 8px;
-}
-
-.btn-reverse {
-  background: #fff;
-  color: #000;
 }
 
 .btn-block {
@@ -163,8 +144,9 @@ ul {
 
 .btn-arrow {
   font-size: 24px;
-  padding: 5px 30px;
+  padding: 4px 30px;
   display: inline-block;
+  margin-bottom: 10px;
 }
 
 .btn:hover,
@@ -219,44 +201,70 @@ ul {
   }
 }
 
-
 .datetimebox {
   padding: 9px;
-  /* display: inline-block;
-  text-align: center; */
   display: flex;
   line-height: 17px;
   user-select: none;
-  /* margin-bottom: 50px; */
   width: 166px;
 }
 
-
-.datetime-input-box-wrapper {
-  display: inline-flex;
-  flex: 1;
-  background-color: inherit;
-  min-width: 0;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.datetime-input-edit-wrapper {
-  overflow: hidden;
-  white-space: nowrap;
-  flex-grow: 1;
-}
-
-.datetime-edit-field {
-  display: inline-block;
-  text-align: center;
-  padding: 1px 3px;
-  border: none;
-  margin: 0;
-  ime-mode: disabled;
-  outline: none;
-}
-
 .schedule {
-  margin-top: 50px;
+  margin-top: 20px;
+  height: 62vh;
+  overflow: auto;
+  width: 900px;
+  justify-content: center;
+}
+
+.amount-block-confirm {
+  list-style: none;
+  background-image: linear-gradient(#55ff95, #ff5595);
+  width: 50px;
+  height: 90px;
+}
+
+.time-block-confirm {
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  background-color: #ff5595;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.time-block-confirm li {
+  padding: 1px 3px;
+  position: relative;
+  z-index: 9999;
+}
+
+.calendar-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 0px;
+}
+
+.calendar-tools .opiekunowie-list {
+  padding: 0px 20px;
+  justify-content: flex-start;
+}
+
+.calendar-tools .opiekunowie-list li {
+  padding: 3px 10px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 1px;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.calendar-tools .opiekunowie-list li:hover {
+  transform: scale(0.98);
 }

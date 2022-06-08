@@ -55,9 +55,10 @@ export const getSchedules = createAsyncThunk(
   "schedule/getAll",
   async (thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.getSchedules(token);
+     // const token = thunkAPI.getState().auth.user.token;
+      return await scheduleService.getSchedules();
     } catch (error) {
+      console.log("Error:", error)
       const message =
         (error.response &&
           error.response.data &&

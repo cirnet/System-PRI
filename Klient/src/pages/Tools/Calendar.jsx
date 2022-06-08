@@ -7,7 +7,6 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import Spinner from "../../components/Spinner";
 import Schedule from "../../components/Schedule";
 
-
 import "react-datepicker/dist/react-datepicker.css";
 import formatDate from "../../features/schedule/formatDate";
 import {
@@ -21,40 +20,54 @@ function Calendar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const date = startOfWeek(new Date(), { weekStartsOn: 1 });
-  const [startDate, setStartDate] = useState(date);
-  const [endDate, setEndDate] = useState(new Date());
   const [scheduleLocal, setScheduleLocal] = useState([]);
-
+  const [startDate, setStartDate] = useState(
+    startOfWeek(new Date(), { weekStartsOn: 1 })
+  );
+  const [endDate, setEndDate] = useState(
+    startOfWeek(addWeeks(new Date(), 1), { weekStartsOn: 0 })
+  );
   const { user } = useSelector((state) => state.auth);
   const { schedule, isUpdated, isLoading, isError, message } = useSelector(
     (state) => state.schedule
   );
-
-
   const onSubmit = (e) => {
-
     const schedulePostBody = {
       schedule: scheduleLocal,
       opiekun: user.imie + " " + user.nazwisko,
-    }
-    dispatch(updateSchedule({ scheduleId: user.id, scheduleData: schedulePostBody }));
+    };
+
+    dispatch(
+      updateSchedule({ scheduleId: user.id, scheduleData: schedulePostBody })
+    );
   };
 
   function handleDateChange(date, jump) {
     if (jump > 0) {
       setStartDate(startOfWeek(addWeeks(startDate, 1), { weekStartsOn: 1 }));
       setEndDate(startOfWeek(addWeeks(startDate, 2), { weekStartsOn: 0 }));
-    }
-    else if (jump < 0) {
+    } else if (jump < 0) {
       setStartDate(startOfWeek(subWeeks(startDate, 1), { weekStartsOn: 1 }));
       setEndDate(startOfWeek(startDate, { weekStartsOn: 0 }));
-    }
-    else {
+    } else {
       setStartDate(startOfWeek(date, { weekStartsOn: 1 }));
       setEndDate(startOfWeek(addWeeks(date, 1), { weekStartsOn: 0 }));
     }
   }
+  const renderCustomDateCell = (date, selected, refSetter) => {
+    return (
+      <div
+        style={{
+          height: "40px",
+          border: "1px solid #E0E0E0",
+          background: selected ? "#ff5595" : "#FFF",
+          rowGap: "-1",
+          columnGap: "-1",
+        }}
+        ref={refSetter}
+      />
+    );
+  };
 
   useEffect(() => {
     if (isError) {
@@ -65,18 +78,16 @@ function Calendar() {
       navigate("/login");
     }
 
-    if (schedule === undefined && !isError) {;
+    if (schedule === undefined && !isError) {
       dispatch(getSchedule(user.id)).then((value) => {
-        const what = value.payload.schedule.map((date) => { return new Date(date) })
-        setScheduleLocal(what)
-
+        const daty = value.payload.schedule.map((date) => {
+          return new Date(date);
+        });
+        setScheduleLocal(daty);
       });
-     
-      
     } else {
-      setScheduleLocal(schedule.schedule)
+      setScheduleLocal(schedule.schedule);
     }
-
 
     return () => {
       dispatch(reset());
@@ -90,29 +101,25 @@ function Calendar() {
   return (
     <>
       <div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div>
           <div
-            style={{
-              width: "900px",
-              paddingBottom: "50px",
-              // height: "900px",
-              // overflow: "auto",
-            }}
+            style={
+              {
+                // paddingBottom: "0px",
+                // height: "900px",
+                // overflow: "auto",
+              }
+            }
           >
             <div>
-              <p>{formatDate(startDate)} - {formatDate(endDate)}</p>
+              <p>
+                {formatDate(startDate)} - {formatDate(endDate)}
+              </p>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-center",
-                  paddingBottom: "10px",
                 }}
               >
                 <button
@@ -146,12 +153,13 @@ function Calendar() {
               ></DatePicker>
             </div>
             <div className="schedule">
-            <Schedule
-              startDate={startDate}
-              schedule={scheduleLocal}
-              setSchedule={setScheduleLocal}
+              <Schedule
+                startDate={startDate}
+                schedule={scheduleLocal}
+                setSchedule={setScheduleLocal}
+                renderDateCell={renderCustomDateCell}
               />
-              </div>
+            </div>
           </div>
         </div>
         <button className="btn-confirm " onClick={onSubmit}>

@@ -33,7 +33,7 @@ export default function GotowyHarmonogram() {
     startOfWeek(new Date(), { weekStartsOn: 1 })
   );
   const [endDate, setEndDate] = useState(
-    startOfWeek(new Date(), { weekStartsOn: 0 })
+    startOfWeek(addWeeks(new Date(), 1), { weekStartsOn: 0 })
   );
   const [scheduleLocal, setScheduleLocal] = useState([]);
 
@@ -56,21 +56,6 @@ export default function GotowyHarmonogram() {
   }
 
   useEffect(() => {
-    setColorList([]);
-    const len = opiekunowieList.length - excludedOpiekunowie.length;
-    if (len !== 0) {
-      for (let i = 0; i <= len; i += 1) {
-        setColorList((oldColorList) => [
-          ...oldColorList,
-          0.5 + (0.5 / len) * i,
-        ]);
-      }
-    } else {
-      setColorList([0.1]);
-    }
-  }, [excludedOpiekunowie]);
-
-  useEffect(() => {
     if (isError) {
       console.log(message);
     }
@@ -78,48 +63,40 @@ export default function GotowyHarmonogram() {
     if (!user) {
       navigate("/login");
     }
-
     const selectedList2 = {};
-    const opiekunList = [];
-    let dataOpiekunowie;
+    let opiekunList = [];
+    let dataOpiekunowie = [];
     let dict = {};
     if (mainSchedule === undefined && !isError) {
       dispatch(getMainSchedules()).then((value) => {
         value.payload
-          .filter((o) => o.opiekun === "Koordynator")
-          .map(
-            (object) => (
-              object.schedule.map((date) => {
-                dataOpiekunowie = date.split(",");
-                const data = dataOpiekunowie.shift();
-                selectedList2[new Date(data)] = {
-                  tak: dataOpiekunowie,
-                  nie: [],
-                };
-              }),
-              dataOpiekunowie.map((op) => opiekunList.push(op))
-            )
-          );
-      });
-      setScheduleLocal([]);
-    } else {
-      mainSchedule
-        .filter((o) => o.opiekun === "Koordynator")
-        .map(
-          (object) => (
-            object.schedule.map((date) => {
-              dataOpiekunowie = date.split(",");
-              const data = dataOpiekunowie.shift();
-              selectedList2[new Date(data)] = {
-                tak: dataOpiekunowie,
-                nie: [],
-              };
-            }),
-            dataOpiekunowie.map((op) => opiekunList.push(op))
-          )
-        );
-    }
+          .filter((o) => o.opiekun === "Koordynator")[0]
+          .schedule.map((date) => {
+            dataOpiekunowie = date.split(",");
+            const data = dataOpiekunowie.shift();
+            selectedList2[new Date(data)] = {
+              tak: dataOpiekunowie,
+              nie: [],
+            };
+            dataOpiekunowie.map((i) => opiekunList.push(i));
+          });
 
+        opiekunList = [...new Set(opiekunList)];
+      });
+    } else if (!isError) {
+      mainSchedule
+        .filter((o) => o.opiekun === "Koordynator")[0]
+        .schedule.map((date) => {
+          dataOpiekunowie = date.split(",");
+          const data = dataOpiekunowie.shift();
+          selectedList2[new Date(data)] = {
+            tak: dataOpiekunowie,
+            nie: [],
+          };
+          dataOpiekunowie.map((i) => opiekunList.push(i));
+        });
+      opiekunList = [...new Set(opiekunList)];
+    }
     opiekunList.map((opiekun, indeks) => (dict[opiekun] = indeks));
     setSelectedList(selectedList2);
     setOpiekunowieList(opiekunList);
@@ -141,26 +118,6 @@ export default function GotowyHarmonogram() {
     setExcludedOpiekunowie(
       excludedOpiekunowie.filter((item) => item !== opiekun)
     );
-  };
-
-  const includeOpiekunForTile = (date, opiekunId) => {
-    setPreventScheduleSelection(true);
-
-    let selectedListCopy = { ...selectedList };
-    const opiekun = selectedListCopy[date].nie.splice(opiekunId, 1);
-    selectedListCopy[date].tak.push(opiekun);
-
-    setSelectedList(selectedListCopy);
-  };
-
-  const excludeOpiekunForTile = (date, opiekunId) => {
-    setPreventScheduleSelection(true);
-
-    let selectedListCopy = { ...selectedList };
-    const opiekun = selectedListCopy[date].tak.splice(opiekunId, 1);
-    selectedListCopy[date].nie.push(opiekun);
-
-    setSelectedList(selectedListCopy);
   };
 
   return (

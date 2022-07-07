@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-import scheduleService from "./scheduleService";
+import mainScheduleService from "./mainScheduleService";
 
 
 const initialState = {
-  schedule:  undefined,
+  mainSchedule:  undefined,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -12,13 +11,13 @@ const initialState = {
 };
 
 
-// create new schedule
-export const createSchedule = createAsyncThunk(
-  "schedule/create",
-  async (scheduleData, thunkAPI) => {
+// create new mainSchedule
+export const createMainSchedule = createAsyncThunk(
+  "mainSchedule/create",
+  async (mainScheduleData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.createSchedule(scheduleData, token);
+      return await mainScheduleService.createMainSchedule(mainScheduleData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -31,13 +30,13 @@ export const createSchedule = createAsyncThunk(
   }
 );
 
-// Get user schedule
-export const getSchedule = createAsyncThunk(
-  "schedule/get",
-  async (scheduleId, thunkAPI) => {
+// Get user mainSchedule
+export const getMainSchedule = createAsyncThunk(
+  "mainSchedule/get",
+  async (mainScheduleId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.getSchedule(scheduleId, token);
+      return await mainScheduleService.getMainSchedule(mainScheduleId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -50,13 +49,13 @@ export const getSchedule = createAsyncThunk(
   }
 );
 
-// Get all schedules
-export const getSchedules = createAsyncThunk(
-  "schedule/getAll",
+// Get all mainSchedules
+export const getMainSchedules = createAsyncThunk(
+  "mainSchedule/getAll",
   async (thunkAPI) => {
     try {
      // const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.getSchedules();
+      return await mainScheduleService.getMainSchedules();
     } catch (error) {
       console.log("Error:", error)
       const message =
@@ -70,13 +69,13 @@ export const getSchedules = createAsyncThunk(
   }
 );
 
-// PUT schedule
-export const updateSchedule = createAsyncThunk(
-  "schedule/update",
-  async ({ scheduleId, scheduleData }, thunkAPI) => {
+// PUT mainSchedule
+export const updateMainSchedule = createAsyncThunk(
+  "mainSchedule/update",
+  async ({ mainScheduleId, mainScheduleData }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.updateSchedule(scheduleId, scheduleData, token);
+      return await mainScheduleService.updateMainSchedule(mainScheduleId, mainScheduleData, token);
     } catch (error) {
       console.log("Error:", error)
       const message =
@@ -90,8 +89,8 @@ export const updateSchedule = createAsyncThunk(
   }
 );
 
-export const scheduleSlice = createSlice({
-  name: "schedule",
+export const mainScheduleSlice = createSlice({
+  name: "mainSchedule",
   initialState,
   reducers: {
     reset: (state) => {
@@ -99,64 +98,66 @@ export const scheduleSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      
     },
   },
   extraReducers: (builder) => {
     builder
-    .addCase(createSchedule.pending, (state) => {
+    .addCase(createMainSchedule.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(createSchedule.fulfilled, (state, action) => {
+    .addCase(createMainSchedule.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.schedule = action.payload;
+      state.mainSchedule = action.payload;
     })
-    .addCase(createSchedule.rejected, (state, action) => {
+    .addCase(createMainSchedule.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     })
-      .addCase(getSchedule.pending, (state) => {
+      .addCase(getMainSchedule.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getSchedule.fulfilled, (state, action) => {
+      .addCase(getMainSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.schedule = action.payload;
+        state.mainSchedule = action.payload;
       })
-      .addCase(getSchedule.rejected, (state, action) => {
+      .addCase(getMainSchedule.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getSchedules.pending, (state) => {
+      .addCase(getMainSchedules.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getSchedules.fulfilled, (state, action) => {
+      .addCase(getMainSchedules.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.schedule = action.payload;
+        state.mainSchedule = action.payload;
       })
-      .addCase(getSchedules.rejected, (state, action) => {
+      .addCase(getMainSchedules.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(updateSchedule.pending, (state) => {
+      .addCase(updateMainSchedule.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateSchedule.fulfilled, (state, action) => {
+      .addCase(updateMainSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.schedule = action.payload;
+        
       })
-      .addCase(updateSchedule.rejected, (state, action) => {
+      .addCase(updateMainSchedule.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       });
+    
   },
 });
 
-export const { reset } = scheduleSlice.actions;
-export default scheduleSlice.reducer;
+export const { reset } = mainScheduleSlice.actions;
+export default mainScheduleSlice.reducer;

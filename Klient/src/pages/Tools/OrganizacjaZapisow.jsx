@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import GotowyHarmonogram from "../GotowyHarmonogram"
 function OrganizacjaZapisow() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ function OrganizacjaZapisow() {
     "Zespoły rezerwowe",
     "Oferty współpracy",
     "Formowanie zespołów studenckich",
+    "Harmonogram"
   ];
   const opiekunowie = [
     "Patryk Żywica",
@@ -34,17 +35,16 @@ function OrganizacjaZapisow() {
   };
   function renderList(list) {
     return (
-      <ul>
+      <ul className="opiekunowie-list">
         {[...Array(5)].map((e, i) => (
-          <li key={i}>
-            <button>
-              {list} {i + 1}
-            </button>
+          <li key={i} style={{ padding: "8px" }}>
+            {list} {i + 1}
           </li>
         ))}
       </ul>
     );
   }
+
   const renderCurrentSelection = () => {
     switch (currentSection) {
       case 0:
@@ -56,7 +56,7 @@ function OrganizacjaZapisow() {
       case 3:
         return;
       case 4:
-        return;
+        return <div style={{marginTop: "55vh"}}><GotowyHarmonogram/></div>
 
       default:
         return null;
@@ -64,16 +64,21 @@ function OrganizacjaZapisow() {
   };
 
   return (
-    <div className="content">
-      <div className="header">
-        <ul className="opiekunowie">
-          {nav.map((nav, i) => (
-            <li key={i}>
-              <button onClick={() => setCurrentSection(i)}>{nav}</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div
+      className="calendar-tools"
+      style={{ marginTop: "10vh", justifyContent: "left", height: "100px" }}
+    >
+      <ul className="opiekunowie-list ">
+        {nav.map((nav, i) => (
+          <li
+            key={i}
+            onClick={() => setCurrentSection(i)}
+            style={{ padding: "8px" }}
+          >
+            {nav}
+          </li>
+        ))}
+      </ul>
 
       {renderCurrentSelection()}
     </div>

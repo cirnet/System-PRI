@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
+import { createSchedule } from "../features/schedule/scheduleSlice";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -28,6 +29,11 @@ function Register() {
     }
 
     if (isSuccess || user) {
+      const scheduleData = {
+        schedule: [],
+        opiekun: user.imie + ' ' + user.nazwisko
+      }
+      dispatch(createSchedule(scheduleData))
       navigate("/");
     }
 
@@ -44,24 +50,12 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (password !== password2) {
-    //   toast.error("Passwords do not match");
-    // } else {
-    //   const userData = {
-    //     name,
-    //     email,
-    //     password,
-    //     schedule: [],
-    //   };
-
-    // }
     const userData = {
       imie,
       nazwisko,
       rola,
     };
-    console.log("userdata daje:", userData);
-    dispatch(register(userData));
+    dispatch(register(userData))
   };
 
   if (isLoading) {

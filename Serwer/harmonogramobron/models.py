@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
+#index, dzien, miesiac, nr dnia, rok, godzina(hh:mm:ss), str_czas, prowadzacy
+from django.contrib.postgres.fields import ArrayField
+
 class Harmonogram(models.Model):
     id = models.BigAutoField(primary_key=True)
     schedule = ArrayField(models.CharField(max_length=200), blank=True)

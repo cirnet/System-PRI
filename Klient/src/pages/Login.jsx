@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../features/auth/authSlice";
+import { login, reset, loginTymczasowy } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    _id: "",
   });
 
-  const { email, password } = formData;
+  const { _id } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error("Error");
     }
 
     if (isSuccess || user) {
@@ -40,14 +39,9 @@ function Login() {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
-
-    const userData = {
-      email,
-      password,
-    };
-
-    dispatch(login(userData));
+    e.preventDefault()
+    //dispatch(login(userData));
+    dispatch(loginTymczasowy(_id));
   };
 
   if (isLoading) {
@@ -64,23 +58,12 @@ function Login() {
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
-              type="email"
+              type="number"
               className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
+              id="_id"
+              name="_id"
+              value={_id}
+              placeholder="Enter idl"
               onChange={onChange}
             />
           </div>

@@ -1,22 +1,8 @@
 import { useEffect, useState } from "react";
 import ScheduleSelector from "react-schedule-selector";
 
-export default function Schedule({ startDate, schedule, setSchedule }) {
-  const renderCustomDateCell = (date, selected, refSetter) => {
-    //const filter = (element) => element.getTime() === date.getTime();
-    return (
-      <div
-        style={{
-          height: "40px",
-          border: "1px solid #E0E0E0",
-          background: selected ? "#ff5595" : "#FFF",
-          rowGap: "-1",
-          columnGap: "-1",
-        }}
-        ref={refSetter}
-      />
-    );
-  };
+export default function Schedule({ startDate, schedule, setSchedule, renderDateCell }) {
+
 
   return (
     <>
@@ -30,11 +16,12 @@ export default function Schedule({ startDate, schedule, setSchedule }) {
         columnGap="-1px"
         rowGap="-1px"
         onChange={(newSchedule) => {
-          setSchedule(newSchedule);
+          setSchedule(newSchedule) 
         }}
         startDate={startDate}
         hourlyChunks={2}
-        renderDateCell={renderCustomDateCell}
+        renderDateCell={renderDateCell}
+        style={{overflow: 'auto'}}
       />
     </>
   );

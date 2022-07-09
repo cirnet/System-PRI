@@ -10,3 +10,7 @@ class LeadersViewset(viewsets.ModelViewSet):
 class DefenseScheduleViewset(viewsets.ModelViewSet):
     queryset = models.DefenseSchedule.objects.all()
     serializer_class = serializers.DefenseScheduleSerializer
+
+class StudentsViewset(viewsets.ModelViewSet):
+    queryset = models.DefenseSchedule.objects.all()
+    serializer_class = serializers.DefenseScheduleSerializer

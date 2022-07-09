@@ -18,7 +18,6 @@ from django.urls import path, include
 from .router import router
 
 urlpatterns = [
-    path('defenseSchedule/', include('defenseSchedule.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls))
 ]

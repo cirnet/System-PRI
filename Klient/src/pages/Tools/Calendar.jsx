@@ -34,7 +34,7 @@ function Calendar() {
   const onSubmit = (e) => {
     const schedulePostBody = {
       schedule: scheduleLocal,
-      opiekun: user.imie + " " + user.nazwisko,
+      opiekun: user.name + " " + user.surname,
     };
 
     dispatch(

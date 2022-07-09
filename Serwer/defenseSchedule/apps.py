@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class HarmonogramobronConfig(AppConfig):
+class DefenseScheduleConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'harmonogramobron'
+    name = 'defenseSchedule'

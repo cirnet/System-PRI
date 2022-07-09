@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/harmonogram/";
+const API_URL = "/api/defenseSchedule/";
 
 
 // Create new schedule

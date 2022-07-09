@@ -29,7 +29,7 @@ function MyProfile() {
     <div>
       <card>
         <div>
-          <p>{user.imie}</p>
+          <p>{user.name}</p>
           <p>{user.email}</p>
           <p>{skill}</p>
         </div>

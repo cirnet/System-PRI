@@ -43,9 +43,9 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
-export const loginTymczasowy = createAsyncThunk("auth/loginTymczasowy", async (prowadzacyId, user, thunkAPI) => {
+export const loginTymczasowy = createAsyncThunk("auth/loginTymczasowy", async (leaderId, user, thunkAPI) => {
   try {
-    return await authService.loginTymczasowy(prowadzacyId, user);
+    return await authService.loginTymczasowy(leaderId, user);
   } catch (error) {
     const message =
       (error.response &&

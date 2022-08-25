@@ -1,6 +1,6 @@
 # System-PRI
 
-Inżynierski projekt zespołowy PRI
+Inżynierski projekt zespołowy System-PRI
 
 ## Instalacja
 

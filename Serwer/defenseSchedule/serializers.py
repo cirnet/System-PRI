@@ -1,20 +1,7 @@
 from rest_framework import serializers
-from .models import Leaders, DefenseSchedule, Students
+from .models import Person
 
-class LeadersSerializer(serializers.ModelSerializer):
+class PersonSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Leaders
-        fields = '__all__'
-
-
-
-class DefenseScheduleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DefenseSchedule
-        fields = '__all__'
-
-
-class StudentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Students
+        model = Person
         fields = '__all__'

@@ -1,32 +1,61 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
-class DefenseSchedule(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    schedule = ArrayField(models.CharField(max_length=200), blank=True)
-    leader = models.TextField(max_length=50, blank=True, null=True)
-    class Meta:
-        managed = True
-        db_table = 'defense_schedule'
+class User(models.Model):
+    login = models.CharField(primary_key=True, max_length=20)
+    password = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING)
 
+class Person(models.Model):
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
 
-class Leaders(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=30, blank=True, null=True)
-    surname = models.CharField(max_length=30, blank=True, null=True)
-    role = models.CharField(max_length=20, blank=True, null=True)
+    class Role(models.IntegerChoices):
+        Koordynator = 0
+        Opiekun = 1
+        Student = 2
 
-    class Meta:
-        managed = True
-        db_table = 'leaders'
+    role = models.IntegerField(choices=Role.choices)
 
-class Students(models.Model):
-    index_number = models.CharField(max_length=8, blank=True, null=True)
-    group = models.CharField(max_length=30, blank=True, null=True)
-    defense_schedule = models.CharField(max_length=200, blank=True, null=True)
-    skills =  ArrayField(models.CharField(max_length=200), blank=True)
-    leader = models.CharField(max_length=30, blank=True, null=True)
+class CommissionParticipation(models.Model):
+    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING, related_name="commission_participations")
+    commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
-    class Meta:
-        managed = True
-        db_table = 'students'
+class Commission(models.Model):
+    time_start = models.TimeField()
+    time_end = models.TimeField()
+    is_complete = models.BooleanField()
+
+class Defense(models.Model):
+    defense_date = models.DateField()
+    commission = models.ForeignKey('Commission', on_delete=models.CASCADE)
+    team = models.ForeignKey('Team', on_delete=models.DO_NOTHING)
+    time_start = models.TimeField()
+
+    class defense_type(models.IntegerChoices):
+        defense_half = 0
+        defense_full = 1
+
+    defense_type = models.IntegerField(choices=defense_type.choices)
+    grade = models.IntegerField()
+
+class AvailableTimeSlot(models.Model):
+    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING)
+    time_start = models.TimeField()
+    time_end = models.TimeField()
+
+class Team(models.Model):
+    name = models.CharField(max_length=100)
+    supervisor = models.ForeignKey('Person', on_delete=models.DO_NOTHING) #Opiekun projektu
+    project = models.ForeignKey('Project', on_delete=models.DO_NOTHING)
+
+class Project(models.Model):
+    topic = models.CharField(max_length=100)
+    grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING)
+
+class ProjectGradeCard(models.Model):
+    pass

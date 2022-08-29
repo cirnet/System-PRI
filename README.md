@@ -10,7 +10,7 @@ Na przykładzie Ubuntu:
 
 `sudo apt install python3-pip`
 
-### Postawienie Postgresa:
+### Postawienie Postgresa
 
 `sudo apt install postgresql postgresql-contrib`
 
@@ -30,13 +30,13 @@ Na przykładzie Ubuntu:
 
 `pip install psycopg2`
 
-### LDAP:
+### LDAP
 
 `sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev`
 
 `pip install python-ldap`
 
-### React:
+### React
 
 `sudo apt install nodejs`
 
@@ -46,7 +46,7 @@ Na przykładzie Ubuntu:
 
 `npm start`
 
-### Django:
+### Django
 
 W folderze projektu:
 

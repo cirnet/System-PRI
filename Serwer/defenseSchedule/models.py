@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 class User(models.Model):
+    def __str__(self):
+        return f"{self.login}"
+
     login = models.CharField(primary_key=True, max_length=20)
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)

@@ -23,15 +23,11 @@ class UserManager(BaseUserManager):
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
-        person = Person()
-        person.role = 2
-        person.save()
         user = self.create_user(
             email,
             password=password,
         )
         user.is_admin = True
-        user.person = person
         user.save(using=self._db)
         return user
 
@@ -44,7 +40,15 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING, null=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+    class Role(models.IntegerChoices):
+        Koordynator = 0
+        Opiekun = 1
+        Student = 2
+
+    role = models.IntegerField(choices=Role.choices, null=True)
     # date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -56,7 +60,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.email
+        return f"{self.email}"
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -74,22 +78,8 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-class Person(models.Model):
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-    
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-
-    class Role(models.IntegerChoices):
-        Koordynator = 0
-        Opiekun = 1
-        Student = 2
-
-    role = models.IntegerField(choices=Role.choices)
-
 class CommissionParticipation(models.Model):
-    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING, related_name="commission_participations")
+    person = models.ForeignKey('User', on_delete=models.DO_NOTHING, related_name="commission_participations")
     commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
 class Commission(models.Model):
@@ -111,13 +101,13 @@ class Defense(models.Model):
     grade = models.IntegerField()
 
 class AvailableTimeSlot(models.Model):
-    person = models.ForeignKey('Person', on_delete=models.DO_NOTHING)
+    person = models.ForeignKey('User', on_delete=models.DO_NOTHING)
     time_start = models.TimeField()
     time_end = models.TimeField()
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
-    supervisor = models.ForeignKey('Person', on_delete=models.DO_NOTHING) #Opiekun projektu
+    supervisor = models.ForeignKey('User', on_delete=models.DO_NOTHING) #Opiekun projektu
     project = models.ForeignKey('Project', on_delete=models.DO_NOTHING)
 
 class Project(models.Model):

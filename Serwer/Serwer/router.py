@@ -5,7 +5,7 @@ studentprefix = "student/"
 
 
 router = routers.DefaultRouter()
-router.register('user', UserViewset, basename='user')
+router.register('user', MyUserViewset, basename='user')
 router.register('commission', CommissionViewset)
 router.register('commission-participation', CommissionParticipationViewset, basename='commission-participation')
 router.register('defense', DefenseViewset)

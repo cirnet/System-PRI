@@ -1,7 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
+)
 
-class UserManager(BaseUserManager):
+
+class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         """
         Creates and saves a User with the given email, date of
@@ -32,35 +35,24 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
-    username = None
-    login = models.CharField(primary_key=True, max_length=100)
+class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
 
-    class Role(models.IntegerChoices):
-        Koordynator = 0
-        Opiekun = 1
-        Student = 2
-
-    role = models.IntegerField(choices=Role.choices, null=True)
-    # date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    objects = UserManager()
+    objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = []
+    #REQUIRED_FIELDS = []
 
     def __str__(self):
-        return f"{self.email}"
+        return self.email
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -79,7 +71,7 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 class CommissionParticipation(models.Model):
-    person = models.ForeignKey('User', on_delete=models.DO_NOTHING, related_name="commission_participations")
+    person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING, related_name="commission_participations")
     commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
 class Commission(models.Model):
@@ -101,13 +93,13 @@ class Defense(models.Model):
     grade = models.IntegerField()
 
 class AvailableTimeSlot(models.Model):
-    person = models.ForeignKey('User', on_delete=models.DO_NOTHING)
+    person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
     time_start = models.TimeField()
     time_end = models.TimeField()
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
-    supervisor = models.ForeignKey('User', on_delete=models.DO_NOTHING) #Opiekun projektu
+    supervisor = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING) #Opiekun projektu
     project = models.ForeignKey('Project', on_delete=models.DO_NOTHING)
 
 class Project(models.Model):

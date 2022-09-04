@@ -45,6 +45,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
+    team_membership = models.ForeignKey('Team', on_delete=models.DO_NOTHING, null=True) #członek jakiego zespołu
+
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
@@ -98,13 +100,26 @@ class AvailableTimeSlot(models.Model):
     time_end = models.TimeField()
 
 class Team(models.Model):
+    def __str__(self):
+        return self.name
     name = models.CharField(max_length=100)
     supervisor = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING) #Opiekun projektu
-    project = models.ForeignKey('Project', on_delete=models.DO_NOTHING)
+    project = models.ForeignKey('Project', on_delete=models.DO_NOTHING, null=True, blank=True)
 
 class Project(models.Model):
+    def __str__(self):
+        return self.topic
+    
+    def save(self, **kwargs):
+        super(Project, self).save(**kwargs)
+        pgc = ProjectGradeCard(project=self)
+        pgc.save()
+
+    
     topic = models.CharField(max_length=100)
-    grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING)
+    grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING, null=True, blank=True)
+    
 
 class ProjectGradeCard(models.Model):
+    #topic = models.CharField(max_length=100)
     pass

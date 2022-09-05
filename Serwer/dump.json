@@ -1,0 +1,901 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Studenci",
+    "permissions": [
+      [
+        "view_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Opiekunowie",
+    "permissions": [
+      [
+        "add_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "change_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "delete_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "view_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Koordynatorzy",
+    "permissions": [
+      [
+        "add_logentry",
+        "admin",
+        "logentry"
+      ],
+      [
+        "change_logentry",
+        "admin",
+        "logentry"
+      ],
+      [
+        "delete_logentry",
+        "admin",
+        "logentry"
+      ],
+      [
+        "view_logentry",
+        "admin",
+        "logentry"
+      ],
+      [
+        "add_group",
+        "auth",
+        "group"
+      ],
+      [
+        "change_group",
+        "auth",
+        "group"
+      ],
+      [
+        "delete_group",
+        "auth",
+        "group"
+      ],
+      [
+        "view_group",
+        "auth",
+        "group"
+      ],
+      [
+        "add_permission",
+        "auth",
+        "permission"
+      ],
+      [
+        "change_permission",
+        "auth",
+        "permission"
+      ],
+      [
+        "delete_permission",
+        "auth",
+        "permission"
+      ],
+      [
+        "view_permission",
+        "auth",
+        "permission"
+      ],
+      [
+        "add_token",
+        "authtoken",
+        "token"
+      ],
+      [
+        "change_token",
+        "authtoken",
+        "token"
+      ],
+      [
+        "delete_token",
+        "authtoken",
+        "token"
+      ],
+      [
+        "view_token",
+        "authtoken",
+        "token"
+      ],
+      [
+        "add_tokenproxy",
+        "authtoken",
+        "tokenproxy"
+      ],
+      [
+        "change_tokenproxy",
+        "authtoken",
+        "tokenproxy"
+      ],
+      [
+        "delete_tokenproxy",
+        "authtoken",
+        "tokenproxy"
+      ],
+      [
+        "view_tokenproxy",
+        "authtoken",
+        "tokenproxy"
+      ],
+      [
+        "add_contenttype",
+        "contenttypes",
+        "contenttype"
+      ],
+      [
+        "change_contenttype",
+        "contenttypes",
+        "contenttype"
+      ],
+      [
+        "delete_contenttype",
+        "contenttypes",
+        "contenttype"
+      ],
+      [
+        "view_contenttype",
+        "contenttypes",
+        "contenttype"
+      ],
+      [
+        "add_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "change_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "delete_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "view_availabletimeslot",
+        "defenseSchedule",
+        "availabletimeslot"
+      ],
+      [
+        "add_commission",
+        "defenseSchedule",
+        "commission"
+      ],
+      [
+        "change_commission",
+        "defenseSchedule",
+        "commission"
+      ],
+      [
+        "delete_commission",
+        "defenseSchedule",
+        "commission"
+      ],
+      [
+        "view_commission",
+        "defenseSchedule",
+        "commission"
+      ],
+      [
+        "add_commissionparticipation",
+        "defenseSchedule",
+        "commissionparticipation"
+      ],
+      [
+        "change_commissionparticipation",
+        "defenseSchedule",
+        "commissionparticipation"
+      ],
+      [
+        "delete_commissionparticipation",
+        "defenseSchedule",
+        "commissionparticipation"
+      ],
+      [
+        "view_commissionparticipation",
+        "defenseSchedule",
+        "commissionparticipation"
+      ],
+      [
+        "add_defense",
+        "defenseSchedule",
+        "defense"
+      ],
+      [
+        "change_defense",
+        "defenseSchedule",
+        "defense"
+      ],
+      [
+        "delete_defense",
+        "defenseSchedule",
+        "defense"
+      ],
+      [
+        "view_defense",
+        "defenseSchedule",
+        "defense"
+      ],
+      [
+        "add_myuser",
+        "defenseSchedule",
+        "myuser"
+      ],
+      [
+        "change_myuser",
+        "defenseSchedule",
+        "myuser"
+      ],
+      [
+        "delete_myuser",
+        "defenseSchedule",
+        "myuser"
+      ],
+      [
+        "view_myuser",
+        "defenseSchedule",
+        "myuser"
+      ],
+      [
+        "add_project",
+        "defenseSchedule",
+        "project"
+      ],
+      [
+        "change_project",
+        "defenseSchedule",
+        "project"
+      ],
+      [
+        "delete_project",
+        "defenseSchedule",
+        "project"
+      ],
+      [
+        "view_project",
+        "defenseSchedule",
+        "project"
+      ],
+      [
+        "add_projectgradecard",
+        "defenseSchedule",
+        "projectgradecard"
+      ],
+      [
+        "change_projectgradecard",
+        "defenseSchedule",
+        "projectgradecard"
+      ],
+      [
+        "delete_projectgradecard",
+        "defenseSchedule",
+        "projectgradecard"
+      ],
+      [
+        "view_projectgradecard",
+        "defenseSchedule",
+        "projectgradecard"
+      ],
+      [
+        "add_team",
+        "defenseSchedule",
+        "team"
+      ],
+      [
+        "change_team",
+        "defenseSchedule",
+        "team"
+      ],
+      [
+        "delete_team",
+        "defenseSchedule",
+        "team"
+      ],
+      [
+        "view_team",
+        "defenseSchedule",
+        "team"
+      ],
+      [
+        "add_session",
+        "sessions",
+        "session"
+      ],
+      [
+        "change_session",
+        "sessions",
+        "session"
+      ],
+      [
+        "delete_session",
+        "sessions",
+        "session"
+      ],
+      [
+        "view_session",
+        "sessions",
+        "session"
+      ]
+    ]
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a9148wk1tj5x1co409xm21bgzbi8832j",
+  "fields": {
+    "session_data": ".eJxVzE0OwiAUBOC7sDaE8o9L9z0DecBDqgaS0q6Md5cmXeh25pt5Ew_7VvzecfVLIlcykctvFiA-sR5FekC9Nxpb3dYl0IPQs-10bglft9P-HRToZawD1yhBZ8sty8JKxiNGgTmrxIwBFVAbyw1KHSdwWnEn9OASRWRDO_L5AuQlN4Q:1oURK4:-WdaE4Eui8Bn3J-yIlinByKj-EVDSduubZfqaNZSdnQ",
+    "expire_date": "2022-09-17T11:28:24.782Z"
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$aYsrSW1SwVVjlpszoQ4Oeo$4ZRu9srlAaBSqAuPGvM/mCd8qBVq9SkGpjI0sjsZhU8=",
+    "last_login": "2022-09-03T11:28:24.779Z",
+    "is_superuser": false,
+    "email": "admin@admin.pl",
+    "is_active": true,
+    "is_admin": true,
+    "team_membership": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$l6eauCPnBN5YjPKgx08mhv$wn7eGsKvYQLGeDlq7iC5uYaeZohY9zIE/qB5LwEy92A=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "jankow1@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$a3XI2ZC1LFCTGFmADUTUai$jtQfJvBRTWKl+vx968HJUr6HuzQVZ1SfhMx2U8lBn28=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "marnow1@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$9cLbsdOXXQa91prqsUrCd6$VFvpnQfBqGT3rhqN0pok62bzUF3HKj5Vkzs6mbslykQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "micwis1@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ZC20FrsJyKq6qEBFWMJfBu$7c+uO3Qp2cl8LuBddVv+qK/LOdVrKSwWASEx/ho7yMs=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "piowal@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$7aGVGE7GD7NUGz6OPMG3wf$YrjLR1Zg6T3o/ckurySYiu9BiJ50R9bG45uadYxcWhk=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "arknow@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$o94inCmAsfAbLygSQcUuDX$wYyewIgQSz4WgM1ax3ScDT/kfAVVZrRaC7/AS3VM3mY=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "malbak@st.amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Studenci"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ZiUJkFK5wH90nuA4UYT2YN$XsiSin1HavYbNk8sJz2VqiIWMICNy+FcCdcNdhaokvg=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "patryk.zywica@amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Koordynatorzy"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$sL8oytmYlDunkC2vn0UWMi$f8gput5PU4j2Zcsiz1roOD++wPrNb6GUacAeWfpSHkA=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "tomasz.pilka@amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Opiekunowie"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$i0KpRBEXypiEiLhV10Wzb1$95fi9NBARYbD9AhIENhdFPrDq8OnCTfRDoTNzEAbkqw=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "michal.hanckowiak@amu.edu.pl",
+    "is_active": true,
+    "is_admin": false,
+    "team_membership": null,
+    "groups": [
+      [
+        "Opiekunowie"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "defenseSchedule.team",
+  "pk": 1,
+  "fields": {
+    "name": "Grupa 5",
+    "supervisor": [
+      "patryk.zywica@amu.edu.pl"
+    ],
+    "project": null
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 2,
+  "fields": {
+    "topic": "System-PRI",
+    "grade_card": null
+  }
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1,
+  "fields": {}
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2022-09-03T11:28:47.974Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "2",
+    "object_repr": "arek@arek.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2022-09-03T11:52:09.095Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "1",
+    "object_repr": "Studenci",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2022-09-03T11:52:19.874Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "2",
+    "object_repr": "Opiekunowie",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2022-09-03T11:52:28.161Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "3",
+    "object_repr": "Koordynatorzy",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2022-09-03T11:52:32.264Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "3",
+    "object_repr": "Koordynatorzy",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2022-09-03T11:56:18.932Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "2",
+    "object_repr": "Opiekunowie",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2022-09-03T11:56:28.217Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "object_id": "1",
+    "object_repr": "Studenci",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2022-09-03T11:57:05.697Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "3",
+    "object_repr": "jankow1@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2022-09-03T11:57:26.649Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "4",
+    "object_repr": "marnow1@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2022-09-03T12:01:24.590Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "5",
+    "object_repr": "micwis1@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2022-09-03T12:02:01.605Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "6",
+    "object_repr": "piowal@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2022-09-03T12:02:21.277Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "7",
+    "object_repr": "arknow@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2022-09-03T12:06:17.517Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "8",
+    "object_repr": "malbak@st.amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2022-09-03T12:07:52.655Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "9",
+    "object_repr": "patryk.zywica@amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2022-09-03T12:08:06.412Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "10",
+    "object_repr": "tomasz.pilka@amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2022-09-03T12:08:46.360Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "11",
+    "object_repr": "michal.hanckowiak@amu.edu.pl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2022-09-03T12:13:26.693Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "2",
+    "object_repr": "arek@arek.pl",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2022-09-04T13:16:13.086Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "team"
+    ],
+    "object_id": "1",
+    "object_repr": "Team object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2022-09-04T14:10:06.832Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "2",
+    "object_repr": "Project object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+}
+]

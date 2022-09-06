@@ -107,19 +107,28 @@ class Team(models.Model):
     project = models.ForeignKey('Project', on_delete=models.DO_NOTHING, null=True, blank=True)
 
 class Project(models.Model):
+    topic = models.CharField(max_length=100)
+    #grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING, null=True, blank=True)
+    grade_card = models.OneToOneField(
+        'ProjectGradeCard',
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='project',
+    )
+
+
     def __str__(self):
         return self.topic
     
     def save(self, **kwargs):
-        super(Project, self).save(**kwargs)
         pgc = ProjectGradeCard(project=self)
         pgc.save()
+        self.grade_card = pgc
 
-    
-    topic = models.CharField(max_length=100)
-    grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING, null=True, blank=True)
-    
+        super(Project, self).save(**kwargs)
+
 
 class ProjectGradeCard(models.Model):
     #topic = models.CharField(max_length=100)
+    #project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='grade_card')
     pass

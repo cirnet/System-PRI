@@ -80,6 +80,15 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     #filter_horizontal = ()
 
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        exclude = ['grade_card']
+
+class ProjectAdmin(admin.ModelAdmin):
+    exclude = ['grade_card']
+    form = ProjectForm
+
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
@@ -91,5 +100,6 @@ admin.site.register(Commission)
 admin.site.register(Defense)
 admin.site.register(AvailableTimeSlot)
 admin.site.register(Team)
-admin.site.register(Project)
+admin.site.register(Project, ProjectAdmin)
+
 admin.site.register(ProjectGradeCard)

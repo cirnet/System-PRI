@@ -350,6 +350,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "8plqjhl7e8l4g2iq3na06v72ktnvhx59",
+  "fields": {
+    "session_data": ".eJxVzE0OwiAUBOC7sDaE8o9L9z0DecBDqgaS0q6Md5cmXeh25pt5Ew_7VvzecfVLIlcykctvFiA-sR5FekC9Nxpb3dYl0IPQs-10bglft9P-HRToZawD1yhBZ8sty8JKxiNGgTmrxIwBFVAbyw1KHSdwWnEn9OASRWRDO_L5AuQlN4Q:1oVFPX:fC1t_c7eB6MVLYG7Fv9H14hHevYprWX4IONIq2TbBwY",
+    "expire_date": "2022-09-19T16:57:23.603Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "a9148wk1tj5x1co409xm21bgzbi8832j",
   "fields": {
     "session_data": ".eJxVzE0OwiAUBOC7sDaE8o9L9z0DecBDqgaS0q6Md5cmXeh25pt5Ew_7VvzecfVLIlcykctvFiA-sR5FekC9Nxpb3dYl0IPQs-10bglft9P-HRToZawD1yhBZ8sty8JKxiNGgTmrxIwBFVAbyw1KHSdwWnEn9OASRWRDO_L5AuQlN4Q:1oURK4:-WdaE4Eui8Bn3J-yIlinByKj-EVDSduubZfqaNZSdnQ",
@@ -360,7 +368,7 @@
   "model": "defenseSchedule.myuser",
   "fields": {
     "password": "pbkdf2_sha256$320000$aYsrSW1SwVVjlpszoQ4Oeo$4ZRu9srlAaBSqAuPGvM/mCd8qBVq9SkGpjI0sjsZhU8=",
-    "last_login": "2022-09-03T11:28:24.779Z",
+    "last_login": "2022-09-05T16:57:23.600Z",
     "is_superuser": false,
     "email": "admin@admin.pl",
     "is_active": true,
@@ -433,7 +441,7 @@
     "email": "piowal@st.amu.edu.pl",
     "is_active": true,
     "is_admin": false,
-    "team_membership": null,
+    "team_membership": 1,
     "groups": [
       [
         "Studenci"
@@ -451,7 +459,7 @@
     "email": "arknow@st.amu.edu.pl",
     "is_active": true,
     "is_admin": false,
-    "team_membership": null,
+    "team_membership": 1,
     "groups": [
       [
         "Studenci"
@@ -469,7 +477,7 @@
     "email": "malbak@st.amu.edu.pl",
     "is_active": true,
     "is_admin": false,
-    "team_membership": null,
+    "team_membership": 1,
     "groups": [
       [
         "Studenci"
@@ -540,21 +548,774 @@
     "supervisor": [
       "patryk.zywica@amu.edu.pl"
     ],
-    "project": null
+    "project": 1858
   }
 },
 {
   "model": "defenseSchedule.project",
-  "pk": 2,
+  "pk": 1853,
   "fields": {
-    "topic": "System-PRI",
-    "grade_card": null
+    "topic": "Projekt 1"
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 1855,
+  "fields": {
+    "topic": "Projekt 2"
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 1857,
+  "fields": {
+    "topic": "Projekt 4"
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 1858,
+  "fields": {
+    "topic": "Projekt 5"
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 1860,
+  "fields": {
+    "topic": "Projekt 6"
+  }
+},
+{
+  "model": "defenseSchedule.project",
+  "pk": 1861,
+  "fields": {
+    "topic": "Projekt 7"
   }
 },
 {
   "model": "defenseSchedule.projectgradecard",
-  "pk": 1,
+  "pk": 1853,
   "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1854,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1855,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1856,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1857,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1858,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1860,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.projectgradecard",
+  "pk": 1861,
+  "fields": {}
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 1,
+  "fields": {
+    "category": "presentation",
+    "name": "Czy prezentacja zawierała wszystkie wymagane treści",
+    "weight_1": 3,
+    "weight_2": 1,
+    "contribution_1": 0.0035,
+    "contribution_2": 0.0012,
+    "description": "Czy prezentacja zawierała wszystkie wymagane treści (cel i założenia projektowe, podział prac na semestry, przegląd zrealizowanych funkcjonalności, architektura i użyte technologie, role osób w zespole, demo systemu)? *"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 2,
+  "fields": {
+    "category": "documentation",
+    "name": "Dokument wizji projektu",
+    "weight_1": 3,
+    "weight_2": 0,
+    "contribution_1": 0.0075,
+    "contribution_2": 0.0,
+    "description": "Dokument wizji projektu"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 3,
+  "fields": {
+    "category": "teamwork",
+    "name": "Systematyczność pracy w semestrze",
+    "weight_1": 5,
+    "weight_2": 5,
+    "contribution_1": 0.0079,
+    "contribution_2": 0.0065,
+    "description": "Systematyczność pracy w semestrze"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 4,
+  "fields": {
+    "category": "presentation",
+    "name": "Czy prezentacja była przeprowadzona zgodnie ze sztuką?",
+    "weight_1": 4,
+    "weight_2": 4,
+    "contribution_1": 0.0046,
+    "contribution_2": 0.0046,
+    "description": "Czy prezentacja (omówienie projektu i jego demonstracja) była przeprowadzona zgodnie ze sztuką?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 5,
+  "fields": {
+    "category": "presentation",
+    "name": "Demonstracja systemu",
+    "weight_1": 4,
+    "weight_2": 6,
+    "contribution_1": 0.0046,
+    "contribution_2": 0.0069,
+    "description": "Demonstracja systemu"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 6,
+  "fields": {
+    "category": "presentation",
+    "name": "Odpowiedzi na pytania komisji",
+    "weight_1": 2,
+    "weight_2": 2,
+    "contribution_1": 0.0023,
+    "contribution_2": 0.0023,
+    "description": "Odpowiedzi na pytania komisji"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 7,
+  "fields": {
+    "category": "documentation",
+    "name": "Dokument wymagań projektowych",
+    "weight_1": 3,
+    "weight_2": 2,
+    "contribution_1": 0.0075,
+    "contribution_2": 0.0029,
+    "description": "Dokument wymagań projektowych"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 8,
+  "fields": {
+    "category": "documentation",
+    "name": "Dokumentacja dla klienta/grupy docelowej/użytkownika",
+    "weight_1": 0,
+    "weight_2": 2,
+    "contribution_1": 0.0,
+    "contribution_2": 0.0029,
+    "description": "Dokumentacja dla klienta/grupy docelowej/użytkownika"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 9,
+  "fields": {
+    "category": "documentation",
+    "name": "Dokumentacja deweloperska",
+    "weight_1": 1,
+    "weight_2": 2,
+    "contribution_1": 0.0025,
+    "contribution_2": 0.0029,
+    "description": "Dokumentacja deweloperska"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 10,
+  "fields": {
+    "category": "documentation",
+    "name": "Licencja i podział praw własności",
+    "weight_1": 1,
+    "weight_2": 1,
+    "contribution_1": 0.0025,
+    "contribution_2": 0.0014,
+    "description": "Licencja i podział praw własności"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 11,
+  "fields": {
+    "category": "teamwork",
+    "name": "Podział prac w semestrze",
+    "weight_1": 3,
+    "weight_2": 3,
+    "contribution_1": 0.0047,
+    "contribution_2": 0.0039,
+    "description": "Podział prac w semestrze"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 12,
+  "fields": {
+    "category": "teamwork",
+    "name": "Kontakt z klientem/grupą docelową, testy w grupie docelowej",
+    "weight_1": 4,
+    "weight_2": 4,
+    "contribution_1": 0.063,
+    "contribution_2": 0.052,
+    "description": "Kontakt z klientem/grupą docelową, testy w grupie docelowej"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 13,
+  "fields": {
+    "category": "teamwork",
+    "name": "Zarządzanie ryzykiem i zakresem projektu",
+    "weight_1": 2,
+    "weight_2": 3,
+    "contribution_1": 0.032,
+    "contribution_2": 0.039,
+    "description": "Zarządzanie ryzykiem i zakresem projektu"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 14,
+  "fields": {
+    "category": "teamwork",
+    "name": "Metodyka pracy i narzędzia ją wspierające",
+    "weight_1": 3,
+    "weight_2": 3,
+    "contribution_1": 0.047,
+    "contribution_2": 0.039,
+    "description": "Metodyka pracy i narzędzia ją wspierające"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 15,
+  "fields": {
+    "category": "teamwork",
+    "name": "Zarządzanie kodem źródłowym",
+    "weight_1": 2,
+    "weight_2": 2,
+    "contribution_1": 0.032,
+    "contribution_2": 0.026,
+    "description": "Zarządzanie kodem źródłowym"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 16,
+  "fields": {
+    "category": "teamwork",
+    "name": "DevOps",
+    "weight_1": 0,
+    "weight_2": 3,
+    "contribution_1": 0.0,
+    "contribution_2": 0.039,
+    "description": "DevOps"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 17,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy złożoność produktu projektu odpowiada wielkości zespołu? Czy jakość produktu odpowiada wielkości projektu",
+    "weight_1": 3,
+    "weight_2": 5,
+    "contribution_1": 0.048,
+    "contribution_2": 0.066,
+    "description": "Czy złożoność produktu projektu odpowiada wielkości zespołu? Czy jakość produktu odpowiada wielkości projektu"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 18,
+  "fields": {
+    "category": "project-products",
+    "name": "Dostęp do produktu projektu dla komisji do testów podczas prezentacji * (obowiązkowe w II sem)",
+    "weight_1": 1,
+    "weight_2": 1,
+    "contribution_1": 0.016,
+    "contribution_2": 0.013,
+    "description": "Dostęp do produktu projektu dla komisji do testów podczas prezentacji * (obowiązkowe w II sem)"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 19,
+  "fields": {
+    "category": "project-products",
+    "name": "Brak krytycznych błędów w tym: bezpieczeństwa oraz uniemożliwiających korzystanie z systemu",
+    "weight_1": 0,
+    "weight_2": 2,
+    "contribution_1": 0.0,
+    "contribution_2": 0.026,
+    "description": "Brak krytycznych błędów w tym: bezpieczeństwa oraz uniemożliwiających korzystanie z systemu"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 20,
+  "fields": {
+    "category": "project-products",
+    "name": "Dostęp do produktu projektu dla komisji do testów dwa tygodnie przed prezentacją",
+    "weight_1": 0,
+    "weight_2": 5,
+    "contribution_1": 0.0,
+    "contribution_2": 0.066,
+    "description": "Dostęp do produktu projektu dla komisji do testów dwa tygodnie przed prezentacją"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 21,
+  "fields": {
+    "category": "project-products",
+    "name": "Spełnienie kryteriów akceptacji",
+    "weight_1": 5,
+    "weight_2": 5,
+    "contribution_1": 0.08,
+    "contribution_2": 0.066,
+    "description": "Spełnienie kryteriów akceptacji"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 22,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy wdrożone zostały wszystkie zakładane na dany semestr funkcjonalności (ocenia prowadzący)?",
+    "weight_1": 2,
+    "weight_2": 2,
+    "contribution_1": 0.032,
+    "contribution_2": 0.026,
+    "description": "Czy wdrożone zostały wszystkie zakładane na dany semestr funkcjonalności (ocenia prowadzący)?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 23,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy projekt dobrze rokuje?",
+    "weight_1": 5,
+    "weight_2": 0,
+    "contribution_1": 0.08,
+    "contribution_2": 0.0,
+    "description": "Czy projekt dobrze rokuje?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 24,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy projekt został wdrożony?",
+    "weight_1": 0,
+    "weight_2": 3,
+    "contribution_1": 0.0,
+    "contribution_2": 0.04,
+    "description": "Czy projekt został wdrożony?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 25,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy projekt jest użyteczny dla grupy docelowej; Czy spełnia kryteria użyteczności i został przetestowany pod tym kątem?",
+    "weight_1": 3,
+    "weight_2": 5,
+    "contribution_1": 0.048,
+    "contribution_2": 0.066,
+    "description": "Czy projekt jest użyteczny dla grupy docelowej; Czy spełnia kryteria użyteczności i został przetestowany pod tym kątem?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 26,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
+    "weight_1": 2,
+    "weight_2": 0,
+    "contribution_1": 0.032,
+    "contribution_2": 0.0,
+    "description": "Czy przygotowano prototyp projektu zgodnie ze sztuką?"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 27,
+  "fields": {
+    "category": "project-products",
+    "name": "Czy przeprowadzono i udokumentowano testy?",
+    "weight_1": 0,
+    "weight_2": 4,
+    "contribution_1": 0.0,
+    "contribution_2": 0.053,
+    "description": "Czy przeprowadzono i udokumentowano testy, w tym testy: jednostkowe, integracyjne, akceptacyjne, obciążeniowe, funkcjonalne (kryterium nie obejmuje testów użyteczności) oraz statyczna analiza jakości"
+  }
+},
+{
+  "model": "defenseSchedule.evaluationcriteria",
+  "pk": 28,
+  "fields": {
+    "category": "project-products",
+    "name": "Dobór techologii i architektury systemu do rozwiązywanego problemu",
+    "weight_1": 1,
+    "weight_2": 2,
+    "contribution_1": 0.016,
+    "contribution_2": 0.026,
+    "description": "Dobór techologii i architektury systemu do rozwiązywanego problemu"
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 1,
+  "fields": {
+    "criteria": 1,
+    "project_card": 1853,
+    "points_1": 1,
+    "points_2": 2
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 3,
+  "fields": {
+    "criteria": 1,
+    "project_card": 1860,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 4,
+  "fields": {
+    "criteria": 2,
+    "project_card": 1860,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 5,
+  "fields": {
+    "criteria": 3,
+    "project_card": 1860,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 6,
+  "fields": {
+    "criteria": 2,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 7,
+  "fields": {
+    "criteria": 3,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 8,
+  "fields": {
+    "criteria": 1,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 9,
+  "fields": {
+    "criteria": 4,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 10,
+  "fields": {
+    "criteria": 5,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 11,
+  "fields": {
+    "criteria": 6,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 12,
+  "fields": {
+    "criteria": 7,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 13,
+  "fields": {
+    "criteria": 8,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 14,
+  "fields": {
+    "criteria": 9,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 15,
+  "fields": {
+    "criteria": 10,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 16,
+  "fields": {
+    "criteria": 11,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 17,
+  "fields": {
+    "criteria": 12,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 18,
+  "fields": {
+    "criteria": 13,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 19,
+  "fields": {
+    "criteria": 14,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 20,
+  "fields": {
+    "criteria": 15,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 21,
+  "fields": {
+    "criteria": 16,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 22,
+  "fields": {
+    "criteria": 17,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 23,
+  "fields": {
+    "criteria": 18,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 24,
+  "fields": {
+    "criteria": 19,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 25,
+  "fields": {
+    "criteria": 21,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 26,
+  "fields": {
+    "criteria": 22,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 27,
+  "fields": {
+    "criteria": 24,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 28,
+  "fields": {
+    "criteria": 25,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 29,
+  "fields": {
+    "criteria": 26,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 30,
+  "fields": {
+    "criteria": 28,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 31,
+  "fields": {
+    "criteria": 27,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 32,
+  "fields": {
+    "criteria": 20,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
+},
+{
+  "model": "defenseSchedule.projectcardevaluation",
+  "pk": 33,
+  "fields": {
+    "criteria": 23,
+    "project_card": 1861,
+    "points_1": null,
+    "points_2": null
+  }
 },
 {
   "model": "admin.logentry",
@@ -896,6 +1657,870 @@
     "object_repr": "Project object (2)",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2022-09-05T17:02:42.604Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "team"
+    ],
+    "object_id": "1",
+    "object_repr": "Grupa 5",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Project\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2022-09-05T17:04:08.938Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "3",
+    "object_repr": "Testowy projekt",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2022-09-05T17:37:46.527Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "projectgradecard"
+    ],
+    "object_id": "1853",
+    "object_repr": "ProjectGradeCard object (1853)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2022-09-05T17:37:49.817Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "None",
+    "object_repr": "Projekt 1",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2022-09-05T17:38:35.010Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "projectgradecard"
+    ],
+    "object_id": "1855",
+    "object_repr": "ProjectGradeCard object (1855)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2022-09-05T17:38:38.694Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "None",
+    "object_repr": "Projekt 2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2022-09-05T17:57:37.669Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "1857",
+    "object_repr": "Projekt 4",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2022-09-05T17:58:08.744Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "1858",
+    "object_repr": "Projekt 5",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2022-09-06T16:18:44.677Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "1",
+    "object_repr": "EvaluationCriteria object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2022-09-06T16:30:42.429Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "projectcardevaluation"
+    ],
+    "object_id": "1",
+    "object_repr": "ProjectCardEvaluation object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2022-09-06T16:31:10.840Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "team"
+    ],
+    "object_id": "1",
+    "object_repr": "Grupa 5",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Project\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2022-09-06T16:48:49.098Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "2",
+    "object_repr": "Dokument wizji projektu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2022-09-06T16:49:33.646Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "3",
+    "object_repr": "Systematyczność pracy w semestrze",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2022-09-06T17:00:28.772Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "1860",
+    "object_repr": "Projekt 6",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2022-09-06T17:03:29.290Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "7",
+    "object_repr": "malbak@st.amu.edu.pl",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Team membership\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2022-09-08T15:29:16.824Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "1",
+    "object_repr": "Czy prezentacja zawierała wszystkie wymagane treści",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Nazwa\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2022-09-08T15:29:44.958Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "4",
+    "object_repr": "Czy prezentacja była przeprowadzona zgodnie ze sztuką?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2022-09-08T15:30:41.156Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "5",
+    "object_repr": "Demonstracja systemu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2022-09-08T15:31:05.042Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "6",
+    "object_repr": "Odpowiedzi na pytania komisji",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2022-09-08T15:32:19.006Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "7",
+    "object_repr": "Dokument wymagań projektowych",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2022-09-08T15:32:54.170Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "8",
+    "object_repr": "Dokumentacja dla klienta/grupy docelowej/użytkownika",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2022-09-08T15:33:21.604Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "9",
+    "object_repr": "Dokumentacja deweloperska",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2022-09-08T15:33:45.392Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "10",
+    "object_repr": "Licencja i podział praw własności",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2022-09-08T15:34:16.864Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "11",
+    "object_repr": "Podział prac w semestrze",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2022-09-08T15:57:32.071Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "12",
+    "object_repr": "Kontakt z klientem/grupą docelową, testy w grupie docelowej",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2022-09-08T15:59:09.365Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "13",
+    "object_repr": "Zarządzanie ryzykiem i zakresem projektu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2022-09-08T15:59:36.068Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "14",
+    "object_repr": "Metodyka pracy i narzędzia ją wspierające",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2022-09-08T15:59:59.627Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "15",
+    "object_repr": "Zarządzanie kodem źródłowym",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2022-09-08T16:00:41.127Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "16",
+    "object_repr": "DevOps",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2022-09-08T16:01:13.334Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "17",
+    "object_repr": "Czy złożoność produktu projektu odpowiada wielkości zespołu? Czy jakość produktu odpowiada wielkości projektu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2022-09-08T16:01:47.334Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "18",
+    "object_repr": "Dostęp do produktu projektu dla komisji do testów podczas prezentacji * (obowiązkowe w II sem)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2022-09-08T16:02:18.032Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "19",
+    "object_repr": "Brak krytycznych błędów w tym: bezpieczeństwa oraz uniemożliwiających korzystanie z systemu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2022-09-08T16:02:53.642Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "20",
+    "object_repr": "Dostęp do produktu projektu dla komisji do testów dwa tygodnie przed prezentacją",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2022-09-08T16:03:22.734Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "21",
+    "object_repr": "Spełnienie kryteriów akceptacji",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2022-09-08T16:03:46.655Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "22",
+    "object_repr": "Czy wdrożone zostały wszystkie zakładane na dany semestr funkcjonalności (ocenia prowadzący)?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2022-09-08T16:04:09.637Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "23",
+    "object_repr": "Czy projekt dobrze rokuje?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2022-09-08T16:04:34.730Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "24",
+    "object_repr": "Czy projekt został wdrożony?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2022-09-08T16:04:59.238Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "25",
+    "object_repr": "Czy projekt jest użyteczny dla grupy docelowej; Czy spełnia kryteria użyteczności i został przetestowany pod tym kątem?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2022-09-08T16:05:20.839Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "26",
+    "object_repr": "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2022-09-08T16:05:58.789Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "27",
+    "object_repr": "Czy przeprowadzono i udokumentowano testy?",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2022-09-08T16:06:39.506Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "28",
+    "object_repr": "Dobór techologii i architektury systemu do rozwiązywanego problemu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2022-09-08T16:06:55.028Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "28",
+    "object_repr": "Dobór techologii i architektury systemu do rozwiązywanego problemu",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2022-09-08T16:07:15.546Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "27",
+    "object_repr": "Czy przeprowadzono i udokumentowano testy?",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2022-09-08T16:07:43.720Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "20",
+    "object_repr": "Dostęp do produktu projektu dla komisji do testów dwa tygodnie przed prezentacją",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2022-09-08T16:08:14.699Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "evaluationcriteria"
+    ],
+    "object_id": "23",
+    "object_repr": "Czy projekt dobrze rokuje?",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2022-09-08T16:11:28.231Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "project"
+    ],
+    "object_id": "1861",
+    "object_repr": "Projekt 7",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2022-09-08T16:25:32.917Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "6",
+    "object_repr": "arknow@st.amu.edu.pl",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Team membership\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2022-09-08T16:25:43.699Z",
+    "user": [
+      "admin@admin.pl"
+    ],
+    "content_type": [
+      "defenseSchedule",
+      "myuser"
+    ],
+    "object_id": "5",
+    "object_repr": "piowal@st.amu.edu.pl",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Team membership\"]}}]"
   }
 }
 ]

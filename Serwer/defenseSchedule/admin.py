@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import MyUser, CommissionParticipation, Commission, Defense, AvailableTimeSlot, Team, Project, ProjectGradeCard
+from .models import MyUser, CommissionParticipation, Commission, Defense, AvailableTimeSlot, Team, Project, ProjectGradeCard, EvaluationCriteria, ProjectCardEvaluation
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -90,6 +90,14 @@ class ProjectAdmin(admin.ModelAdmin):
     form = ProjectForm
 
 
+class ProjectCardEvaluationInline(admin.TabularInline):
+    model = ProjectCardEvaluation
+
+class ProjectGradeCardAdmin(admin.ModelAdmin):
+    inlines = [
+        ProjectCardEvaluationInline,
+    ]
+
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
@@ -101,5 +109,6 @@ admin.site.register(Defense)
 admin.site.register(AvailableTimeSlot)
 admin.site.register(Team)
 admin.site.register(Project, ProjectAdmin)
-
-admin.site.register(ProjectGradeCard)
+admin.site.register(ProjectGradeCard, ProjectGradeCardAdmin)
+admin.site.register(EvaluationCriteria)
+#admin.site.register(ProjectCardEvaluation)

@@ -120,15 +120,59 @@ class Project(models.Model):
     def __str__(self):
         return self.topic
     
+    def prepare_pgc_content(self, pgc):
+        evaluation_criterias = EvaluationCriteria.objects.all()
+
+        for ec in evaluation_criterias:
+            pce = ProjectCardEvaluation()
+            pce.criteria = ec
+            pce.project_card = pgc
+            pce.save()
+
     def save(self, **kwargs):
-        pgc = ProjectGradeCard(project=self)
+        pgc = ProjectGradeCard(project=self) #stworzenie karty oceny projektu i przypisanie jej projektu
         pgc.save()
         self.grade_card = pgc
-
+        self.prepare_pgc_content(pgc)
         super(Project, self).save(**kwargs)
 
 
 class ProjectGradeCard(models.Model):
     #topic = models.CharField(max_length=100)
     #project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='grade_card')
-    pass
+    members = models.ManyToManyField('EvaluationCriteria', through='ProjectCardEvaluation')
+
+    def __str__(self):
+        return self.project.topic
+
+class EvaluationCriteria(models.Model):
+    class EvaluationCategories(models.TextChoices):
+        PRESENTATION = 'presentation', 'Prezentacja'
+        DOCUMENTATION = 'documentation', 'Dokumentacja'
+        TEAMWORK = 'teamwork', 'Praca grupy w semestrze'
+        PROJECT_PRODUCTS = 'project-products', 'Produkty projektu'
+
+    category = models.CharField(
+        max_length=25,
+        choices=EvaluationCategories.choices,
+        default=EvaluationCategories.PRESENTATION,
+    )
+
+    name = models.CharField("Nazwa", max_length=200)
+    weight_1 = models.IntegerField("Waga I Semestr")
+    weight_2 = models.IntegerField("Waga II Semestr")
+    contribution_1 = models.FloatField("Udział 1")
+    contribution_2 = models.FloatField("Udział 2")
+    description = models.TextField("Opis kryterium", max_length=500)
+
+    def __str__(self):
+        return self.name
+
+class ProjectCardEvaluation(models.Model):
+    criteria = models.ForeignKey(EvaluationCriteria, on_delete=models.DO_NOTHING)
+    project_card = models.ForeignKey(ProjectGradeCard, on_delete=models.DO_NOTHING)
+    points_1 = models.IntegerField(null=True, blank=True)
+    points_2 = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.criteria.name

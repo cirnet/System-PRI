@@ -105,6 +105,8 @@ class EvaluationCriteriaAdmin(admin.ModelAdmin):
 
 class TeamInline(admin.TabularInline):
     model = MyUser
+    fields = ('email',)
+    readonly_fields = ('email',)
 
 class TeamAdmin(admin.ModelAdmin):
     inlines = [

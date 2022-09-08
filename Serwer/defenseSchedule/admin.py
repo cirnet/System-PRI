@@ -98,8 +98,18 @@ class ProjectGradeCardAdmin(admin.ModelAdmin):
         ProjectCardEvaluationInline,
     ]
 
+
 class EvaluationCriteriaAdmin(admin.ModelAdmin):
     list_display = ('name', 'category')
+
+
+class TeamInline(admin.TabularInline):
+    model = MyUser
+
+class TeamAdmin(admin.ModelAdmin):
+    inlines = [
+        TeamInline,
+    ]
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
@@ -110,7 +120,7 @@ admin.site.register(CommissionParticipation)
 admin.site.register(Commission)
 admin.site.register(Defense)
 admin.site.register(AvailableTimeSlot)
-admin.site.register(Team)
+admin.site.register(Team, TeamAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ProjectGradeCard, ProjectGradeCardAdmin)
 admin.site.register(EvaluationCriteria, EvaluationCriteriaAdmin)

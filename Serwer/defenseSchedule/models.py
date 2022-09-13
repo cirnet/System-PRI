@@ -77,15 +77,25 @@ class CommissionParticipation(models.Model):
     commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
 class Commission(models.Model):
-    time_start = models.TimeField()
-    time_end = models.TimeField()
-    is_complete = models.BooleanField()
+    members = models.ManyToManyField('MyUser', through='CommissionParticipation') 
+    time_start = models.DateTimeField()
+    time_end = models.DateTimeField()
+    is_complete = models.BooleanField(default=False) #czy komisja ma odpowiednią ilość członków - 4
+    is_accepted = models.BooleanField(default=False) #czy komisja została zaakceptowana przez koordynatora
+    is_selected = models.BooleanField(default=False) #czy komisja została wybrana przez zespół studentów
+
+    def delete(self, *args, **kwargs): #obsługa usuwania CommissionParticipation
+        self.members.clear()
+        super().delete(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.time_start} - {self.time_end}"
 
 class Defense(models.Model):
     defense_date = models.DateField()
     commission = models.ForeignKey('Commission', on_delete=models.CASCADE)
     team = models.ForeignKey('Team', on_delete=models.DO_NOTHING)
-    time_start = models.TimeField()
+    time_start = models.DateTimeField()
 
     class defense_type(models.IntegerChoices):
         defense_half = 0
@@ -96,8 +106,20 @@ class Defense(models.Model):
 
 class AvailableTimeSlot(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
-    time_start = models.TimeField()
-    time_end = models.TimeField()
+    time_start = models.DateTimeField()
+    time_end = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.time_start} - {self.time_end}"
+
+class CoordinatorTimeSlot(models.Model):
+    person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
+    time_start = models.DateTimeField()
+    time_end = models.DateTimeField()
+    
+    def __str__(self):
+        strpk = str(self.pk)
+        return strpk
 
 class Team(models.Model):
     def __str__(self):

@@ -1,0 +1,19 @@
+CoordinatorTimeSlots
+
+time_start - początek bloku czasu obron
+time_end - koniec bloku czasu obron
+mogą być 3 rekordy dotyczące tego samego dnia
+
+1. Koordynator dodaje wpisy do CoordinatorTimeSlots
+
+1a. Automatycznie tworzymy obiekty Commissions (każda trwająca pół godziny) dla wszystkich terminów wskazanych w CoordinatorTimeSlots
+
+2. Opiekunowie określają terminy w których są dostępni dodając wpisy do AvailableTimeSlots, na podstawie wpisów z pkt. 1 (tylko w tych terminach)
+3. Na podstawie terminów określonych przez opiekunów w pkt. 2, tworzymy w tabeli Commissions potencjalne komisje egzaminacyjne (obron) 
+4. Za pomocą algorytmu generujemy CommissionParticipation, każdą kompletną komisję oznaczamy za pomocą "is_complete" w tabeli Commissions
+5. Koordynator akceptuje komisję przez pole "is_accepted" w tabeli Commissions
+6. Umożliwiamy studentom wybór slotu czasowego spośród Commissions które są "is_complete", "is_accepted" (kompletne i zaakceptowane przez koordynatora) i w których jest ich opiekun.
+7. Studenci wybierają komisję z tabeli Commissions czym uruchamiają flagę "is_selected"
+8. Komisja która spełnia warunki: "is_complete", "is_accepted", "is_selected" tworzy wpis w tabeli Defenses
+
+problem z datetime

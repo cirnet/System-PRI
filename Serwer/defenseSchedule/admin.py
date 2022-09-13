@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import MyUser, CommissionParticipation, Commission, Defense, AvailableTimeSlot, Team, Project, ProjectGradeCard, EvaluationCriteria, ProjectCardEvaluation
+from .models import MyUser, CommissionParticipation, Commission, Defense, AvailableTimeSlot, Team, Project, ProjectGradeCard, EvaluationCriteria, ProjectCardEvaluation, CoordinatorTimeSlot
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -113,15 +113,29 @@ class TeamAdmin(admin.ModelAdmin):
         TeamInline,
     ]
 
+class CoordinatorTimeSlotAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'time_start', 'time_end')
+
+class AvailableTimeSlotAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'person')
+
+class CommissionAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'is_complete', 'is_accepted', 'is_selected')
+
+class CommissionParticipationAdmin(admin.ModelAdmin):
+    #list_display = ('')
+    pass
+
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 #admin.site.unregister(Group)
-admin.site.register(CommissionParticipation)
-admin.site.register(Commission)
+admin.site.register(CommissionParticipation, CommissionParticipationAdmin)
+admin.site.register(Commission, CommissionAdmin)
 admin.site.register(Defense)
-admin.site.register(AvailableTimeSlot)
+admin.site.register(CoordinatorTimeSlot, CoordinatorTimeSlotAdmin)
+admin.site.register(AvailableTimeSlot, AvailableTimeSlotAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ProjectGradeCard, ProjectGradeCardAdmin)

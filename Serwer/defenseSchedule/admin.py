@@ -114,13 +114,29 @@ class TeamAdmin(admin.ModelAdmin):
     ]
 
 class CoordinatorTimeSlotAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'time_start', 'time_end')
+    list_display = ('__str__', 'start_date_end_date', 'person')
+
+    def start_date_end_date(self, obj):
+        start_date = obj.time_start.date()
+        end_date = obj.time_end.date()
+        
+        return f'{start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}'
+
+    start_date_end_date.short_description = "start date - end date"
 
 class AvailableTimeSlotAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'person')
 
 class CommissionAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'is_complete', 'is_accepted', 'is_selected')
+    list_display = ('__str__', 'start_date_end_date', 'is_complete', 'is_accepted', 'is_selected')
+
+    def start_date_end_date(self, obj):
+        start_date = obj.time_start.date()
+        end_date = obj.time_end.date()
+        
+        return f'{start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}'
+
+    start_date_end_date.short_description = "start date - end date"
 
 class CommissionParticipationAdmin(admin.ModelAdmin):
     #list_display = ('')

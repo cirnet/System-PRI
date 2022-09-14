@@ -89,7 +89,10 @@ class Commission(models.Model):
         super().delete(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.time_start} - {self.time_end}"
+        start_time = self.time_start.time()
+        end_time = self.time_end.time()
+        
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
 
 class Defense(models.Model):
     defense_date = models.DateField()
@@ -118,8 +121,10 @@ class CoordinatorTimeSlot(models.Model):
     time_end = models.DateTimeField()
     
     def __str__(self):
-        strpk = str(self.pk)
-        return strpk
+        start_time = self.time_start.time()
+        end_time = self.time_end.time()
+        
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
 
 class Team(models.Model):
     def __str__(self):

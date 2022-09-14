@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
@@ -76,6 +78,12 @@ class CommissionParticipation(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING, related_name="commission_participations")
     commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        start_time = self.commission.time_start.time()
+        end_time = self.commission.time_end.time()
+        
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+
 class Commission(models.Model):
     members = models.ManyToManyField('MyUser', through='CommissionParticipation') 
     time_start = models.DateTimeField()
@@ -113,13 +121,31 @@ class AvailableTimeSlot(models.Model):
     time_end = models.DateTimeField()
 
     def __str__(self):
-        return f"{self.time_start} - {self.time_end}"
+        start_time = self.time_start.time()
+        end_time = self.time_end.time()
+        
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+
+    def save(self, **kwargs):
+        chosen_commission = Commission.objects.get(time_start=self.time_start)
+        #pobrać istniejące commissions i wybrać tą która zgadza się z time_start
+        cp = CommissionParticipation(person=self.person, commission=chosen_commission) #stworzenie uczestnictwa w komisji
+        cp.save()
+
+        super(AvailableTimeSlot, self).save(**kwargs)
+
+
 
 class CoordinatorTimeSlot(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
-    time_start = models.DateTimeField()
-    time_end = models.DateTimeField()
+    time_start = models.DateTimeField(default=datetime.now)
+    time_end = models.DateTimeField(default=datetime.now)
     
+    def clean(self):
+        if self.time_start > self.time_end:
+            raise ValidationError({'time_start': 'Time is incorrect.'})
+
+
     def __str__(self):
         start_time = self.time_start.time()
         end_time = self.time_end.time()

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from required import Requires, R
 
 class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,8 +23,29 @@ class DefenseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AvailableTimeSlotSerializer(serializers.ModelSerializer):
+    REQUIREMENTS = (
+        Requires("time_end", "time_start") +
+        Requires("time_end", R("time_end") > R("time_start"))
+     )
+
+    def validate(self, data):
+        self.REQUIREMENTS.validate(data)  # handle validation error
+
     class Meta:
         model = AvailableTimeSlot
+        fields = '__all__'
+
+class CoordinatorTimeSlotSerializer(serializers.ModelSerializer):
+    REQUIREMENTS = (
+        Requires("time_end", "time_start") +
+        Requires("time_end", R("time_end") > R("time_start"))
+     )
+
+    def validate(self, data):
+        self.REQUIREMENTS.validate(data)  # handle validation error
+
+    class Meta:
+        model = CoordinatorTimeSlot
         fields = '__all__'
 
 class TeamSerializer(serializers.ModelSerializer):

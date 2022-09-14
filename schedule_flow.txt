@@ -2,18 +2,33 @@ CoordinatorTimeSlots
 
 time_start - początek bloku czasu obron
 time_end - koniec bloku czasu obron
-mogą być 3 rekordy dotyczące tego samego dnia
+
+Uwagi:
+- mogą istnieć chociażby 3 rekordy dotyczące tego samego dnia, np. w godzinach 10-12, 14-16, 18-20 etc.
 
 1. Koordynator dodaje wpisy do CoordinatorTimeSlots
 
-1a. Automatycznie tworzymy obiekty Commissions (każda trwająca pół godziny) dla wszystkich terminów wskazanych w CoordinatorTimeSlots
+1a. Na podstawie terminów określonych przez koordynatora, automatycznie tworzymy potencjalne komisje egzaminacyjne (obiekty Commissions, każda trwająca pół godziny) dla wszystkich terminów wskazanych w CoordinatorTimeSlots
 
-2. Opiekunowie określają terminy w których są dostępni dodając wpisy do AvailableTimeSlots, na podstawie wpisów z pkt. 1 (tylko w tych terminach)
-3. Na podstawie terminów określonych przez opiekunów w pkt. 2, tworzymy w tabeli Commissions potencjalne komisje egzaminacyjne (obron) 
-4. Za pomocą algorytmu generujemy CommissionParticipation, każdą kompletną komisję oznaczamy za pomocą "is_complete" w tabeli Commissions
-5. Koordynator akceptuje komisję przez pole "is_accepted" w tabeli Commissions
-6. Umożliwiamy studentom wybór slotu czasowego spośród Commissions które są "is_complete", "is_accepted" (kompletne i zaakceptowane przez koordynatora) i w których jest ich opiekun.
-7. Studenci wybierają komisję z tabeli Commissions czym uruchamiają flagę "is_selected"
-8. Komisja która spełnia warunki: "is_complete", "is_accepted", "is_selected" tworzy wpis w tabeli Defenses
+2. Opiekunowie określają terminy w których są dostępni dodając wpisy do AvailableTimeSlots, na podstawie wpisów z pkt. 1 CoordinatorTimeSlots lub 1a w tabeli Commissions (tylko w tych terminach!)
 
-problem z datetime
+3. Za pomocą algorytmu generujemy CommissionParticipation, każdą kompletną komisję oznaczamy za pomocą "is_complete" w tabeli Commissions
+
+4. Koordynator akceptuje komisję przez pole "is_accepted" w tabeli Commissions
+5. Umożliwiamy studentom wybór slotu czasowego spośród Commissions które są "is_complete", "is_accepted" (kompletne i zaakceptowane przez koordynatora) i w których jest ich opiekun.
+6. Studenci wybierają komisję z tabeli Commissions czym uruchamiają flagę "is_selected"
+7. Komisja która spełnia warunki: "is_complete", "is_accepted", "is_selected" tworzy wpis w tabeli Defenses
+
+Zrobione:
+- usuwanie commissions przy usuwaniu CoordinatorTimeSlots
+- tworzenie CommissionParticipation przy tworzeniu AvailableTimeSlots
+- lepsze wyświetlanie wpisów w panelu admina
+- wyświetlanie członków komisji w modelu commissions w panelu admina
+- walidacja czasu CoordinatorTimeSlots początek i koniec (po stronie REST API jak i po stronie panelu admina)
+
+Do zrobienia:
+
+- usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots
+- nie można skasować Commissions bo są powiązane z CommissionParticipation
+- is_complete = True jeśli jest 4 członków komisji
+- posprawdzać endpointy api

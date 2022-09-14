@@ -23,6 +23,10 @@ class AvailableTimeSlotViewset(viewsets.ModelViewSet):
     queryset = models.AvailableTimeSlot.objects.all()
     serializer_class = serializers.AvailableTimeSlotSerializer
 
+class CoordinatorTimeSlotViewset(viewsets.ModelViewSet):
+    queryset = models.CoordinatorTimeSlot.objects.all()
+    serializer_class = serializers.CoordinatorTimeSlotSerializer
+
 class TeamViewset(viewsets.ModelViewSet):
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer

@@ -3,8 +3,6 @@ CoordinatorTimeSlots
 time_start - początek bloku czasu obron
 time_end - koniec bloku czasu obron
 
-Uwagi:
-- mogą istnieć chociażby 3 rekordy dotyczące tego samego dnia, np. w godzinach 10-12, 14-16, 18-20 etc.
 
 1. Koordynator dodaje wpisy do CoordinatorTimeSlots
 
@@ -32,3 +30,13 @@ Do zrobienia:
 - nie można skasować Commissions bo są powiązane z CommissionParticipation
 - is_complete = True jeśli jest 4 członków komisji
 - posprawdzać endpointy api
+
+- przypomnieć sobie logowanie przez api 
+
+Panel admina/API:
+CoordinatorTimeSlots:
+- coordinator time slot; pole person = domyślnie powinien to być zalogowany użytkownik
+- poprawianie time_end zgodnie z interwałami pół godzinnymi
+
+Uwagi do CoordinatorTimeSlots:
+- powinny móc istnieć chociażby 3 rekordy dotyczące tego samego dnia, np. w godzinach 10-12, 14-16, 18-20 etc.

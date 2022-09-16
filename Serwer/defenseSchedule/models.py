@@ -129,6 +129,7 @@ class AvailableTimeSlot(models.Model):
     def save(self, **kwargs):
         chosen_commission = Commission.objects.get(time_start=self.time_start)
         #pobrać istniejące commissions i wybrać tą która zgadza się z time_start
+        #TODO Sprawdzić czy komisja już istnieje, jeśli tak to nie dodawać nowej
         cp = CommissionParticipation(person=self.person, commission=chosen_commission) #stworzenie uczestnictwa w komisji
         cp.save()
 
@@ -143,7 +144,9 @@ class CoordinatorTimeSlot(models.Model):
     
     def clean(self):
         if self.time_start > self.time_end:
-            raise ValidationError({'time_start': 'Time is incorrect.'})
+            raise ValidationError({'time_start': 'Data początkowa nie może być wcześniejsza niż końcowa.'})
+        elif self.time_start == self.time_end:
+            raise ValidationError({'time_start': 'Daty nie mogą być takie same.'})
 
 
     def __str__(self):

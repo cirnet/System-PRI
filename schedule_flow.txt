@@ -26,12 +26,15 @@ Zrobione:
 
 Do zrobienia:
 
-- usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots
-- nie można skasować Commissions bo są powiązane z CommissionParticipation
-- is_complete = True jeśli jest 4 członków komisji
-- posprawdzać endpointy api
+1. usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots
 
-- przypomnieć sobie logowanie przez api 
+2. nie można skasować Commissions bo są powiązane z CommissionParticipation
+3. nie można skasować CoordinatorTimeSlots bo są powiązane z CommissionParticipation
+
+4. is_complete = True jeśli jest 4 członków komisji
+5. posprawdzać endpointy api
+
+6. przypomnieć sobie logowanie przez api 
 
 Panel admina/API:
 CoordinatorTimeSlots:

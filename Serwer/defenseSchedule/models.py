@@ -138,9 +138,14 @@ class AvailableTimeSlot(models.Model):
 
 
 class CoordinatorTimeSlot(models.Model):
+    def fixed_time(hour):
+        time_now = datetime.now()
+        time_fixed = time_now.replace(hour=hour, minute=0, second=0, microsecond=0)
+        return time_fixed
+
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
-    time_start = models.DateTimeField(default=datetime.now)
-    time_end = models.DateTimeField(default=datetime.now)
+    time_start = models.DateTimeField(default=fixed_time(6))
+    time_end = models.DateTimeField(default=fixed_time(12))
     
     def clean(self):
         if self.time_start > self.time_end:
@@ -152,7 +157,7 @@ class CoordinatorTimeSlot(models.Model):
     def __str__(self):
         start_time = self.time_start.time()
         end_time = self.time_end.time()
-        
+
         return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
 
 class Team(models.Model):

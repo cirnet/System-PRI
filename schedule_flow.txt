@@ -23,6 +23,7 @@ Zrobione:
 - lepsze wyświetlanie wpisów w panelu admina
 - wyświetlanie członków komisji w modelu commissions w panelu admina
 - walidacja czasu CoordinatorTimeSlots początek i koniec (po stronie REST API jak i po stronie panelu admina)
+- sprawdzić czy istnieją już rekordy Commissions dla nowo tworzonego CoordinatorTimeSlot
 
 Do zrobienia:
 
@@ -36,6 +37,10 @@ Do zrobienia:
 
 6. przypomnieć sobie logowanie przez api 
 
+
+
+8. Po zmianie strefy czasowej czasy wyświetlają złe godziny w panelu admina
+
 Panel admina/API:
 CoordinatorTimeSlots:
 - coordinator time slot; pole person = domyślnie powinien to być zalogowany użytkownik
@@ -43,3 +48,32 @@ CoordinatorTimeSlots:
 
 Uwagi do CoordinatorTimeSlots:
 - powinny móc istnieć chociażby 3 rekordy dotyczące tego samego dnia, np. w godzinach 10-12, 14-16, 18-20 etc.
+
+
+###########################
+
+    try:
+        existing_commissions = Commission.objects.filter(
+        time_start__gte=instance.time_start).filter(
+        time_end__lte=instance.time_end)
+
+        # ontime_commission = existing_commissions.get(time_start=beginning_time)
+        # next_commission = existing_commissions.get(time_start=beginning_time + timedelta(minutes=30))
+        for comm in existing_commissions:
+            if(comm.time_start >= instance.time_start):
+                pass
+            else:
+                pass
+            
+            time_interval = beginning_time + timedelta(minutes=30)
+
+        # try:
+        #     single_commission = existing_commissions.get(time_start=beginning_time)
+        # except:
+        #     pass
+
+
+zrobić analogicznie jak wcześniej
+set z id komisji
+chosen commissions żeby nie zawierały gdzie ta person jest wpisana
+#wyeliminować te dla których istnieje już commission participation z tą osobą (person)

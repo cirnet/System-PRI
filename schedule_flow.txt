@@ -27,19 +27,19 @@ Zrobione:
 
 Do zrobienia:
 
-1. usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots
+1. usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots (nie działa w momencie gdy w bazie są CommissionParticipation dla kilku różnych osób)
 
-2. nie można skasować Commissions bo są powiązane z CommissionParticipation
-3. nie można skasować CoordinatorTimeSlots bo są powiązane z CommissionParticipation
+2. Tworzenie CommissionParticipation przy tworzeniu AvailableTimeSlots (tworzą się, ale chcę tak żeby się nie dublowały)
 
-4. is_complete = True jeśli jest 4 członków komisji
-5. posprawdzać endpointy api
+3. nie można skasować Commissions bo są powiązane z CommissionParticipation
+4. nie można skasować CoordinatorTimeSlots bo są powiązane z CommissionParticipation
+4a. Myślę że w przypadku skasowania CoordinatorTimeSlots albo Commissions, CommissionParticipation powinno zostać i podpiąć się do ewentualnie nowo utworzonych Commissions
 
-6. przypomnieć sobie logowanie przez api 
-
-
-
+5. is_complete = True jeśli jest 4 członków komisji
+6. posprawdzać endpointy api
+7. przypomnieć sobie logowanie przez api 
 8. Po zmianie strefy czasowej czasy wyświetlają złe godziny w panelu admina
+9. Sortowanie CommissionParticipation po dacie w panelu admina
 
 Panel admina/API:
 CoordinatorTimeSlots:

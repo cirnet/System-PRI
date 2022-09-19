@@ -5,6 +5,10 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 
+def fixed_time(hour):
+        time_now = datetime.now()
+        time_fixed = time_now.replace(hour=hour, minute=0, second=0, microsecond=0)
+        return time_fixed
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -117,8 +121,8 @@ class Defense(models.Model):
 
 class AvailableTimeSlot(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
-    time_start = models.DateTimeField()
-    time_end = models.DateTimeField()
+    time_start = models.DateTimeField(default=fixed_time(8))
+    time_end = models.DateTimeField(default=fixed_time(10))
 
     def __str__(self):
         start_time = self.time_start.time()
@@ -127,22 +131,34 @@ class AvailableTimeSlot(models.Model):
         return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
 
     def save(self, **kwargs):
-        chosen_commission = Commission.objects.get(time_start=self.time_start)
+        chosen_commission_participations = CommissionParticipation.objects.filter(
+        commission__time_start__gte=self.time_start).filter(
+        commission__time_end__lte=self.time_end).filter(
+        person=self.person)
+
+        print("Oto lista istniejących CommissionParticipation")
+        for ccp in chosen_commission_participations:
+            print(f"* {ccp}")
+        print("\n")
+
+        chosen_commissions = Commission.objects.filter(
+        time_start__gte=self.time_start).filter(
+        time_end__lte=self.time_end)
         #pobrać istniejące commissions i wybrać tą która zgadza się z time_start
         #TODO Sprawdzić czy komisja już istnieje, jeśli tak to nie dodawać nowej
-        cp = CommissionParticipation(person=self.person, commission=chosen_commission) #stworzenie uczestnictwa w komisji
-        cp.save()
+        for cc in chosen_commissions:
+            cp = CommissionParticipation(person=self.person, commission=cc) #stworzenie uczestnictwa w komisji
+            if(cp not in chosen_commission_participations):
+                print(f"{cp} nie jest w chosen_commission_participations")
+                cp.save()
+            else:
+                print("Znaleziono")
 
         super(AvailableTimeSlot, self).save(**kwargs)
 
 
 
 class CoordinatorTimeSlot(models.Model):
-    def fixed_time(hour):
-        time_now = datetime.now()
-        time_fixed = time_now.replace(hour=hour, minute=0, second=0, microsecond=0)
-        return time_fixed
-
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
     time_start = models.DateTimeField(default=fixed_time(6))
     time_end = models.DateTimeField(default=fixed_time(12))

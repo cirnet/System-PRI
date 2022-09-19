@@ -8,7 +8,7 @@ from django.db.models import Q
 from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation
 
 
-@receiver(post_save, sender=CoordinatorTimeSlot) # tworzenie komisji dla bloku czasu wyznaczonego przez koordynatora
+@receiver(post_save, sender=CoordinatorTimeSlot) # tworzenie obiektów Commission dla bloku czasu wyznaczonego przez koordynatora
 def create_commission(sender, instance, created, **kwargs):
     
     beginning_time = instance.time_start
@@ -58,7 +58,8 @@ def delete_commission(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=AvailableTimeSlot)
 def create_timeslots(sender, instance, **kwargs):
-    coordinator_timeslots = CoordinatorTimeSlot.objects.all()
+    pass
+    #coordinator_timeslots = CoordinatorTimeSlot.objects.all()
 
     # for ct in coordinator_timeslots:
     #     if(instance.time_start > ct.time_start and instance.time_start < ct.time_end):
@@ -68,18 +69,32 @@ def create_timeslots(sender, instance, **kwargs):
 
 @receiver(post_save, sender=AvailableTimeSlot)
 def create_commission_participation(sender, instance, **kwargs):
-    #coordinator_timeslots = CoordinatorTimeSlot.objects.all()
-    
     pass
+    #coordinator_timeslots = CoordinatorTimeSlot.objects.all()
     #is_complete = true jeśli dodawany członek komisji jest 4
-    comm_parts = CommissionParticipation.objects.filter(commission__time_start__exact=instance.time_start).count()
-    # ^ tu brakuje dodatkowego warunku na sprawdzenie dnia
-    print(f"Oto liczbaaaaaaaa: {comm_parts}")
-    if(comm_parts >= 4):
-        instance.is_complete = True
+    # comm_parts = CommissionParticipation.objects.filter(commission__time_start__exact=instance.time_start).count()
+    # # ^ tu brakuje dodatkowego warunku na sprawdzenie dnia
+    # print(f"Oto liczbaaaaaaaa: {comm_parts}")
+    # if(comm_parts >= 4):
+    #     instance.is_complete = True
     # cp = CommissionParticipation(person=sender.person) #stworzenie karty oceny projektu i przypisanie jej projektu
     # cp.save()
 
 @receiver(post_delete, sender=AvailableTimeSlot)
 def delete_commission_participation(sender, instance, **kwargs):
-    pass
+    
+    existing_available_time_slots = AvailableTimeSlot.objects.filter(person=instance.person)
+    
+    persistent_commission_participations_ids = set()
+
+    for eats in existing_available_time_slots:
+        commissions_ids = CommissionParticipation.objects.filter(
+        commission__time_start__gte=eats.time_start).filter(
+        commission__time_end__lte=eats.time_end).values_list('id', flat=True) 
+
+        persistent_commission_participations_ids = persistent_commission_participations_ids.union(set(commissions_ids))
+    
+    commission_participations = CommissionParticipation.objects.filter(
+        commission__time_start__gte=instance.time_start).filter(
+        commission__time_end__lte=instance.time_end).filter(~Q(id__in=persistent_commission_participations_ids))
+    commission_participations.delete()

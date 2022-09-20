@@ -23,27 +23,35 @@ Zrobione:
 - lepsze wyświetlanie wpisów w panelu admina
 - wyświetlanie członków komisji w modelu commissions w panelu admina
 - walidacja czasu CoordinatorTimeSlots początek i koniec (po stronie REST API jak i po stronie panelu admina)
-- sprawdzić czy istnieją już rekordy Commissions dla nowo tworzonego CoordinatorTimeSlot
+- sprawdzić czy istnieją już rekordy Commissions dla nowo tworzonego CoordinatorTimeSlot]
+1. usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots (nie działa w momencie gdy w bazie są CommissionParticipation dla kilku różnych osób)
+2. Tworzenie CommissionParticipation przy tworzeniu AvailableTimeSlots (tworzą się, ale chcę tak żeby się nie dublowały)
+8. Po zmianie strefy czasowej czasy wyświetlają złe godziny w panelu admina
+9. Sortowanie CommissionParticipation po dacie w panelu admina
+5. is_complete = True jeśli jest 4 członków komisji
+- coordinator time slot; pole person = domyślnie powinien to być zalogowany użytkownik
 
 Do zrobienia:
-
-1. usuwanie CommissionParticipation przy usuwaniu AvailableTimeSlots (nie działa w momencie gdy w bazie są CommissionParticipation dla kilku różnych osób)
-
-2. Tworzenie CommissionParticipation przy tworzeniu AvailableTimeSlots (tworzą się, ale chcę tak żeby się nie dublowały)
 
 3. nie można skasować Commissions bo są powiązane z CommissionParticipation
 4. nie można skasować CoordinatorTimeSlots bo są powiązane z CommissionParticipation
 4a. Myślę że w przypadku skasowania CoordinatorTimeSlots albo Commissions, CommissionParticipation powinno zostać i podpiąć się do ewentualnie nowo utworzonych Commissions
 
-5. is_complete = True jeśli jest 4 członków komisji
+
 6. posprawdzać endpointy api
 7. przypomnieć sobie logowanie przez api 
-8. Po zmianie strefy czasowej czasy wyświetlają złe godziny w panelu admina
-9. Sortowanie CommissionParticipation po dacie w panelu admina
+
+- pozmieniać wyświetlanie czasu w innych miejscach (STRy) żeby używały poprawnej daty
+- wyświetlanie daty dnia z poziomu defenses
+- wskazywanie bloku czasu CoordinatorTimeSlot dla kilku dni, ale w normalnych godzinach (lub wskazanych)
+- działający link do osoby, np. w CommissionParticipation
+0. __str__ dla Defense
+1. is_valid na False jeśli w komisji nie ma 4 członków
+
 
 Panel admina/API:
 CoordinatorTimeSlots:
-- coordinator time slot; pole person = domyślnie powinien to być zalogowany użytkownik
+
 - poprawianie time_end zgodnie z interwałami pół godzinnymi
 
 Uwagi do CoordinatorTimeSlots:

@@ -1,14 +1,29 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from datetime import datetime
+from django.utils.timezone import make_aware
+from django.utils import timezone
+from pytz import timezone 
+from django.conf import settings
+settings_time_zone = timezone(settings.TIME_ZONE)
+
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 
 def fixed_time(hour):
-        time_now = datetime.now()
-        time_fixed = time_now.replace(hour=hour, minute=0, second=0, microsecond=0)
-        return time_fixed
+    time_now = datetime.now()
+    time_fixed = time_now.replace(hour=hour, minute=0, second=0, microsecond=0)
+    return time_fixed
+
+def timezone_correct_time(self):
+    start_time = self.time_start
+    end_time = self.time_end
+
+    start_time = start_time.astimezone(settings_time_zone)
+    end_time = end_time.astimezone(settings_time_zone)
+    return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}, {self.time_start.strftime("%d-%m-%Y")}'
+
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -82,11 +97,26 @@ class CommissionParticipation(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING, related_name="commission_participations")
     commission = models.ForeignKey('Commission', on_delete=models.DO_NOTHING)
 
+    def __eq__(self, other):
+        if isinstance(other, CommissionParticipation):
+            return self.person == other.person and self.commission == other.commission
+
+        return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return super().__hash__()
+
     def __str__(self):
-        start_time = self.commission.time_start.time()
-        end_time = self.commission.time_end.time()
-        
-        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+        start_time = self.commission.time_start
+        end_time = self.commission.time_end
+
+        start_time = start_time.astimezone(settings_time_zone)
+        end_time = end_time.astimezone(settings_time_zone)
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}, {self.commission.time_start.strftime("%d-%m-%Y")}'
+
 
 class Commission(models.Model):
     members = models.ManyToManyField('MyUser', through='CommissionParticipation') 
@@ -95,16 +125,13 @@ class Commission(models.Model):
     is_complete = models.BooleanField(default=False) #czy komisja ma odpowiednią ilość członków - 4
     is_accepted = models.BooleanField(default=False) #czy komisja została zaakceptowana przez koordynatora
     is_selected = models.BooleanField(default=False) #czy komisja została wybrana przez zespół studentów
+    is_valid = models.BooleanField(default=True) #czy komisja mieści się w godzinach wskazanych w CoordinatorTimeSlot
 
     def delete(self, *args, **kwargs): #obsługa usuwania CommissionParticipation
         self.members.clear()
         super().delete(*args, **kwargs)
 
-    def __str__(self):
-        start_time = self.time_start.time()
-        end_time = self.time_end.time()
-        
-        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+    __str__ = timezone_correct_time
 
 class Defense(models.Model):
     defense_date = models.DateField()
@@ -124,11 +151,7 @@ class AvailableTimeSlot(models.Model):
     time_start = models.DateTimeField(default=fixed_time(8))
     time_end = models.DateTimeField(default=fixed_time(10))
 
-    def __str__(self):
-        start_time = self.time_start.time()
-        end_time = self.time_end.time()
-        
-        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+    __str__ = timezone_correct_time
 
     def save(self, **kwargs):
         chosen_commission_participations = CommissionParticipation.objects.filter(
@@ -169,12 +192,7 @@ class CoordinatorTimeSlot(models.Model):
         elif self.time_start == self.time_end:
             raise ValidationError({'time_start': 'Daty nie mogą być takie same.'})
 
-
-    def __str__(self):
-        start_time = self.time_start.time()
-        end_time = self.time_end.time()
-
-        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}'
+    __str__ = timezone_correct_time
 
 class Team(models.Model):
     def __str__(self):

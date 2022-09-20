@@ -72,41 +72,24 @@ class TeamAdmin(admin.ModelAdmin):
     ]
 
 class CoordinatorTimeSlotAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'start_date_end_date', 'person')
+    list_display = ('__str__', 'person')
+    ordering = ['time_start']
 
-    def start_date_end_date(self, obj):
-        start_date = obj.time_start.date()
-        end_date = obj.time_end.date()
-        
-        return f'{start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}'
-
-    start_date_end_date.short_description = "start date - end date"
+    def initial_form_data(self, request):
+        return {'person': request.user}
 
 class AvailableTimeSlotAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'start_date_end_date', 'person')
-
-    def start_date_end_date(self, obj):
-        start_date = obj.time_start.date()
-        end_date = obj.time_end.date()
-        
-        return f'{start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}'
-
-    start_date_end_date.short_description = "start date - end date"
+    list_display = ('__str__', 'person')
+    ordering = ['time_start']
     
 class CommissionParticipationInline(admin.TabularInline):
     model = CommissionParticipation
     extra = 1
+    
 
 class CommissionAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'start_date_end_date', 'is_complete', 'is_accepted', 'is_selected')
-
-    def start_date_end_date(self, obj):
-        start_date = obj.time_start.date()
-        end_date = obj.time_end.date()
-        
-        return f'{start_date.strftime("%Y-%m-%d")} - {end_date.strftime("%Y-%m-%d")}'
-
-    start_date_end_date.short_description = "start date - end date"
+    list_display = ('__str__', 'is_valid', 'is_complete', 'is_accepted', 'is_selected')
+    ordering = ['time_start']
 
     inlines = [
         CommissionParticipationInline,
@@ -114,6 +97,7 @@ class CommissionAdmin(admin.ModelAdmin):
 
 class CommissionParticipationAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'person')
+    ordering = ['-commission__time_start']
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)

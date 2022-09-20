@@ -7,6 +7,22 @@ from django.db.models import Q
 
 from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation
 
+@receiver(pre_save, sender=CoordinatorTimeSlot)
+def validate_commission(sender, instance, **kwargs):
+
+    created = (instance.pk==None)
+    if(created):
+        return
+
+    # Aktualizujemy istniejący slot
+    existing_coordinator_time_slot = CoordinatorTimeSlot.objects.get(pk=instance.pk)
+
+    invalid_commissions = Commission.objects.filter(
+        Q(time_start__lte=instance.time_start) | Q(time_end__gte=instance.time_end))
+
+    for ic in invalid_commissions:
+        ic.is_valid = False
+        ic.save()
 
 @receiver(post_save, sender=CoordinatorTimeSlot) # tworzenie obiektów Commission dla bloku czasu wyznaczonego przez koordynatora
 def create_commission(sender, instance, created, **kwargs):
@@ -72,7 +88,11 @@ def create_commission_participation(sender, instance, **kwargs):
     pass
     #coordinator_timeslots = CoordinatorTimeSlot.objects.all()
     #is_complete = true jeśli dodawany członek komisji jest 4
-    # comm_parts = CommissionParticipation.objects.filter(commission__time_start__exact=instance.time_start).count()
+    commissions = Commission.objects.filter(time_start__gte=instance.time_start).filter(time_end__lte=instance.time_end)
+    for c in commissions:
+        if (c.members.count() > 3):
+            c.is_complete=True
+            c.save()
     # # ^ tu brakuje dodatkowego warunku na sprawdzenie dnia
     # print(f"Oto liczbaaaaaaaa: {comm_parts}")
     # if(comm_parts >= 4):
@@ -89,12 +109,14 @@ def delete_commission_participation(sender, instance, **kwargs):
 
     for eats in existing_available_time_slots:
         commissions_ids = CommissionParticipation.objects.filter(
+        person=instance.person).filter(
         commission__time_start__gte=eats.time_start).filter(
         commission__time_end__lte=eats.time_end).values_list('id', flat=True) 
 
         persistent_commission_participations_ids = persistent_commission_participations_ids.union(set(commissions_ids))
     
     commission_participations = CommissionParticipation.objects.filter(
+        person=instance.person).filter(
         commission__time_start__gte=instance.time_start).filter(
         commission__time_end__lte=instance.time_end).filter(~Q(id__in=persistent_commission_participations_ids))
     commission_participations.delete()

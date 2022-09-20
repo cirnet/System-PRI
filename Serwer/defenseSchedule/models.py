@@ -66,7 +66,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    team_membership = models.ForeignKey('Team', on_delete=models.DO_NOTHING, null=True) #członek jakiego zespołu
+    team_membership = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True) #członek jakiego zespołu
 
     objects = MyUserManager()
 
@@ -134,17 +134,23 @@ class Commission(models.Model):
     __str__ = timezone_correct_time
 
 class Defense(models.Model):
-    defense_date = models.DateField()
     commission = models.ForeignKey('Commission', on_delete=models.CASCADE)
-    team = models.ForeignKey('Team', on_delete=models.DO_NOTHING)
-    time_start = models.DateTimeField()
+    team = models.ForeignKey('Team', on_delete=models.CASCADE)
 
     class defense_type(models.IntegerChoices):
         defense_half = 0
         defense_full = 1
 
     defense_type = models.IntegerField(choices=defense_type.choices)
-    grade = models.IntegerField()
+    grade = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        start_time = self.commission.time_start
+        end_time = self.commission.time_end
+
+        start_time = start_time.astimezone(settings_time_zone)
+        end_time = end_time.astimezone(settings_time_zone)
+        return f'{start_time.strftime("%H:%M")} - {end_time.strftime("%H:%M")}, {self.commission.time_start.strftime("%d-%m-%Y")}'
 
 class AvailableTimeSlot(models.Model):
     person = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING)
@@ -199,17 +205,12 @@ class Team(models.Model):
         return self.name
     name = models.CharField(max_length=100)
     supervisor = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING) #Opiekun projektu
-    project = models.ForeignKey('Project', on_delete=models.DO_NOTHING, null=True, blank=True)
+    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True)
 
 class Project(models.Model):
     topic = models.CharField(max_length=100)
     #grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING, null=True, blank=True)
-    grade_card = models.OneToOneField(
-        'ProjectGradeCard',
-        on_delete=models.CASCADE,
-        primary_key=True,
-        related_name='project',
-    )
+
 
 
     def __str__(self):
@@ -225,17 +226,24 @@ class Project(models.Model):
             pce.save()
 
     def save(self, **kwargs):
+        super(Project, self).save(**kwargs)
         pgc = ProjectGradeCard(project=self) #stworzenie karty oceny projektu i przypisanie jej projektu
         pgc.save()
         self.grade_card = pgc
         self.prepare_pgc_content(pgc)
-        super(Project, self).save(**kwargs)
+        
 
 
 class ProjectGradeCard(models.Model):
     #topic = models.CharField(max_length=100)
     #project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='grade_card')
     members = models.ManyToManyField('EvaluationCriteria', through='ProjectCardEvaluation')
+    project = models.OneToOneField(
+        'Project',
+        on_delete=models.CASCADE,
+        primary_key=False,
+        related_name='grade_card',
+    )
 
     def __str__(self):
         return self.project.topic
@@ -265,7 +273,7 @@ class EvaluationCriteria(models.Model):
 
 class ProjectCardEvaluation(models.Model):
     criteria = models.ForeignKey(EvaluationCriteria, on_delete=models.DO_NOTHING)
-    project_card = models.ForeignKey(ProjectGradeCard, on_delete=models.DO_NOTHING)
+    project_card = models.ForeignKey(ProjectGradeCard, on_delete=models.CASCADE)
     points_1 = models.IntegerField(null=True, blank=True)
     points_2 = models.IntegerField(null=True, blank=True)
 

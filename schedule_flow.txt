@@ -30,6 +30,10 @@ Zrobione:
 9. Sortowanie CommissionParticipation po dacie w panelu admina
 5. is_complete = True jeśli jest 4 członków komisji
 - coordinator time slot; pole person = domyślnie powinien to być zalogowany użytkownik
+- __str__ dla Defense
+- is_selected = True jeśli Commission jest wybrane w Defense
+- wyświetlanie daty dnia z poziomu defenses
+- pozmieniać wyświetlanie czasu w innych miejscach (STRy) żeby używały poprawnej daty
 
 Do zrobienia:
 
@@ -37,16 +41,16 @@ Do zrobienia:
 4. nie można skasować CoordinatorTimeSlots bo są powiązane z CommissionParticipation
 4a. Myślę że w przypadku skasowania CoordinatorTimeSlots albo Commissions, CommissionParticipation powinno zostać i podpiąć się do ewentualnie nowo utworzonych Commissions
 
-
 6. posprawdzać endpointy api
 7. przypomnieć sobie logowanie przez api 
 
-- pozmieniać wyświetlanie czasu w innych miejscach (STRy) żeby używały poprawnej daty
-- wyświetlanie daty dnia z poziomu defenses
 - wskazywanie bloku czasu CoordinatorTimeSlot dla kilku dni, ale w normalnych godzinach (lub wskazanych)
 - działający link do osoby, np. w CommissionParticipation
-0. __str__ dla Defense
+
 1. is_valid na False jeśli w komisji nie ma 4 członków
+is_selected = False przy zmianie Commission w Defense
+- kasowanie Team w momencie gdy są w nim members
+- kasowanie Project w momencie gdy jest do niego odniesienie w Team
 
 
 Panel admina/API:

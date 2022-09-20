@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
 
-from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation
+from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation, Defense
 
 @receiver(pre_save, sender=CoordinatorTimeSlot)
 def validate_commission(sender, instance, **kwargs):
@@ -120,3 +120,18 @@ def delete_commission_participation(sender, instance, **kwargs):
         commission__time_start__gte=instance.time_start).filter(
         commission__time_end__lte=instance.time_end).filter(~Q(id__in=persistent_commission_participations_ids))
     commission_participations.delete()
+
+@receiver(post_save, sender=Defense)
+def commission_selected(sender, instance, **kwargs):
+    selected_commission = Commission.objects.get(pk=instance.commission.pk)
+    print(selected_commission)
+    selected_commission.is_selected = True
+    selected_commission.save()
+
+@receiver(pre_save, sender=Defense)
+def commission_selected(sender, instance, **kwargs):
+    existing_defense = Defense.objects.get(pk=instance.pk)
+    selected_commission = Commission.objects.get(pk=existing_defense.commission.pk)
+    print(selected_commission)
+    selected_commission.is_selected = False
+    selected_commission.save()

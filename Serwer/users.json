@@ -1,0 +1,124 @@
+[
+{
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$aYsrSW1SwVVjlpszoQ4Oeo$4ZRu9srlAaBSqAuPGvM/mCd8qBVq9SkGpjI0sjsZhU8=",
+      "last_login": "2022-09-05T16:57:23.600Z",
+      "is_superuser": false,
+      "email": "admin@admin.pl",
+      "is_active": true,
+      "is_admin": true,
+      "team_membership": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$l6eauCPnBN5YjPKgx08mhv$wn7eGsKvYQLGeDlq7iC5uYaeZohY9zIE/qB5LwEy92A=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "jankow1@st.amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Studenci"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$a3XI2ZC1LFCTGFmADUTUai$jtQfJvBRTWKl+vx968HJUr6HuzQVZ1SfhMx2U8lBn28=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "marnow1@st.amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Studenci"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9cLbsdOXXQa91prqsUrCd6$VFvpnQfBqGT3rhqN0pok62bzUF3HKj5Vkzs6mbslykQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "micwis1@st.amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Studenci"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$ZiUJkFK5wH90nuA4UYT2YN$XsiSin1HavYbNk8sJz2VqiIWMICNy+FcCdcNdhaokvg=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "patryk.zywica@amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Koordynatorzy"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$sL8oytmYlDunkC2vn0UWMi$f8gput5PU4j2Zcsiz1roOD++wPrNb6GUacAeWfpSHkA=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "tomasz.pilka@amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Opiekunowie"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "defenseSchedule.myuser",
+    "fields": {
+      "password": "pbkdf2_sha256$320000$i0KpRBEXypiEiLhV10Wzb1$95fi9NBARYbD9AhIENhdFPrDq8OnCTfRDoTNzEAbkqw=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "michal.hanckowiak@amu.edu.pl",
+      "is_active": true,
+      "is_admin": false,
+      "team_membership": null,
+      "groups": [
+        [
+          "Opiekunowie"
+        ]
+      ],
+      "user_permissions": []
+    }
+  }
+]

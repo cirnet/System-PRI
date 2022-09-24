@@ -130,8 +130,12 @@ def commission_selected(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Defense)
 def commission_selected(sender, instance, **kwargs):
-    existing_defense = Defense.objects.get(pk=instance.pk)
-    selected_commission = Commission.objects.get(pk=existing_defense.commission.pk)
-    print(selected_commission)
-    selected_commission.is_selected = False
-    selected_commission.save()
+    try:
+        existing_defense = Defense.objects.get(pk=instance.pk)
+        selected_commission = Commission.objects.get(pk=existing_defense.commission.pk)
+        print(selected_commission)
+        selected_commission.is_selected = False
+        selected_commission.save()
+    except ObjectDoesNotExist:
+        pass
+    

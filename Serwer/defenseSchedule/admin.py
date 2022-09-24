@@ -52,13 +52,16 @@ class ProjectCardEvaluationInline(admin.TabularInline):
     model = ProjectCardEvaluation
 
 class ProjectGradeCardAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'sem_1_points', 'sumproduct_2_sem')
     inlines = [
         ProjectCardEvaluationInline,
     ]
 
+    
+
 
 class EvaluationCriteriaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category')
+    list_display = ('name', 'category', 'contribution_1', 'contribution_2')
 
 
 class TeamInline(admin.TabularInline):

@@ -244,6 +244,11 @@ class ProjectGradeCard(models.Model):
         primary_key=False,
         related_name='grade_card',
     )
+    sumproduct_1_sem = models.FloatField("sem 1 points", default=0.0)
+    sumproduct_2_sem = models.FloatField("sem 2 points", default=0.0)
+
+    def sem_1_points(self):
+        return "%.2f" % self.sumproduct_1_sem
 
     def __str__(self):
         return self.project.topic

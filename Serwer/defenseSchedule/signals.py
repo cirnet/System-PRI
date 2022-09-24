@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
 
-from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation, Defense
+from .models import Commission, CoordinatorTimeSlot, AvailableTimeSlot, CommissionParticipation, Defense, Project, ProjectCardEvaluation, EvaluationCriteria, ProjectGradeCard
 
 @receiver(pre_save, sender=CoordinatorTimeSlot)
 def validate_commission(sender, instance, **kwargs):
@@ -139,3 +139,44 @@ def commission_selected(sender, instance, **kwargs):
     except ObjectDoesNotExist:
         pass
     
+def calculate_project_evaluation(project_card):
+    sumproduct_1 = 0.0
+    sumproduct_2 = 0.0
+    criteria_results = ProjectCardEvaluation.objects.filter(project_card=project_card)
+
+    sum_w_1 = 0.0
+    sum_w_2 = 0.0
+
+    for ec in criteria_results:
+        ep1 = 0.0
+        ew1 = ec.criteria.contribution_1
+        if(ec.points_1):
+            ep1 = ec.points_1 / 4.0
+        sumproduct_1 = sumproduct_1 + (ep1 * ew1)
+        sum_w_1 = sum_w_1 + ew1 
+
+        ep2 = 0.0
+        ew2 = ec.criteria.contribution_2
+        if(ec.points_2):
+            ep2 = ec.points_2 / 4.0
+        sumproduct_2 = sumproduct_2 + (ep2 * ew2)
+        sum_w_2 = sum_w_2 + ew2
+
+    print(sum_w_1)
+    print(sum_w_2)
+
+    project_card.sumproduct_1_sem = sumproduct_1
+    project_card.sumproduct_2_sem = sumproduct_2
+    project_card.save()
+
+@receiver(post_save, sender=ProjectCardEvaluation)
+def sumproduct(sender, instance, **kwargs):
+    project_card = instance.project_card
+    calculate_project_evaluation(project_card)
+
+@receiver(post_save, sender=EvaluationCriteria)
+def recalculate_project_points(sender, instance, **kwargs):
+    projects_grade_cards = ProjectGradeCard.objects.all()
+
+    for pgc in projects_grade_cards:
+        calculate_project_evaluation(pgc)

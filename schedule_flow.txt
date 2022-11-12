@@ -51,6 +51,17 @@ Do zrobienia:
 is_selected = False przy zmianie Commission w Defense
 - kasowanie Team w momencie gdy są w nim members
 - kasowanie Project w momencie gdy jest do niego odniesienie w Team
+- nowa kolumna: procent wypełnienia Karty Oceny Projektu, powinno to być widać w widoku wszystkich kart. Do sprawdzana postępu wypełnienia KOP.
+- usuwanie okienek w harmonogramie obron
+- formowanie zespołów (cały osobny moduł)
+
+Karta Oceny Projektu:
+Trzy dodatkowe parametry dla każdej karty:
+1. procent wypełnienia karty
+2. suma iloczynów dla obu semestrów:
+    - (punkty 1 semestr * udział 1) tj. z modelu EvaluationCriteria: weight_1 * contribution_1
+    - (punkty 2 semestr * udział 2) tj. z modelu EvaluationCriteria: weight_2 * contribution_2
+3. Średnia punktacja z wypełnionych kryteriów
 
 
 Panel admina/API:

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  django:
+    build: .
+    ports:
+      - target: 8000
+        published: 8000
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12.11-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db

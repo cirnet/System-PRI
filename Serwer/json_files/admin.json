@@ -1,0 +1,24 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "c8rcyw1skyqjf8t644poe7176s113djt",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlmbNf5R0nMGy7u2cQA5UpxUiLuTSCmgnZn33iLEdalh7XkOYxIXYY04_UKK_MxtN-kR232SPLVlHknuiTxsl7cp5df1aP8Oaux1W5PyqCOSAZcKxIHJlcEhKnCZCoM6o7HGbtRrVNkBa0vWg4UC6BSLzxf8ajdJ:1ouHDj:fZib5da2UHvrGTfKhPZc59TazJS5UAFU5-z6s5Vg9-s",
+    "expire_date": "2022-11-27T17:56:39.057Z"
+  }
+},
+{
+  "model": "defenseSchedule.myuser",
+  "fields": {
+    "password": "pbkdf2_sha256$320000$GdhU2XLTUpY4kqbEPSWKiI$NS6pvgJqMVyo2qjLhULzZa8xi4N5VaO31Z66G1WCJVw=",
+    "last_login": "2022-11-13T17:56:39.054Z",
+    "is_superuser": false,
+    "email": "admin@admin.pl",
+    "is_active": true,
+    "is_admin": true,
+    "team_membership": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

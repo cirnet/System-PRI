@@ -1,0 +1,23 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Studenci",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Opiekunowie",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Koordynatorzy",
+    "permissions": []
+  }
+}
+]

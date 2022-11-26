@@ -1,0 +1,63 @@
+import ComissionElement from "./ComissionElement"
+import { useEffect, useState } from "react";
+import axios from 'axios'
+import { DataGrid } from '@mui/x-data-grid'
+
+const columns = [
+  { field: 'id', headerName: 'ID' },
+  { field: 'time_start', headerName: 'time_start', width: 250 },
+  { field: 'time_end', headerName: 'time_end', width: 250 },
+  { field: 'is_valid', headerName: 'is_valid', width: 150 },
+  { field: 'is_complete', headerName: 'is_complete', width: 150 },
+  { field: 'is_accepted', headerName: 'is_accepted', width: 150 },
+  { field: 'is_selected', headerName: 'is_selected', width: 150 },
+  { field: 'members', headerName: 'members', width: 150 }
+]
+
+export default function Comission(){
+     const [content, setContent] = useState([])
+
+    useEffect(()=>{
+      const fetch = async()=>{
+        const {data} = await axios.get('http://localhost:8000/api/commission/')
+            setContent(data)
+            console.log(data)
+      }
+        fetch()
+    },[])
+
+    console.log(content.is_valid)
+    return(
+<div className="content">
+
+<h1>Comission</h1>
+
+{content?
+    <div style={{ height: 500, width: '95%' }}>
+      <DataGrid
+        rows={content}
+        columns={columns}
+        pageSize={100}
+        align="center"/>
+    </div>
+  :"'Brak wolnych slotow'"}
+
+
+{/* {content ? content.map(e=>(
+        <ComissionElement 
+        key={e.id}
+        id={e.id}
+        time_start={e.time_start}
+        time_end={e.time_end}
+        is_complete={e.is_complete}
+        is_accepted={e.is_accepted}
+        is_selected={e.is_selected}
+        is_valid={e.is_valid}
+        members={e.members}
+        />)
+    ):"Brak comission"} */}
+
+</div>
+    
+    )
+}

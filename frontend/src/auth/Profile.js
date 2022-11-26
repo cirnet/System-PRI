@@ -24,14 +24,17 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <>
+    {/* {user?<div>
     
             
           
-          <p>Welcome {user.fname} {user.lname}</p>
+      <p>Welcome {user.fname} {user.lname}</p>
 
-          <img src={user.avatar} alt="avatar"></img>
-          
-    </div>
+      <img src={user.avatar} alt="avatar"></img>
+      
+</div>:''} */}
+{/* {user} */}
+</>
   );
 }

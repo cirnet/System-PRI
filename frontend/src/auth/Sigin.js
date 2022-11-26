@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 
 
 async function loginUser(credentials) {
-  return fetch('localhost', {
+  return fetch('http://localhost:8000/api/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -21,13 +21,13 @@ async function loginUser(credentials) {
 
 export default function Signin() {
 
-  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await loginUser({
-      username,
+      email,
       password
     });
     if ('accessToken' in response) {
@@ -69,7 +69,7 @@ export default function Signin() {
                 type="text"
                 className="form-control mt-1"
                 placeholder="Wpsiz swój login"
-                onChange={e => setUserName(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">

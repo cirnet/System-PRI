@@ -19,6 +19,8 @@ import Profile from "./Profile";
 
 import Signin from "./auth/Sigin";
 import Profile2 from "./auth/Profile";
+import TimeSlots from "./timeslots/TimeSlots";
+import Comission from "./Comission/Comission";
 function App() {
 
 // const { token, setToken } = useToken();
@@ -62,9 +64,9 @@ function App() {
 
 const token = localStorage.getItem('accessToken');
 
-if(!token) {
-  return <Signin />
-}
+// if(!token) {
+//   return <Signin />
+// }
 
 return (
 
@@ -84,7 +86,8 @@ return (
            {/* <Route path="/:id/:id" element={<Home />} /> */}
               <Route path="/profile" element={<Profile2 />}/>
           <Route path="/" element={<Profile2 />}/>
-          
+          <Route path="/timeslots" element={<TimeSlots />}/>
+          <Route path="/comission" element={<Comission />}/>
          </Routes>
          </div>
          <Footer/>

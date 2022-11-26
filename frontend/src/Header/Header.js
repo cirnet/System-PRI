@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Routes,
@@ -13,6 +15,9 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Header(){
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const navigate = useNavigate()
 function logout(){
   navigate(`/login`)
@@ -42,8 +47,18 @@ const [anchorEl, setAnchorEl] = useState(null);
                 <Nav.Link as={Link} to='/tools'>Narzędzia</Nav.Link>
                 <Nav.Link as={Link} to='/caregivers'>Opiekunowie</Nav.Link>
                 <Nav.Link as={Link} to='/teams'>Zespoły</Nav.Link>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/timeslots">TimeSlots</NavDropdown.Item>
+              <NavDropdown.Item href="/comission">Comission</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
               </Nav>
               <Navbar.Text><Nav.Link onClick={handleLogout} >Wyloguj</Nav.Link></Navbar.Text>
+{/* {user.avatar?<img src={user.avatar} alt="avatar"></img>:''} */}
             </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -3,7 +3,6 @@ import {useState} from 'react';
 
 
 
-
 export default function Profile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -25,16 +24,17 @@ export default function Profile() {
 
   return (
     <>
-    {/* {user?<div>
+
+    {user?<div>
     
             
           
       <p>Welcome {user.fname} {user.lname}</p>
 
-      <img src={user.avatar} alt="avatar"></img>
+      <img src={user.avatar} alt="avatar" width={100}></img>
       
-</div>:''} */}
-{/* {user} */}
+</div>:''}
+
 </>
   );
 }

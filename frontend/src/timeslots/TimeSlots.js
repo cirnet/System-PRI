@@ -7,9 +7,9 @@ import { DataGrid } from '@mui/x-data-grid'
 const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'person', headerName: 'Person', width: 300 },
-  { field: 'time_start', headerName: 'time_start', width: 300 },
-  { field: 'time_end', headerName: 'time_end', width: 300 }
-]
+  { field: 'time_start', headerName: 'Od', width: 250,renderCell:(params)=>{return(<span>{new Date(params.row.time_start).toLocaleString()}</span>)} },
+  { field: 'time_end', headerName: 'Do', width: 250,renderCell:(params)=>{return(<span>{new Date(params.row.time_end).toLocaleString()}</span>)} },
+  ]
 
 export default function TimeSlots(){
 
@@ -27,14 +27,17 @@ console.log(content)
     return(
         <>
 <div className="content">
-  {content?
+
+  <h1>Time Slots</h1>
+  
+  {content.length>0?
     <div style={{ height: 500, width: '95%' }}>
       <DataGrid
         rows={content}
         columns={columns}
         pageSize={100}/>
     </div>
-  :"'Brak wolnych slotow'"}
+  :"Brak wolnych slotow"}
 
 {/* <DenseTable rows={content}/> */}
 {/* 

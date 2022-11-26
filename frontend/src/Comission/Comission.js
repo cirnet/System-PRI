@@ -2,16 +2,20 @@ import ComissionElement from "./ComissionElement"
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import { DataGrid } from '@mui/x-data-grid'
+import './style.css'
+
+const divStyle = {
+  color: 'blue',
+};
 
 const columns = [
   { field: 'id', headerName: 'ID' },
-  { field: 'time_start', headerName: 'time_start', width: 250 },
-  { field: 'time_end', headerName: 'time_end', width: 250 },
-  { field: 'is_valid', headerName: 'is_valid', width: 150 },
+  { field: 'time_start', headerName: 'Od', width: 150,renderCell:(params)=>{return(<span>{new Date(params.row.time_start).toLocaleString()}</span>)} },
+  { field: 'time_end', headerName: 'Do', width: 150,renderCell:(params)=>{return(<span>{new Date(params.row.time_end).toLocaleString()}</span>)} },
+  { field: 'is_valid', headerName: 'is_valid', width: 150},
   { field: 'is_complete', headerName: 'is_complete', width: 150 },
   { field: 'is_accepted', headerName: 'is_accepted', width: 150 },
-  { field: 'is_selected', headerName: 'is_selected', width: 150 },
-  { field: 'members', headerName: 'members', width: 150 }
+  { field: 'is_selected', headerName: 'is_selected', width: 150 }
 ]
 
 export default function Comission(){
@@ -25,22 +29,32 @@ export default function Comission(){
       }
         fetch()
     },[])
-
+console.log(content)
     console.log(content.is_valid)
+
+
+    if(content.length>0){
+    <DataGrid rows={content} columns={columns} pageSize={100} align="center"/>
+  }
+
+
     return(
 <div className="content">
 
+
 <h1>Comission</h1>
 
-{content?
-    <div style={{ height: 500, width: '95%' }}>
+{content.length>0?<><div style={{ height: 500, width: '95%' }}>
       <DataGrid
         rows={content}
         columns={columns}
         pageSize={100}
         align="center"/>
     </div>
-  :"'Brak wolnych slotow'"}
+</>
+:"Brak wolnych slotow"}
+
+
 
 
 {/* {content ? content.map(e=>(

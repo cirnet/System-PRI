@@ -1,4 +1,6 @@
+# Dockerize React
 
+Repo for the step by step tutorial of Dockerizing a React app: https://jsramblings.com/dockerizing-a-react-app/
 
 Build the Docker image:
 

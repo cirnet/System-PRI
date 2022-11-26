@@ -57,8 +57,9 @@ const [anchorEl, setAnchorEl] = useState(null);
               </NavDropdown.Item>
             </NavDropdown>
               </Nav>
-              <Navbar.Text><Nav.Link onClick={handleLogout} >Wyloguj</Nav.Link></Navbar.Text>
-{/* {user.avatar?<img src={user.avatar} alt="avatar"></img>:''} */}
+              <Navbar.Text><Nav.Link onClick={handleLogout} >Wyloguj </Nav.Link></Navbar.Text>
+{user?<img src={user.avatar} alt="avatar" width={50}></img>:'sdsd'}
+          
             </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -64,9 +64,9 @@ function App() {
 
 const token = localStorage.getItem('accessToken');
 
-// if(!token) {
-//   return <Signin />
-// }
+if(!token) {
+  return <Signin />
+}
 
 return (
 

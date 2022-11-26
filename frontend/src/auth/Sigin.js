@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8000/api/user', {
+  return fetch('https://www.mecallapi.com/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -21,13 +21,13 @@ async function loginUser(credentials) {
 
 export default function Signin() {
 
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await loginUser({
-      email,
+      username,
       password
     });
     if ('accessToken' in response) {
@@ -69,7 +69,7 @@ export default function Signin() {
                 type="text"
                 className="form-control mt-1"
                 placeholder="Wpsiz swój login"
-                onChange={e => setEmail(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -88,9 +88,15 @@ export default function Signin() {
             </div>
             <p className="text-center mt-2">
              <a href="#">Zapomniałeś hasła?</a>
+             <p>Konto testowe</p>
+        
+              karn.yong@mecallapi.com / mecallapi
+              ivy.cal@mecallapi.com / mecallapi
             </p>
           </div>
         </form>
+      
+        
       </div>
     )
   }

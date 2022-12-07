@@ -21,6 +21,7 @@ import Signin from "./auth/Sigin";
 import Profile2 from "./auth/Profile";
 import TimeSlots from "./timeslots/TimeSlots";
 import Comission from "./Comission/Comission";
+import CoordinatorTimeSlot from "./CoordinatorTimeSlot/CoordinatorTimeSlot"
 function App() {
 
 // const { token, setToken } = useToken();
@@ -88,6 +89,7 @@ return (
           <Route path="/" element={<Profile2 />}/>
           <Route path="/timeslots" element={<TimeSlots />}/>
           <Route path="/comission" element={<Comission />}/>
+          <Route path="/CoordinatorTimeSlot" element={<CoordinatorTimeSlot/>}/>
          </Routes>
          </div>
          <Footer/>

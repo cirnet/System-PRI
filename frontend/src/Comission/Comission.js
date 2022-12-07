@@ -4,6 +4,9 @@ import axios from 'axios'
 import { DataGrid } from '@mui/x-data-grid'
 import './style.css'
 
+import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
 const divStyle = {
   color: 'blue',
 };
@@ -12,7 +15,15 @@ const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'time_start', headerName: 'Od', width: 150,renderCell:(params)=>{return(<span>{new Date(params.row.time_start).toLocaleString()}</span>)} },
   { field: 'time_end', headerName: 'Do', width: 150,renderCell:(params)=>{return(<span>{new Date(params.row.time_end).toLocaleString()}</span>)} },
-  { field: 'is_valid', headerName: 'is_valid', width: 150},
+  { field: 'is_valid', headerName: 'is_valid', width: 150, renderCell:(params)=>{return(
+<>
+{params?"sdsd":"nie"}
+</>
+  
+  
+  
+  
+  )} },
   { field: 'is_complete', headerName: 'is_complete', width: 150 },
   { field: 'is_accepted', headerName: 'is_accepted', width: 150 },
   { field: 'is_selected', headerName: 'is_selected', width: 150 }

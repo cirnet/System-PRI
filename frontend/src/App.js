@@ -22,6 +22,7 @@ import Profile2 from "./auth/Profile";
 import TimeSlots from "./timeslots/TimeSlots";
 import Comission from "./Comission/Comission";
 import CoordinatorTimeSlot from "./CoordinatorTimeSlot/CoordinatorTimeSlot"
+import Form2 from "./CoordinatorTimeSlot/Form2"
 function App() {
 
 // const { token, setToken } = useToken();
@@ -90,6 +91,7 @@ return (
           <Route path="/timeslots" element={<TimeSlots />}/>
           <Route path="/comission" element={<Comission />}/>
           <Route path="/CoordinatorTimeSlot" element={<CoordinatorTimeSlot/>}/>
+          <Route path="/form" element={<Form2/>}/>
          </Routes>
          </div>
          <Footer/>

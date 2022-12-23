@@ -1,0 +1,24 @@
+.box {
+  min-width: 100px;
+  min-height: 100px;
+  border: 2px solid black;
+  margin: 10px;
+  padding: 5px;
+}
+.hours {
+  border: 2px solid black;
+  width: 50px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+.containerDay {
+  display: flex;
+}

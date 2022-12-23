@@ -26,8 +26,7 @@ import Form2 from "./CoordinatorTimeSlot/Form2"
 import Calendar2 from "./calendar2/Calendar2";
 import Calendar3 from "./calendar2/Calendar3";
 import Schedule from "./calendar2/Schedule";
-import Schedule2 from "./calendar2/Schedule2";
-import Schedule3 from "./calendar2/Schedule3";
+import ScheduleDescription from "./calendar2/ScheduleDescription"
 function App() {
 
 // const { token, setToken } = useToken();
@@ -100,8 +99,7 @@ return (
           <Route path="/calendar" element={<Calendar2/>}/>
           <Route path="/calendar3" element={<Calendar3/>}/>
           <Route path="/schedule" element={<Schedule/>}/>
-          <Route path="/schedule2" element={<Schedule2/>}/>
-          <Route path="/schedule3" element={<Schedule3/>}/>
+          <Route path="/schedule/:id" element={<ScheduleDescription/>}/>
          </Routes>
          </div>
          <Footer/>

@@ -103,6 +103,7 @@ export default function Schedule(props) {
             <ScheduleElement
             id={item.id}
             // person={item.person}
+            is_complete={item.is_complete}
             time_start={item.time_start}
             time_end={item.time_end}
             />
@@ -116,7 +117,7 @@ export default function Schedule(props) {
     <>
     <div className='container'>
       
-      {days}
+      {content?days:"Brak"}
     
     </div>
     

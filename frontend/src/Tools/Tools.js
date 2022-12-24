@@ -1,6 +1,7 @@
  import React, {useState} from "react"
 import Harmonogram from "./Harmonogram"
 import Zapisy from "./Zapisy"
+import Schedule from "../calendar2/Schedule"
 
 export default function Tools(){
     let [choice, setChoice] = useState("harmo")
@@ -22,7 +23,7 @@ const changeChoiceZapisy=()=>{
             
             <button onClick={changeChoiceHarmo} >Organizacja harmonogramu</button>
             <button onClick={changeChoiceZapisy}>Organizacja zapisów</button>
-            <Harmonogram/>
+            <Schedule/>
         </div>
     )
     }

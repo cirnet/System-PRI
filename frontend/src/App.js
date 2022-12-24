@@ -27,6 +27,9 @@ import Calendar2 from "./calendar2/Calendar2";
 import Calendar3 from "./calendar2/Calendar3";
 import Schedule from "./calendar2/Schedule";
 import ScheduleDescription from "./calendar2/ScheduleDescription"
+import Team from "./Teams/Team";
+import TeamAdd from "./Teams/TeamAdd";
+import Error404 from "./Error404";
 function App() {
 
 // const { token, setToken } = useToken();
@@ -87,8 +90,10 @@ return (
 {/*            <Route path='/login' element={<Login setToken={setToken} />}/> */}
            <Route path="/tools" element={<Tools />} />
            <Route path="/teams" element={<Teams/>} />
+           <Route path="/teamadd" element={<TeamAdd/>}/>
+           <Route path="/teams/:id" element={<Team/>}/>
 
-           <Route path="/:id" element={<Tools />} />
+           {/* <Route path="/:id" element={<Tools />} /> */}
            {/* <Route path="/:id/:id" element={<Home />} /> */}
               <Route path="/profile" element={<Profile2 />}/>
           <Route path="/" element={<Profile2 />}/>
@@ -100,6 +105,7 @@ return (
           <Route path="/calendar3" element={<Calendar3/>}/>
           <Route path="/schedule" element={<Schedule/>}/>
           <Route path="/schedule/:id" element={<ScheduleDescription/>}/>
+          <Route path="*" element={<Error404/>}/>
          </Routes>
          </div>
          <Footer/>

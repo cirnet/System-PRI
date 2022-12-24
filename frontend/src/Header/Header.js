@@ -50,7 +50,7 @@ const [anchorEl, setAnchorEl] = useState(null);
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/timeslots">TimeSlots</NavDropdown.Item>
               <NavDropdown.Item href="/comission">Comission</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="/teamAdd">Dodaj zespół</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link

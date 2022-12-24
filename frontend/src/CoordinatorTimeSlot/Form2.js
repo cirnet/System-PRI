@@ -45,21 +45,39 @@ console.log(time_end2)
     event.preventDefault();
 
     
-    fetch('http://localhost:8000/api/coordinator-time-slot/', {
-      method: 'POST',
-      headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json'
-  },
-      body: JSON.stringify({ 
-        time_start: time_start2, 
-        time_end: time_end2,
-        person: person
-      })
+  //   fetch('http://localhost:8000/api/coordinator-time-slot/', {
+  //     method: 'POST',
+  //     headers: {
+  //   'Accept': 'application/json, text/plain, */*',
+  //   'Content-Type': 'application/json'
+  // },
+  //     body: JSON.stringify({ 
+  //       id:"2",
+  //       time_start: time_start2, 
+  //       time_end: time_end2,
+  //       person: person
+  //     })
       
-    }).then((res) => {
-         console.log(`Response: ${res}`)
-     })
+  //   }).then((res) => {
+  //        console.log(`Response: ${res}`)
+  //    })
+
+    // POST request using fetch inside useEffect React hook
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          id:"2",
+          time_start: time_start2, 
+          time_end: time_end2,
+          person: person
+         })
+    };
+    fetch('http://localhost:8000/api/coordinator-time-slot', requestOptions)
+        .then(response => response.json())
+
+// empty dependency array means this effect will only run once (like componentDidMount in classes)
+
   };
 
   return (

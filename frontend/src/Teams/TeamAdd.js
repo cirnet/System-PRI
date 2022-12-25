@@ -27,11 +27,11 @@ const handle = e=>{
 
     return(
         <form onSubmit={handle}>
-            <input type="text" value={name} onChange={e=>setName(e.target.value)}/>
-            <input type="text" value={supervisor} onChange={e=>setSupervisor(e.target.value)}/>
-            <input type="text" value={project} onChange={e=>setProject(e.target.value)}/>
+            <label>Name: <input type="text" value={name} onChange={e=>setName(e.target.value)}/></label><br/>
+            <label>Supervisor: <input type="text" value={supervisor} onChange={e=>setSupervisor(e.target.value)}/></label><br/>
+            <label>Project: <input type="text" value={project} onChange={e=>setProject(e.target.value)}/></label><br/>
         <input type="submit" value="Submit" />
-        <input type="file" />
+        {/* <input type="file" /> */}
       </form>
     )
 }

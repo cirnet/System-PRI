@@ -1,74 +1,78 @@
-import React, { useState, useEffect } from "react";
-// /api/coordinator-time-slot/
-import axios from "axios";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-export default function CoordinatorTimeSlot(){
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 
-const [startDate, setStartDate] = useState(null);
- const [endDate, setEndDate] = useState(null);
- const [poczatek, setPoczatek] = useState(new Date("2022/12/5"))
- const [koniec, setKoniec] = useState(new Date("2022/12/9"))
+export default function CoordinatorTimeSlot() {
+  const [time_start, setTime_start] = useState('');
+  const [time_end, setTime_end] = useState('');
+  const [person, setPerson] = useState('')
+  const [content, setContent] = useState([])
 
-const [content, setContent] = useState([])
 
-    useEffect(()=>{
+  useEffect(()=>{
       const fetch = async()=>{
         const {data} = await axios.get('http://localhost:8000/api/coordinator-time-slot/')
             setContent(data)
-            console.log(data)
-            // console.log(content[0])
+            // console.log("format z backendu: ",data[0]?.time_start)
+            // console.log(data[0]?.time_end)
+            // setTime_start(new Date(data[0]?.time_start).toISOString().replace('T', ' ').split('.')[0])
+            // setTime_end(new Date(data[0]?.time_end).toISOString().replace('T', ' ').split('.')[0])
+            
+            // console.log("format po formacie: ",time_start)
+            // console.log(time_end)  
       }
         fetch()
     },[])
 
-  const handle=()=>{
-    console.log(startDate)
-    console.log(endDate)
- }
-    return(<>
-    <form  style={{ display: "flex" }}>
-     <DatePicker
-       placeholderText="Select Start Date"
-    //    showTimeSelect
-    //    dateFormat="MMMM d, yyyy h:mmaa"
-       selected={startDate}
-       selectsStart
-       startDate={startDate}
-       endDate={endDate}
-       onChange={date => setStartDate(date)}
-       withPortal
-       timeInputLabel="Time:"
-      dateFormat="MM/dd/yyyy h:mm aa"
-      showTimeInput
+    const handleSubmit = e=>{
+      e.preventDefault()
+      console.log(time_start,time_end,person)
+  
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            time_start,time_end,person
+           })
+      };
+      fetch('http://localhost:8000/api/coordinator-time-slot/', requestOptions)
+          .then(response => response.json())
       
-      
-     />
-     <DatePicker
-       placeholderText="Select End Date"
-    //    showTimeSelect
-    //    dateFormat="MMMM d, yyyy h:mmaa"
-       selected={endDate}
-       selectsEnd
-       startDate={startDate}
-       endDate={endDate}
-       minDate={startDate}
-       onChange={date => setEndDate(date)}
-       withPortal
-       timeInputLabel="Time:"
-      dateFormat="MM/dd/yyyy h:mm aa"
-      showTimeInput
-       
-     />
-      {/* <button onClick={send}></button> */}
-      <input type="submit" value="Submit" />
-      <input onClick={handle}></input>
-   </form>
+  }
     
 
+  return (
+    <>
+
+  <input type="datetime-local" id="meeting-time" name="meeting-time" value="2018-06-7T08:30" min="2018-06-07T08:00" max="2018-06-07T10:00"/>
+
+    <form onSubmit={handleSubmit}>
+
+      <p>{time_start}</p>
+      <p>{time_end}</p>
+
+      {/* <p>{test}</p> */}
+
+
+      
+      
+      <label>
+        Data od:
+        <input type="datetime-local" value={time_start}  onChange={(event) => setTime_start(event.target.value)} />
+      </label>
+      <label>
+        Data do:
+        <input type="datetime-local"  value={time_end} onChange={(event) => setTime_end(event.target.value)} />
+      </label>
+      <label>
+      Person:
+      <input type="string" value={person} required onChange={(e) => setPerson(e.target.value)}/>
+      </label>
+      <input type="submit" value="Wyślij" />
+    </form>
+    
+    
     
     </>
-
-   
- );
+    
+  );
 }

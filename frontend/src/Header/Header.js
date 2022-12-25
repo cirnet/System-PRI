@@ -45,8 +45,11 @@ const [anchorEl, setAnchorEl] = useState(null);
               <Nav className="me-auto">
                 <Nav.Link as={Link} to='/profile'>Moj profil</Nav.Link>
                 <Nav.Link as={Link} to='/tools'>Narzędzia</Nav.Link>
-                <Nav.Link as={Link} to='/caregivers'>Opiekunowie</Nav.Link>
+                {/* <Nav.Link as={Link} to='/caregivers'>Opiekunowie</Nav.Link> */}
                 <Nav.Link as={Link} to='/teams'>Zespoły</Nav.Link>
+                <Nav.Link as={Link} to='/coordinatorTimeSlot'>CoordinatorTimeSlot</Nav.Link>
+                <Nav.Link as={Link} to='/availableTimeSlot'>AvailableTimeSlot</Nav.Link>
+                
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/timeslots">TimeSlots</NavDropdown.Item>
               <NavDropdown.Item href="/comission">Comission</NavDropdown.Item>

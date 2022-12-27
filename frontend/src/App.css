@@ -3,20 +3,26 @@
   margin: 0;
   padding: 0;
 }
+
 button {
-  padding: 10px 10px;
+  margin: 0 0.25em 0 0;
+  padding: 0.78571429em 1.5em;
+  /* margin: 5px;
+  padding: 10px 10px; */
   /* border: 1px solid gray; */
-  background-color: rgb(240, 240, 240);
+  border: 1px solid #0000001d;
+  background-color: #00000006;
+  line-height: 1em;
   /* color: #000; */
-  font-size: 1rem;
-  font-weight: bold;
+  /* font-size: 1rem;
+  font-weight: bold; */
   border-radius: 0.188rem;
   transition: 0.4s all;
   cursor: pointer;
-  margin: 5px;
+  
 }
 button:hover{
-  background-color: rgb(220, 220, 220);
+  background-color: #0000000f;
 }
 .zapisy {
   display: flex;
@@ -26,4 +32,6 @@ button:hover{
 
 .App{
   padding: 15px;
+  min-height: 100vh; 
+  position: relative;
 }

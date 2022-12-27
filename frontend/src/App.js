@@ -17,7 +17,7 @@ import Login from './auth/Login';
 import './auth/Login.css';
 import Profile from "./Profile";
 import AvailableTimeSlot from "./AvailableTimeSlot/AvailableTimeSlot"
-import Signin from "./auth/Sigin";
+import Signin from "./auth/Sigin2";
 import Profile2 from "./auth/Profile";
 import TimeSlots from "./timeslots/TimeSlots";
 import Comission from "./Comission/Comission";

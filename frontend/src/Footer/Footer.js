@@ -4,8 +4,6 @@ const style={
     background:"#2185D0", 
     color:"white", 
     textAlign:"center", 
-    bottom:"0",
-    position: "absolute", 
     width:"100%"
 }
 

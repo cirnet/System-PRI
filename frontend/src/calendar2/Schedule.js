@@ -8,7 +8,7 @@ import ScheduleElement from "./SheduleElement"
 export default function Schedule(props) {
 
   const [content, setContent] = useState([])
-  const [loader, setLoader] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
     const fetch = async()=>{
@@ -16,7 +16,8 @@ export default function Schedule(props) {
           setContent(data)
 
           console.log(data)
-          setLoader(true)
+          
+          setLoading(false)
     }
       fetch()
   },[])
@@ -79,12 +80,17 @@ export default function Schedule(props) {
     
     <div className='container'>
 
-      {content.length===0?
+      {/* {content.length===0?
       <span class="loader"></span>:
       loader?
       days:
       <h1>Jeszcze nie ustalono terminów obron</h1>
-      }
+      } */}
+
+   {loading?
+   <span class="loader"></span>:
+   content.length!==0?days:<h1>Jeszcze nie ustalono terminów obron</h1>
+   }
      
       
     </div>

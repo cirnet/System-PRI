@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import AccessibilityOutlinedIcon from '@mui/icons-material/AccessibilityOutlined';
-import Typography from '@mui/material/Typography';
 
 import swal from 'sweetalert';
 
 async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
+  return fetch('http://localhost:8000/dj-rest-auth/login/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -20,27 +15,35 @@ async function loginUser(credentials) {
 
 export default function Signin() {
 
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState()
   const [password, setPassword] = useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await loginUser({
-      username,
+      email,
       password
     });
-    if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
+    if ('key' in response) {
+      swal({
+        icon: "success",
+        buttons: false,
+        timer: 1000,
+      })
+
+      .then((value) => {
+        localStorage.setItem('accessToken', response['key']);
+        // localStorage.setItem('user', JSON.stringify(response['user']));
+        window.location.href = "/profile";
+      });
+    } 
+    else {
+      swal({
+        icon: "error",
+        text: "Błędny email lub hasło!",
         buttons: false,
         timer: 2000,
       })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/profile";
-      });
-    } else {
-      swal("Failed", response.message, "error");
     }
   }
 
@@ -63,12 +66,12 @@ export default function Signin() {
               </span>
             </div>
             <div className="form-group mt-3">
-              <label>Login</label>
+              <label>email</label>
               <input
                 type="text"
                 className="form-control mt-1"
-                placeholder="Wpsiz swój login"
-                onChange={e => setUsername(e.target.value)}
+                placeholder="Wpsiz swój email"
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -85,13 +88,13 @@ export default function Signin() {
                 Zaloguj się
               </button>
             </div>
-            <p className="text-center mt-2">
+            <div className="text-center mt-2">
              <a href="#">Zapomniałeś hasła?</a>
              <p>Konto testowe</p>
         
-              karn.yong@mecallapi.com / mecallapi
-              ivy.cal@mecallapi.com / mecallapi
-            </p>
+              admin@admin.pl / 12345 <br/>
+              test@test.pl / 123456
+            </div>
           </div>
         </form>
       

@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header(){
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  // const user = JSON.parse(localStorage.getItem('user'));
 
   const navigate = useNavigate()
 function logout(){
@@ -31,7 +31,7 @@ const [anchorEl, setAnchorEl] = useState(null);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     window.location.href = "/";
   };
 
@@ -61,7 +61,7 @@ const [anchorEl, setAnchorEl] = useState(null);
             </NavDropdown>
               </Nav>
               <Navbar.Text><Nav.Link onClick={handleLogout} >Wyloguj </Nav.Link></Navbar.Text>
-{user?<img src={user.avatar} alt="avatar" width={50}></img>:'sdsd'}
+{/* {user?<img src={user.avatar} alt="avatar" width={50}></img>:'sdsd'} */}
           
             </Navbar.Collapse>
           </Container>

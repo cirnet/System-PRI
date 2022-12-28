@@ -4,8 +4,11 @@ import axios from 'axios';
 import moment from 'moment';
 import "./style.css"
 import ScheduleElement from "./SheduleElement"
+import 'moment/locale/pl';
 
-export default function Schedule(props) {
+
+
+export default function Schedule() {
 
   const [content, setContent] = useState([])
   const [loading, setLoading] = useState(true)
@@ -13,22 +16,23 @@ export default function Schedule(props) {
   useEffect(()=>{
     const fetch = async()=>{
       const {data} = await axios.get('http://localhost:8000/api/commission/')
-          setContent(data)
-
-          console.log(data)
-          
-          setLoading(false)
+          setContent(data.sort((a, b) => ((a.time_start)> (b.time_start) ? 1 : -1)).filter(filterDates()))
+         setLoading(false)
     }
       fetch()
   },[])
+  
+  function filterDates(){
+    return e => new Date(e.time_start).getHours()>=9 && new Date(e.time_start).getHours()<=17
+  }
+
+
 
   const schedule = {};
 
   content.forEach(item => {
-
     const startTime = moment(item.time_start);
-
-    const dayOfWeek = startTime.format('dddd');
+    const dayOfWeek = startTime.locale('pl').format("dddd").toLocaleLowerCase();
 
     if (!schedule[dayOfWeek]) {
       schedule[dayOfWeek] = [];
@@ -37,10 +41,9 @@ export default function Schedule(props) {
     schedule[dayOfWeek].push(item);
   });
 
-
     const days = Object.keys(schedule).map(day=> (
     <div key={day} className="day">
-      <h3>{day}</h3>
+      <h3>{day.charAt(0).toUpperCase() + day.slice(1)}</h3>
 
       {schedule[day].slice(0,1).map(item=>(
         <h6 key={item}>
@@ -64,6 +67,7 @@ export default function Schedule(props) {
     </div>
   ));
 
+
 // if(content.length===0){
 //   return (
 //     <div className='container'>
@@ -80,17 +84,12 @@ export default function Schedule(props) {
     
     <div className='container'>
 
-      {/* {content.length===0?
-      <span class="loader"></span>:
-      loader?
-      days:
-      <h1>Jeszcze nie ustalono terminów obron</h1>
-      } */}
 
    {loading?
    <span class="loader"></span>:
    content.length!==0?days:<h1>Jeszcze nie ustalono terminów obron</h1>
    }
+
      
       
     </div>

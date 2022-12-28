@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 
-export default function TeamsElement({ name, id, supervisor, project }) {
+export default function ProjectsElement({ topic, id }) {
   const navigate = useNavigate();
 
   //   function readCookie(name) {
@@ -20,7 +20,7 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   //   console.log(csrftoken);
 
   async function deleteFetch(id) {
-    const request = await fetch(`http://localhost:8000/api/team/${id}/`, {
+    const request = await fetch(`http://localhost:8000/api/project/${id}/`, {
       method: "DELETE",
       //   headers: { "X-CSRFToken": csrftoken },
     });
@@ -34,13 +34,11 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   return (
     <>
       <div className="team">
-        <div className="details" onClick={() => navigate(`/teams/${id}`)}>
+        <div className="details" onClick={() => navigate(`/projects/${id}`)}>
           {/* <span>{id? `${id}`:" __________"}</span> */}
           <span>
-            nazwa zespolu <b>{name ? `${name}` : " __________"}</b>
+            topic <b>{topic ? `${topic}` : " __________"}</b>
           </span>
-          <span>supervior {supervisor ? `${supervisor}` : " __________"}</span>
-          <span>project {project ? `${project}` : " __________"}</span>
         </div>
         <button className="delete_button" onClick={() => deleteTeam(id)}>
           DELETE

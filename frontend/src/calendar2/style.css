@@ -1,5 +1,5 @@
 .box {
-  width: 100px;
+  /* width: 100px; */
   height: 50px;
   border: 2px solid black;
   margin: 10px;
@@ -11,6 +11,7 @@
 
 .day{
   width: 15%;
+  text-align: center;
 }
 .hours {
   border: 2px solid black;
@@ -20,8 +21,8 @@
   display: flex;
   flex-wrap: wrap;
   /* align-items: center; */
-  justify-content: center;
-  /* justify-content: space-between; */
+  /* justify-content: center; */
+  justify-content: space-between;
 }
 /* spinner */
 .loader {

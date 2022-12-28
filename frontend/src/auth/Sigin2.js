@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import swal from 'sweetalert';
 
 async function loginUser(credentials) {
@@ -26,6 +25,7 @@ export default function Signin() {
     });
     if ('key' in response) {
       swal({
+        text: "Zalogowano",
         icon: "success",
         buttons: false,
         timer: 1000,
@@ -66,9 +66,10 @@ export default function Signin() {
               </span>
             </div>
             <div className="form-group mt-3">
+              
               <label>email</label>
               <input
-                type="text"
+                type="email"
                 className="form-control mt-1"
                 placeholder="Wpsiz swój email"
                 onChange={e => setEmail(e.target.value)}
@@ -113,14 +114,6 @@ export default function Signin() {
             <span className="link-primary" onClick={changeAuthMode}>
               Zaloguj się
             </span>
-          </div>
-          <div className="form-group">
-            <label>Nazwa</label>
-            <input
-              type="text"
-              className="form-control mt-1"
-              placeholder="Twoja nazwa"
-            />
           </div>
           <div className="form-group mt-3">
             <label>Adres e-mail</label>

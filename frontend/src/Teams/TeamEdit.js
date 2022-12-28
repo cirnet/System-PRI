@@ -1,14 +1,31 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
-export default function TeamAdd() {
+export default function TeamEdit() {
   const [name, setName] = useState("");
   const [supervisor, setSupervisor] = useState("");
   const [project, setProject] = useState("");
+  const { id } = useParams();
 
+  const deleteTeam = () => {
+    fetch(`http://localhost:8000/api/team/${id}`, {
+      method: "delete",
+    });
+  };
+
+  const editTeam = () => {
+    fetch(`http://localhost:8000/api/team/${id}`, {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        supervisor,
+        project,
+      }),
+    });
+  };
   const handle = (e) => {
     e.preventDefault();
-    console.log(name, supervisor, project);
+    // console.log(name, supervisor, project)
 
     const requestOptions = {
       method: "POST",
@@ -54,6 +71,7 @@ export default function TeamAdd() {
       </label>
       <br />
       <input type="submit" value="Submit" />
+      <button onClick={deleteTeam}>Delete</button>
     </form>
   );
 }

@@ -29,6 +29,7 @@ export default function ProjectsElement({ topic, id }) {
   const deleteTeam = (id) => {
     console.log(id);
     deleteFetch(id);
+    window.location.reload(false);
   };
 
   return (

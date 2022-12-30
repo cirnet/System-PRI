@@ -18,6 +18,7 @@ export default function ProjectAdd() {
     fetch("http://localhost:8000/api/project/", requestOptions).then(
       (response) => response.json()
     );
+    window.location.reload(false);
   };
 
   return (

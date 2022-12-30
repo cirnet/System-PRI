@@ -42,6 +42,7 @@ export default function AvailableTimeSlot() {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      // credentials: "include",
       body: JSON.stringify({
         time_start,
         time_end,

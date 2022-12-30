@@ -29,6 +29,7 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   const deleteTeam = (id) => {
     console.log(id);
     deleteFetch(id);
+    window.location.reload(false);
   };
 
   return (

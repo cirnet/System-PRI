@@ -27,20 +27,20 @@ export default function CoordinatorTimeSlot() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(time_start, time_end, person);
-
+    const a = new Date(time_start).toISOString();
+    const b = new Date(time_end).toISOString();
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        time_start,
-        time_end,
+        time_start: a,
+        time_end: b,
         person: 1,
       }),
     };
-    fetch(
-      "http://localhost:8000/api/coordinator-time-slot/",
-      requestOptions
-    ).then((response) => response.json());
+    fetch("http://localhost:8000/api/coordinator-time-slot/", requestOptions)
+      .then((response) => response.json())
+      .then(console.log(requestOptions));
   };
 
   return (
@@ -57,8 +57,8 @@ export default function CoordinatorTimeSlot() {
                 <input
                   type="datetime-local"
                   className="form-control mt-1"
-                  value={time_end}
-                  onChange={(event) => setTime_end(event.target.value)}
+                  value={time_start}
+                  onChange={(event) => setTime_start(event.target.value)}
                 />
               </label>
             </div>

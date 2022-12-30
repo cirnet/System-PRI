@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function TeamAdd() {
   const [name, setName] = useState("");
@@ -22,6 +23,7 @@ export default function TeamAdd() {
     fetch("http://localhost:8000/api/team/", requestOptions).then((response) =>
       response.json()
     );
+    window.location.reload(false);
   };
 
   return (

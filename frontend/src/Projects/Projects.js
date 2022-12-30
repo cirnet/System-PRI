@@ -17,7 +17,9 @@ export default function Projects() {
   return (
     <div className="content">
       {content
-        ? content.map((e) => <ProjectsElement topic={e.topic} id={e.id} />)
+        ? content.map((e) => (
+            <ProjectsElement topic={e.topic} id={e.id} key={e.id} />
+          ))
         : ""}
     </div>
   );

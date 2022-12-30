@@ -1,25 +1,35 @@
-import React, { useState, useContext } from "react";
-
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 import LoginContext from "../context/LoginContext";
+import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 
+// import Cookies from 'js-cookie';
 export default function Profile() {
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const open = Boolean(anchorEl);
+  const [cookies, setCookie] = useCookies();
+
   // const user = JSON.parse(localStorage.getItem('user'));
-
-  // const handleMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   // const handleLogout = () => {
   //   localStorage.removeItem("accessToken");
   //   localStorage.removeItem("user");
   //   window.location.href = "/";
   // };
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(localStorage.getItem("accessToken")),
+      },
+      // credentials: "include", //to wystarczy by wyslac cookies
+    };
+    fetch("http://localhost:8000/dj-rest-auth/user", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <>

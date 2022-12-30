@@ -1,57 +1,65 @@
-import React, { useState } from 'react';
-import swal from 'sweetalert';
+import React, { useState } from "react";
+import swal from "sweetalert";
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8000/dj-rest-auth/login/', {
-    method: 'POST',
+  return fetch("http://localhost:8000/dj-rest-auth/login/", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials)
+    body: JSON.stringify(credentials),
   })
-    .then(data => data.json())
- }
+    .then((data) => data.json())
+    .catch(function () {
+      swal({
+        icon: "error",
+        title: "Problem z serwerem",
+        text: "Prosimy spróbować za chwile!",
+        buttons: false,
+        timer: 3000,
+      });
+    });
+}
 
 export default function Signin() {
-
-  const [email, setEmail] = useState()
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser({
       email,
-      password
+      password,
     });
-    if ('key' in response) {
+    console.log(response);
+    if ("key" in response) {
       swal({
         text: "Zalogowano",
         icon: "success",
         buttons: false,
         timer: 1000,
-      })
+      }).then((value) => {
+        localStorage.setItem("accessToken", response["key"]);
 
-      .then((value) => {
-        localStorage.setItem('accessToken', response['key']);
+        console.log(localStorage.getItem("accessToken"));
         // localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/profile";
+        // window.location.href = "/profile";
       });
-    } 
-    else {
+    } else {
       swal({
         icon: "error",
         text: "Błędny email lub hasło!",
         buttons: false,
         timer: 2000,
-      })
+      });
     }
-  }
+  };
 
-  let [authMode, setAuthMode] = useState("signin")
+  let [authMode, setAuthMode] = useState("signin");
 
   const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin")
-  }
+    setAuthMode(authMode === "signin" ? "signup" : "signin");
+  };
 
   if (authMode === "signin") {
     return (
@@ -66,13 +74,12 @@ export default function Signin() {
               </span>
             </div>
             <div className="form-group mt-3">
-              
               <label>email</label>
               <input
                 type="email"
                 className="form-control mt-1"
                 placeholder="Wpsiz swój email"
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -81,7 +88,7 @@ export default function Signin() {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Wpisz swoje hasło"
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
@@ -90,22 +97,19 @@ export default function Signin() {
               </button>
             </div>
             <div className="text-center mt-2">
-             <a href="#">Zapomniałeś hasła?</a>
-             <p>Konto testowe</p>
-        
-              admin@admin.pl / 12345 <br/>
+              <a href="#">Zapomniałeś hasła?</a>
+              <p>Konto testowe</p>
+              admin@admin.pl / 12345 <br />
               test@test.pl / 123456
             </div>
           </div>
         </form>
-      
-        
       </div>
-    )
+    );
   }
 
   return (
-    <div className="Auth-form-container" >
+    <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Zarejestruj się</h3>
@@ -137,10 +141,10 @@ export default function Signin() {
             </button>
           </div>
           <p className="text-center mt-2">
-             <a href="#">Nie pamiętasz hasła?</a>
+            <a href="#">Nie pamiętasz hasła?</a>
           </p>
         </div>
       </form>
     </div>
-  )
+  );
 }

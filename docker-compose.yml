@@ -6,9 +6,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=test_db
-    ports:
-      - target: 5432
-        published: 5432
   django:
     build: .
     ports:

@@ -43,7 +43,7 @@ export default function Signin() {
 
         console.log(localStorage.getItem("accessToken"));
         // localStorage.setItem('user', JSON.stringify(response['user']));
-        // window.location.href = "/profile";
+        window.location.href = "/profile";
       });
     } else {
       swal({

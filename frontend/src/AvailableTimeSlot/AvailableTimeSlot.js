@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { ImportExport } from "@mui/icons-material";
+import { json } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 export default function AvailableTimeSlot() {
   const [time_start_min, setTime_start_min] = useState("");
@@ -8,6 +11,19 @@ export default function AvailableTimeSlot() {
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
   const [content, setContent] = useState([]);
+  const [options, setOptions] = useState([])
+
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/user/"
+      );
+      console.log(data)
+      setOptions(data);
+    };
+    fetch();
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -23,7 +39,19 @@ export default function AvailableTimeSlot() {
           .replace("T", " ")
           .split(".")[0]
       );
+      setTime_start(
+        new Date(data[0]?.time_start)
+          .toISOString()
+          .replace("T", " ")
+          .split(".")[0]
+      );
       setTime_end_max(
+        new Date(data[0]?.time_end)
+          .toISOString()
+          .replace("T", " ")
+          .split(".")[0]
+      );
+      setTime_end(
         new Date(data[0]?.time_end)
           .toISOString()
           .replace("T", " ")
@@ -54,24 +82,16 @@ export default function AvailableTimeSlot() {
       requestOptions
     ).then((response) => response.json());
   };
-  const options = [
-    {
-      label: "jankow1@st.amu.edu.pl",
-      value: "1",
-    },
-    {
-      label: "marnow1@st.amu.edu.pl",
-      value: "2",
-    },
-    {
-      label: "michal.hanckowiak@amu.edu.pl",
-      value: "3",
-    },
-    {
-      label: "Pinemicwis1@st.amu.edu.pl",
-      value: "4",
-    },
-  ];
+  
+//reduced only group 2 
+const reducedOptions = options.reduce(function(filtered, option) {
+  if (option.groups[0]===2) {
+     let someNewValue = { email: option.email, id: option.id }
+     filtered.push(someNewValue);
+  }
+  return filtered;
+}, []);
+
 
   return (
     <>
@@ -91,7 +111,6 @@ export default function AvailableTimeSlot() {
                   type="datetime-local"
                   className="form-control mt-1"
                   value={time_start}
-                  placeholder={time_start_min}
                   min={time_start_min}
                   max={time_end_max}
                   onChange={(event) => setTime_start(event.target.value)}
@@ -118,8 +137,8 @@ export default function AvailableTimeSlot() {
                   className="form-control mt-1"
                   onChange={(e) => setPerson(e.target.value)}
                 >
-                  {options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
+                  {reducedOptions.map((option) => (
+                    <option value={option.id}>{option.email}</option>
                   ))}
                 </select>
               </label>
@@ -133,6 +152,9 @@ export default function AvailableTimeSlot() {
           </div>
         </form>
       </div>
+      {/* {dataOptions.map((item=>(
+        <p>{item.email} - {item.id}</p>
+        )))} */}
     </>
   );
 }

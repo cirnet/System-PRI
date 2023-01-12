@@ -31,7 +31,7 @@ export default function ScheduleDescription(){
           <p> is_complete {content.is_complete?"tak":"nie"}</p>
           <p> is_selected {content.is_selected?"tak":"nie"}</p>
           <p> is_valid {content.is_valid?"tak":"nie"}</p>
-          <p> members {content.members}</p>
+          <p> members {JSON.stringify(content.members)}</p>
           <p> time_end {content.time_end}</p>
           <p>time_start {content.time_start}</p>
         </div>

@@ -31,6 +31,8 @@ class AvailableTimeSlotSerializer(serializers.ModelSerializer):
     def validate(self, data):
         self.REQUIREMENTS.validate(data)  # handle validation error
 
+        return data
+
     class Meta:
         model = AvailableTimeSlot
         fields = '__all__'
@@ -43,6 +45,8 @@ class CoordinatorTimeSlotSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         self.REQUIREMENTS.validate(data)  # handle validation error
+
+        return data
 
     class Meta:
         model = CoordinatorTimeSlot

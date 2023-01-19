@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import {useParams} from "react-router-dom";
 
-import Test from "./Test"
-
 
 export default function ScheduleDescription(){
 
@@ -16,7 +14,7 @@ export default function ScheduleDescription(){
   const [is_complete, setIs_complete] = useState();
   const [is_selected, setIs_selected] = useState();
   const [is_valid, setIs_valid] = useState();
-    const [time_start, setTime_start] = useState();
+  const [time_start, setTime_start] = useState();
   const [time_end, setTime_end] = useState();
 
 

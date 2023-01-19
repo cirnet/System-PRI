@@ -10,12 +10,12 @@ export default function ScheduleDescription(){
 
     const [content, setContent] = useState({})
 
-  const [is_accepted, setIs_accepted] = useState();
-  const [is_complete, setIs_complete] = useState();
-  const [is_selected, setIs_selected] = useState();
-  const [is_valid, setIs_valid] = useState();
-  const [time_start, setTime_start] = useState();
-  const [time_end, setTime_end] = useState();
+  const [is_accepted, setIs_accepted] = useState("");
+  const [is_complete, setIs_complete] = useState("");
+  const [is_selected, setIs_selected] = useState("");
+  const [is_valid, setIs_valid] = useState("");
+  const [time_start, setTime_start] = useState("");
+  const [time_end, setTime_end] = useState("");
 
 
 const dane={

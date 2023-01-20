@@ -6,7 +6,8 @@ export default function SheduleElement({
     person,
     time_start,
     time_end,
-    is_complete
+    is_complete,
+    is_accepted
 }){
     const navigate = useNavigate()
     const od2 = new Date(time_start).toISOString().replace('T', ' ').split('.')[0]
@@ -15,7 +16,7 @@ export default function SheduleElement({
     const end_time = new Date(time_end).getHours() + ":" + new Date(time_end).getMinutes()
     return(
         <>
-        <div className="box" style={{'cursor':'pointer', 'background':is_complete?'#3ca832':'#eb2626'}}onClick={()=>navigate(`/schedule/${id}`)}>
+        <div className="box" style={{'cursor':'pointer', 'background':is_complete&&is_accepted?'#3ca832':is_complete?'#cc9900':'#eb2626'}}onClick={()=>navigate(`/schedule/${id}`)}>
             {/* <span>{id}</span> */}
             {/* <span>{person}</span> */}
             {/* <p>{new Date(time_start).toISOString().replace('T', ' ').split('.')[0]}</p> */}
@@ -23,6 +24,7 @@ export default function SheduleElement({
             {/* <p>{new Date(time_end).toISOString().replace('T', ' ').split('.')[0]}</p> */}
             <p>{start_time + '-'+ end_time}</p>
             
+
 
         </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import {useParams} from "react-router-dom";
-
+import moment from "moment";
 
 export default function ScheduleDescription(){
 
@@ -35,16 +35,9 @@ const dane={
             setIs_complete(data.is_complete)
             setIs_selected(data.is_selected)
             setIs_valid(data.is_valid)
-            setTime_start(new Date(data.time_start)
-          .toISOString()
-          .replace("T", " ")
-          .split(".")[0]
-      );
-            setTime_end(new Date(data.time_end)
-          .toISOString()
-          .replace("T", " ")
-          .split(".")[0]
-      );
+      setTime_start(moment(data.time_start).format("YYYY-MM-DDTkk:mm"))
+      setTime_end(moment(data.time_end).format("YYYY-MM-DDTkk:mm"))
+            
             console.log(data)
       }
         fetch()

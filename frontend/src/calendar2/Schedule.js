@@ -61,6 +61,7 @@ export default function Schedule() {
             is_complete={item.is_complete}
             time_start={item.time_start}
             time_end={item.time_end}
+            is_accepted={item.is_accepted}
           />
         </div>
       ))}

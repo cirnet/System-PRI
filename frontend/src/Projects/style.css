@@ -1,13 +1,18 @@
-.team {
-  width: 100%;
-  height: 100px;
+.projects {
+  width: 40%;
+  height: 70px;
   border: 1px solid gray;
   display: flex;
   margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-  justify-content: space-between;
+  align-items: center;
+}
+.projects:hover {
+  background-color: #f0f0f0;
 }
 .details {
   display: flex;

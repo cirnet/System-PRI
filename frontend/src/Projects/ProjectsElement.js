@@ -34,7 +34,7 @@ export default function ProjectsElement({ topic, id }) {
 
   return (
     <>
-      <div className="team">
+      <div className="projects">
         <div className="details" onClick={() => navigate(`/projects/${id}`)}>
           {/* <span>{id? `${id}`:" __________"}</span> */}
           <span>

@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import moment from "moment";
 
 export default function ScheduleDescription(){
 
     const {id} = useParams()
-
+const navigate = useNavigate();
     const [content, setContent] = useState({})
 
   const [is_accepted, setIs_accepted] = useState("");
@@ -59,6 +59,8 @@ const dane={
         .catch(error => {
             console.error(error);
         });
+        navigate("/schedule")
+        window.location.reload();
     }
     
 

@@ -5,6 +5,7 @@ import moment from "moment";
 import "./style.css";
 import ScheduleElement from "./SheduleElement";
 import "moment/locale/pl";
+import socketIOClient from 'socket.io-client';
 
 export default function Schedule() {
   const [hourStart, setHourStart] = useState(9);
@@ -12,6 +13,18 @@ export default function Schedule() {
 
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
+  // useEffect(() => {
+  //   const socket = socketIOClient('http://localhost:8000/api/commission/');
+  //   socket.on('data_updated', data => {
+  //     console.log('Dane zmieniły się na backendzie:', data);
+  //     // tutaj można wykonać akcję, która odświeży dane na froncie
+  //   });
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -25,6 +38,7 @@ export default function Schedule() {
     };
     fetch();
   }, [hourStart, hourEnd]);
+
 
   function filterDates() {
     return (e) =>

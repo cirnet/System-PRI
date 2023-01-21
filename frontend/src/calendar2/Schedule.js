@@ -35,8 +35,13 @@ export default function Schedule() {
           .filter(filterDates())
       );
       setLoading(false);
+      console.log("render")
     };
     fetch();
+    const interval = setInterval(()=>{
+      fetch();
+    },5000)
+    return()=>clearInterval(interval)
   }, [hourStart, hourEnd]);
 
 

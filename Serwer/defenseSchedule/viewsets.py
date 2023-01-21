@@ -21,11 +21,28 @@ class DefenseViewset(viewsets.ModelViewSet):
 
 class AvailableTimeSlotViewset(viewsets.ModelViewSet):
     queryset = models.AvailableTimeSlot.objects.all()
-    serializer_class = serializers.AvailableTimeSlotSerializer
+    serializer_class = serializers.AvailableTimeSlotSerializerCreate
+
+    # def create(self, request):
+    #     result = super().create(request)
+    #     print(result)
+    #     current_user = request.user
+    #     result.person = current_user
+    #     result.save()
+    #     return result
+
+    def perform_create(self, serializer):
+        serializer.save(person=self.request.user)
 
 class CoordinatorTimeSlotViewset(viewsets.ModelViewSet):
     queryset = models.CoordinatorTimeSlot.objects.all()
     serializer_class = serializers.CoordinatorTimeSlotSerializer
+
+    def create(self, request):
+        result = super().create(request)
+        print(result)
+        current_user = request.user
+        return result
 
 class TeamViewset(viewsets.ModelViewSet):
     queryset = models.Team.objects.all()

@@ -5,8 +5,44 @@ import {useNavigate, useParams} from "react-router-dom";
 import moment from "moment";
 
 export default function ScheduleDescription(){
+  const {id} = useParams()
+  const [comisja,setComisja] = useState([])
+  const [users,setUsers] = useState([])
+  const [person, setPerson] = useState({})
+  
+  useEffect(()=>{
+      const commissionResponse = async()=>{
+        const {data} = await axios.get(`http://localhost:8000/api/commission/${id}/`)
+            
+            setComisja(data.members)
+            console.log(comisja)
+      }
+        commissionResponse()
+    },[])
 
-    const {id} = useParams()
+
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/user/"
+      );
+      console.log(data)
+      setUsers(data);
+    };
+    fetch();
+  }, []);
+
+
+   const reducedOptions = users
+   .filter(user => comisja.includes(user.id))
+   .reduce(function(filtered,option) {
+     let someNewValue = { email: option.email, id: option.id }
+     filtered.push(someNewValue);
+  return filtered;
+}, []);
+
+    
 const navigate = useNavigate();
     const [content, setContent] = useState({})
 
@@ -62,7 +98,19 @@ const dane={
         navigate("/schedule")
         window.location.reload();
     }
-    
+//     const test = []
+// for(let i=0; i=5;i++){
+//   test.push(
+//     <label>
+//                 <select
+//                   className="form-control mt-1"
+//                   onChange={(e) => setPerson(e.target.value)}>
+//                     {reducedOptions.map((option,index) => (
+//                     <option value={option.id} selected={index===i}>{option.email}</option>))}
+//                 </select>
+//           </label>
+//   )
+// }
 
     return(
         
@@ -77,10 +125,38 @@ const dane={
         //   <p>time_start {content.time_start}</p>
         // </div>
         <div>
-        <span>EDYCJA</span>
+
+          <h1>{moment(time_start).format("LL")}</h1>
+           <h2>{moment(time_start).format("LT")} - {moment(time_end).format("LT")}</h2>
+{(() => {
+            const arr = [];
+            for (let i = 0; i < comisja.length+1; i++) {
+                arr.push(
+                  <div>
+                    <label>
+                <select
+                  className="form-control mt-1 center-option-text"
+                  onChange={(e) => setPerson(e.target.value)}
+                >
+                  <option value="">--------Wybierz osobe--------</option>
+                  {reducedOptions.map((option,index) => (
+                    <option value={option.id} selected={index===i}>{option.email}</option>
+                    
+                  ))}
+                  
+                </select>
+              </label>
+              <br/>
+              </div>
+                );
+            }
+            return arr;
+        })()}
+
+
           <p>id {content.id}</p>
          
-          <p> members {JSON.stringify(content.members)}</p>
+        
         
 
 <form onSubmit={handle}>
@@ -130,6 +206,10 @@ const dane={
 
     <button type="submit">Wyślij</button>
 </form>
+
+
+
+
 
 
 

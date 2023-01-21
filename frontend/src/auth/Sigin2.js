@@ -32,15 +32,16 @@ export default function Signin() {
       password,
     });
     console.log(response);
-    if ("key" in response) {
+    if ("access_token" in response) {
       swal({
         text: "Zalogowano",
         icon: "success",
         buttons: false,
         timer: 1000,
       }).then((value) => {
-        localStorage.setItem("accessToken", response["key"]);
-
+        localStorage.setItem("accessToken", response["access_token"]);
+        localStorage.setItem("refresh_token", response["refresh_token"]);
+        localStorage.setItem("user", response["user"]);
         console.log(localStorage.getItem("accessToken"));
         // localStorage.setItem('user', JSON.stringify(response['user']));
         window.location.href = "/profile";

@@ -8,7 +8,9 @@
   align-content: stretch;
   align-items: flex-end;
 }
-
+.center-option-text {
+  text-align: center;
+}
 .day {
   width: 15%;
   text-align: center;

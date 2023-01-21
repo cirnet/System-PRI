@@ -8,7 +8,6 @@ import Teams from "./Teams/Teams";
 import Tools from "./Tools/Tools";
 import "./App.css";
 // import Caregivers from "./Caregivers/Caregivers";
-import useToken from "./auth/useToken";
 import Login from "./auth/Login";
 import "./auth/Login.css";
 import Profile from "./Profile";

@@ -5,15 +5,14 @@ import moment from "moment";
 import "./style.css";
 import ScheduleElement from "./SheduleElement";
 import "moment/locale/pl";
-import socketIOClient from 'socket.io-client';
+import socketIOClient from "socket.io-client";
 
 export default function Schedule() {
-  const [hourStart, setHourStart] = useState(9);
-  const [hourEnd, setHourEnd] = useState(17);
+  const [hourStart, setHourStart] = useState("");
+  const [hourEnd, setHourEnd] = useState("");
 
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   // useEffect(() => {
   //   const socket = socketIOClient('http://localhost:8000/api/commission/');
@@ -25,6 +24,18 @@ export default function Schedule() {
   //     socket.disconnect();
   //   };
   // }, []);
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/coordinator-time-slot/"
+      );
+      setContent(data);
+
+      setHourStart(new Date(data[0]?.time_start).getHours());
+      setHourEnd(new Date(data[0]?.time_end).getHours());
+    };
+    fetch();
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -35,15 +46,14 @@ export default function Schedule() {
           .filter(filterDates())
       );
       setLoading(false);
-      console.log("render")
+      console.log("render");
     };
     fetch();
-    const interval = setInterval(()=>{
+    const interval = setInterval(() => {
       fetch();
-    },5000)
-    return()=>clearInterval(interval)
+    }, 5000);
+    return () => clearInterval(interval);
   }, [hourStart, hourEnd]);
-
 
   function filterDates() {
     return (e) =>
@@ -94,8 +104,6 @@ export default function Schedule() {
   return (
     <>
       <form style={styleForm}>
-        <span>Chwilowy formularz z mozliwościa zmiany zakresu godzin</span>
-        <br />
         <label>
           OD:
           <input

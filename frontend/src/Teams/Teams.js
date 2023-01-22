@@ -1,6 +1,7 @@
 import TeamsElement from "./TeamsElement";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TeamAdd from "./TeamAdd";
 
 export default function Teams() {
   const [content, setContent] = useState();
@@ -16,18 +17,22 @@ export default function Teams() {
 
   return (
     <div className="content">
-      {content
-        ? content.map((e) => (
-            <TeamsElement
-              name={e.name}
-              key={e.id}
-              id={e.id}
-              supervisor={e.supervisor}
-              project={e.project}
-            />
-            
-          ))
-        : ""}
+      <div className="division">
+        <TeamAdd />
+        <div className="teamsrender">
+          {content
+            ? content.map((e) => (
+                <TeamsElement
+                  name={e.name}
+                  key={e.id}
+                  id={e.id}
+                  supervisor={e.supervisor}
+                  project={e.project}
+                />
+              ))
+            : ""}
+        </div>
+      </div>
     </div>
   );
 }

@@ -55,13 +55,12 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   .filter(item => item.id === project)
   .map(project => project.topic);
 
-console.log("projectToDisplay" ,projectToDisplay)
+// console.log("projectToDisplay" ,projectToDisplay)
 
   return (
     <>
       <div className="teams">
         <div className="details" onClick={() => navigate(`/teams/${id}`)}>
-          {/* <span>{id? `${id}`:" __________"}</span> */}
           <span>
             nazwa zespolu <b>{name.length ? `${name}` : " __________"}</b>
           </span>

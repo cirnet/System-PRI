@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import swal from "sweetalert";
 export default function ProjectAdd() {
   const [topic, setTopic] = useState("");
 
@@ -15,9 +15,16 @@ export default function ProjectAdd() {
         topic,
       }),
     };
-    fetch("http://localhost:8000/api/project/", requestOptions).then(
+    fetch("http://localhost:8000/api/project/", requestOptions)
+    .then(
       (response) => response.json()
-    );
+    )
+    .then(swal({
+        text: "Dodano projekt",
+        icon: "success",
+        buttons: false,
+        timer: 1000,
+      }))
     window.location.reload(false);
   };
 

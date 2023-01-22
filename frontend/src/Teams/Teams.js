@@ -25,6 +25,7 @@ export default function Teams() {
               supervisor={e.supervisor}
               project={e.project}
             />
+            
           ))
         : ""}
     </div>

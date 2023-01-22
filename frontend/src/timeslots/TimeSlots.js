@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid'
 
 const columns = [
   { field: 'id', headerName: 'ID' },
-  { field: 'person', headerName: 'Person', width: 300 },
+  { field: 'person', headerName: 'Person', width: '300' },
   { field: 'time_start', headerName: 'Od', width: 250,renderCell:(params)=>{return(<span>{new Date(params.row.time_start).toLocaleString()}</span>)} },
   { field: 'time_end', headerName: 'Do', width: 250,renderCell:(params)=>{return(<span>{new Date(params.row.time_end).toLocaleString()}</span>)} },
   ]

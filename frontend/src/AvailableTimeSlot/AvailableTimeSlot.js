@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import "./style.css"
 
 export default function AvailableTimeSlot() {
   const [time_start_min, setTime_start_min] = useState("");
@@ -93,14 +94,14 @@ const reducedOptions = options.reduce(function(filtered, option) {
 
   return (
     <>
-      <p>
+      {/* <p>
         Formularz wybrania daty przez profesorów. Data jest OD Do wynikająca z
         tego co wybierze koordynator
-      </p>
+      </p> */}
       <div className="Auth-form-container" onSubmit={handleSubmit}>
         <form className="Auth-form">
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Available Time Slot</h3>
+            <h3 className="Auth-form-title">Wybierz swój zakres dostępności</h3>
 
             <div className="form-group mt-3">
               <label>

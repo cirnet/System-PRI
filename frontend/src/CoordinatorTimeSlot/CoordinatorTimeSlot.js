@@ -31,11 +31,14 @@ export default function CoordinatorTimeSlot() {
     const b = new Date(time_end).toISOString();
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
       body: JSON.stringify({
         time_start: a,
         time_end: b,
-        person: 1,
+        // person: 1,
       }),
     };
     fetch("http://localhost:8000/api/coordinator-time-slot/", requestOptions)

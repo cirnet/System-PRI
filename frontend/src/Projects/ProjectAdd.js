@@ -16,30 +16,34 @@ export default function ProjectAdd() {
       }),
     };
     fetch("http://localhost:8000/api/project/", requestOptions)
-    .then(
-      (response) => response.json()
-    )
-    .then(swal({
-        text: "Dodano projekt",
-        icon: "success",
-        buttons: false,
-        timer: 1000,
-      }))
+      .then((response) => response.json())
+      .then(
+        swal({
+          text: "Dodano projekt",
+          icon: "success",
+          buttons: false,
+          timer: 1000,
+        })
+      );
     window.location.reload(false);
   };
 
   return (
-    <form onSubmit={handle}>
-      <label>
-        Topic:
-        <input
-          type="text"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-        />
-      </label>
+    <form className="form" onSubmit={handle}>
+      <h3>Dodaj projekt</h3>
 
-      <input type="submit" value="Submit" />
+      <input
+        className="form-control mt-1 center-option-text"
+        placeholder="Nazwa projektu"
+        type="text"
+        value={topic}
+        required
+        onChange={(e) => setTopic(e.target.value)}
+      />
+
+      <button type="submit" className="btn btn-primary">
+        Wyślij
+      </button>
     </form>
   );
 }

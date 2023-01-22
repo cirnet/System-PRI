@@ -1,6 +1,7 @@
 import ProjectsElement from "./ProjectsElement";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProjectAdd from "./ProjectAdd";
 
 export default function Projects() {
   const [content, setContent] = useState();
@@ -16,11 +17,16 @@ export default function Projects() {
 
   return (
     <div className="content">
-      {content
-        ? content.map((e) => (
-            <ProjectsElement topic={e.topic} id={e.id} key={e.id} />
-          ))
-        : ""}
+      <div className="division">
+        <ProjectAdd />
+        <div className="projectsrender">
+          {content
+            ? content.map((e) => (
+                <ProjectsElement topic={e.topic} id={e.id} key={e.id} />
+              ))
+            : ""}
+        </div>
+      </div>
     </div>
   );
 }

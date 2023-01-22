@@ -37,6 +37,21 @@ class AvailableTimeSlotSerializer(serializers.ModelSerializer):
         model = AvailableTimeSlot
         fields = '__all__'
 
+class AvailableTimeSlotSerializerCreate(serializers.ModelSerializer):
+    REQUIREMENTS = (
+        Requires("time_end", "time_start") +
+        Requires("time_end", R("time_end") > R("time_start"))
+     )
+
+    def validate(self, data):
+        self.REQUIREMENTS.validate(data)  # handle validation error
+
+        return data
+
+    class Meta:
+        model = AvailableTimeSlot
+        fields = ['time_start', 'time_end']
+
 class CoordinatorTimeSlotSerializer(serializers.ModelSerializer):
     REQUIREMENTS = (
         Requires("time_end", "time_start") +

@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import LoginContext from "../context/LoginContext";
-
+import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
+import jwt_decode from "jwt-decode";
 
 // import Cookies from 'js-cookie';
 export default function Profile() {
- const [user,setUser] = useState("")
+ const [user,setUser] = useState('')
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -15,18 +16,23 @@ export default function Profile() {
       },
       // credentials: "include", //to wystarczy by wyslac cookies
     };
-    fetch("http://localhost:8000/dj-rest-auth/user", requestOptions)
+    const fetch2 = async()=>{
+      const data= await fetch("http://localhost:8000/dj-rest-auth/user", requestOptions)
+      
       .then((response) => response.json())
-      .then((data) => setUser(data))
-      .catch((error) => console.error(error));
+      setUser(data.email.split('@')[0])
+      console.log(user)
+    }
+    fetch2()
   }, []);
 
   return (
     <>
-   { String(localStorage.getItem("user"))}
-    <h1>Profil</h1>
-    <br/>
-       <h2>Witaj <b>{user.email}</b></h2>
+    
+    
+       {user?<h1>Witaj <b> {user}!</b></h1>:''}
+
+       <AvailableTimeSlot/>
       
     </>
   );

@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 .Auth-form {
@@ -25,6 +26,7 @@
 .Auth-form-title {
   text-align: center;
   margin-bottom: 1em;
+  padding-top: 50px;
   font-size: 24px;
   color: rgb(34, 34, 34);
   font-weight: 800;

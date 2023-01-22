@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
+import logo from "../Img/logo-header.svg" 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <Navbar expand="lg" style={{ borderBottom: `1px solid blue` }}>
       <Container>
-        <Navbar.Brand>SYSTEM PRI</Navbar.Brand>
+        <Navbar.Brand><img src={logo} alt="logo" width={150}/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">

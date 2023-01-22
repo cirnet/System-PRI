@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
-
+import logo from "../Img/logo-sigin.svg"
 async function loginUser(credentials) {
   return fetch("http://localhost:8000/dj-rest-auth/login/", {
     method: "POST",
@@ -67,6 +67,7 @@ export default function Signin() {
       <div className="Auth-form-container" onSubmit={handleSubmit}>
         <form className="Auth-form">
           <div className="Auth-form-content">
+            <img src={logo} alt="logo" width={300}/>
             <h3 className="Auth-form-title">Zaloguj się</h3>
             <div className="text-center">
               Nie masz jeszcze konta?{" "}
@@ -75,7 +76,7 @@ export default function Signin() {
               </span>
             </div>
             <div className="form-group mt-3">
-              <label>email</label>
+              <label>Adres e-mail</label>
               <input
                 type="email"
                 className="form-control mt-1"
@@ -99,9 +100,7 @@ export default function Signin() {
             </div>
             <div className="text-center mt-2">
               <a href="#">Zapomniałeś hasła?</a>
-              <p>Konto testowe</p>
-              admin@admin.pl / 12345 <br />
-              test@test.pl / 123456
+  
             </div>
           </div>
         </form>
@@ -113,6 +112,7 @@ export default function Signin() {
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
+          <img src={logo} alt="logo" width={300}/>
           <h3 className="Auth-form-title">Zarejestruj się</h3>
           <div className="text-center">
             Masz konto?{" "}
@@ -142,7 +142,7 @@ export default function Signin() {
             </button>
           </div>
           <p className="text-center mt-2">
-            <a href="#">Nie pamiętasz hasła?</a>
+            <a href="#">Zapomniałeś hasła?</a>
           </p>
         </div>
       </form>

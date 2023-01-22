@@ -66,12 +66,13 @@ export default function AvailableTimeSlot() {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("accessToken")},
       // credentials: "include",
       body: JSON.stringify({
         time_start,
-        time_end,
-        person,
+        time_end
+        
       }),
     };
     fetch(
@@ -127,7 +128,7 @@ const reducedOptions = options.reduce(function(filtered, option) {
                 />
               </label>
             </div>
-            <div className="form-group mt-3">
+            {/* <div className="form-group mt-3">
               <label>
                 Wybierz osobe:
                 <select
@@ -139,7 +140,7 @@ const reducedOptions = options.reduce(function(filtered, option) {
                   ))}
                 </select>
               </label>
-            </div>
+            </div> */}
 
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">

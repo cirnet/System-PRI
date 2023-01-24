@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function CoordinatorTimeSlot() {
   const [time_start, setTime_start] = useState("");
@@ -33,17 +34,26 @@ export default function CoordinatorTimeSlot() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        // Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
       body: JSON.stringify({
         time_start: a,
         time_end: b,
-        // person: 1,
+        person: 1,
       }),
     };
     fetch("http://localhost:8000/api/coordinator-time-slot/", requestOptions)
       .then((response) => response.json())
-      .then(console.log(requestOptions));
+      .then(console.log(requestOptions))
+      .then(
+        swal({
+          text: "Dodano zakres obron",
+          icon: "success",
+          buttons: false,
+          timer: 1000,
+        })
+      );
+    window.location.reload(false);
   };
 
   return (

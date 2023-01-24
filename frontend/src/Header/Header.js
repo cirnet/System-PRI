@@ -45,14 +45,14 @@ export default function Header() {
             <Nav.Link as={Link} to="/coordinatorTimeSlot">
               CoordinatorTimeSlot
             </Nav.Link>
-            <Nav.Link as={Link} to="/availableTimeSlot">
+            {/* <Nav.Link as={Link} to="/availableTimeSlot">
               AvailableTimeSlot
-            </Nav.Link>
-            <Nav.Link as={Link} to="/timeslots">
-              TimeSlots
+            </Nav.Link> */}
+            <Nav.Link as={Link} to="/timeslot">
+              Godziny opiekunów
             </Nav.Link>
             <Nav.Link as={Link} to="/comission">
-              Comission
+              Komisje
             </Nav.Link>
             <Nav.Link as={Link} to="/teams">
               Zespoły

@@ -14,16 +14,6 @@ export default function Schedule() {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const socket = socketIOClient('http://localhost:8000/api/commission/');
-  //   socket.on('data_updated', data => {
-  //     console.log('Dane zmieniły się na backendzie:', data);
-  //     // tutaj można wykonać akcję, która odświeży dane na froncie
-  //   });
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
@@ -49,10 +39,10 @@ export default function Schedule() {
       console.log("render");
     };
     fetch();
-    const interval = setInterval(() => {
-      fetch();
-    }, 5000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   fetch();
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, [hourStart, hourEnd]);
 
   function filterDates() {
@@ -74,6 +64,10 @@ export default function Schedule() {
     schedule[dayOfWeek].push(item);
   });
 
+  const handle = (e) => {
+    console.log(e.currentTarget.getAttribute("time_start"));
+    console.log(e.currentTarget.getAttribute("time_end"));
+  };
   const days = Object.keys(schedule).map((day) => (
     <div key={day} className="day">
       <h3>{day.charAt(0).toUpperCase() + day.slice(1)}</h3>
@@ -83,14 +77,22 @@ export default function Schedule() {
       ))}
 
       {schedule[day].map((item) => (
-        <div key={item.id}>
+        <div
+          key={item.id}
+          time_start={item.time_start}
+          time_end={item.time_end}
+          onClick={handle}
+        >
           <ScheduleElement
+            // onClick={handle}
             id={item.id}
+            // data-badges="test"
             // person={item.person}
             is_complete={item.is_complete}
             time_start={item.time_start}
             time_end={item.time_end}
             is_accepted={item.is_accepted}
+            // onClick={(e) => handle(e.target)}
           />
         </div>
       ))}

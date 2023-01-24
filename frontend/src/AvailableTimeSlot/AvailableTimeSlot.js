@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import "./style.css"
+import "./style.css";
+import swal from "sweetalert";
 
 export default function AvailableTimeSlot() {
   const [time_start_min, setTime_start_min] = useState("");
@@ -9,15 +10,12 @@ export default function AvailableTimeSlot() {
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
   const [content, setContent] = useState([]);
-  const [options, setOptions] = useState([])
-
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/api/user/"
-      );
-      console.log(data)
+      const { data } = await axios.get("http://localhost:8000/api/user/");
+      console.log(data);
       setOptions(data);
     };
     fetch();
@@ -67,30 +65,36 @@ export default function AvailableTimeSlot() {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("accessToken")},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
       // credentials: "include",
       body: JSON.stringify({
         time_start,
-        time_end
-        
+        time_end,
       }),
     };
-    fetch(
-      "http://localhost:8000/api/available-time-slot/",
-      requestOptions
-    ).then((response) => response.json());
+    fetch("http://localhost:8000/api/available-time-slot/", requestOptions)
+      .then((response) => response.json())
+      .then(
+        swal({
+          text: "Dodano twoj zakres dostepności",
+          icon: "success",
+          buttons: false,
+          timer: 1000,
+        })
+      );
   };
-  
-//reduced only group 2 
-const reducedOptions = options.reduce(function(filtered, option) {
-  if (option.groups[0]===2) {
-     let someNewValue = { email: option.email, id: option.id }
-     filtered.push(someNewValue);
-  }
-  return filtered;
-}, []);
 
+  //reduced only group 2
+  const reducedOptions = options.reduce(function (filtered, option) {
+    if (option.groups[0] === 2) {
+      let someNewValue = { email: option.email, id: option.id };
+      filtered.push(someNewValue);
+    }
+    return filtered;
+  }, []);
 
   return (
     <>

@@ -67,3 +67,16 @@
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+
+.dziel {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+}
+.centerH {
+  text-align: center;
+}

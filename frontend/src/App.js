@@ -12,7 +12,7 @@ import Profile from "./Profile";
 import AvailableTimeSlot from "./AvailableTimeSlot/AvailableTimeSlot";
 import Signin from "./auth/Sigin2";
 import Profile2 from "./auth/Profile";
-import TimeSlots from "./timeslots/TimeSlots";
+import TimeSlot from "./AvailableTimeSlot/TimeSlot";
 import Comission from "./Comission/Comission";
 import CoordinatorTimeSlot from "./CoordinatorTimeSlot/CoordinatorTimeSlot";
 import Calendar3 from "./calendar2/Calendar3";
@@ -55,7 +55,7 @@ function App() {
           {/* <Route path="/:id/:id" element={<Home />} /> */}
           <Route path="/profile" element={<Profile2 />} />
           <Route path="/" element={<Profile2 />} />
-          <Route path="/timeslots" element={<TimeSlots />} />
+          <Route path="/timeslot" element={<TimeSlot />} />
           <Route path="/comission" element={<Comission />} />
           <Route path="/availableTimeSlot" element={<AvailableTimeSlot />} />
           <Route

@@ -8,9 +8,7 @@ Przejdź do katalogu głównego i wykonaj polecenie:
 
 `docker-compose up --build &`
 
-Jeśli nie chcemy cały czas przebudowywać obrazu Dockera:
-
-## Instalacja na przykładzie Ubuntu:
+## Instalacja bez Dockera
 
 `sudo apt install python`
 
@@ -20,7 +18,7 @@ Jeśli nie chcemy cały czas przebudowywać obrazu Dockera:
 
 `pip install -r requirements.txt`
 
-### Postawienie Postgresa:
+### Postawienie Postgresa
 
 `sudo apt install postgresql postgresql-contrib`
 
@@ -32,7 +30,7 @@ Jeśli nie chcemy cały czas przebudowywać obrazu Dockera:
 
 `sudo apt install libpq-dev`
 
-### React:
+### React
 
 `sudo apt install nodejs`
 
@@ -42,7 +40,7 @@ Jeśli nie chcemy cały czas przebudowywać obrazu Dockera:
 
 `npm start`
 
-### Django:
+### Django
 
 W folderze projektu:
 

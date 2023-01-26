@@ -18,7 +18,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'is_admin', 'group_name')
 
     def group_name(self, obj):
-            return obj.groups.values_list('name',flat=True).get()
+            return ', '.join(obj.groups.values_list('name',flat=True).all())
 
     group_name.short_description = 'Grupa'
 

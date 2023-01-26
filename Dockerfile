@@ -3,6 +3,7 @@ RUN apk update && apk add bash
 WORKDIR /usr/src/app
 COPY requirements.txt .
 RUN apk add python3 && apk add py-pip
+RUN pip install wheel==0.38.4
 RUN pip install -r requirements.txt
 COPY . .
 WORKDIR /usr/lib/python3.10/site-packages/rest_framework_swagger/templates/rest_framework_swagger/

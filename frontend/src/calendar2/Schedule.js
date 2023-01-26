@@ -19,8 +19,6 @@ export default function Schedule() {
       const { data } = await axios.get(
         "http://localhost:8000/api/coordinator-time-slot/"
       );
-      setContent(data);
-
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
     };
@@ -30,11 +28,7 @@ export default function Schedule() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get("http://localhost:8000/api/commission/");
-      setContent(
-        data
-          .sort((a, b) => (a.time_start > b.time_start ? 1 : -1))
-          .filter(filterDates())
-      );
+      setContent(data.sort((a, b) => (a.time_start > b.time_start ? 1 : -1)));
       setLoading(false);
       console.log("render");
     };
@@ -53,7 +47,7 @@ export default function Schedule() {
 
   const schedule = {};
 
-  content.forEach((item) => {
+  content.filter(filterDates()).forEach((item) => {
     const startTime = moment(item.time_start);
     const dayOfWeek = startTime.locale("pl").format("dddd").toLocaleLowerCase();
 

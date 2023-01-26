@@ -14,6 +14,18 @@ Przejdź do katalogu głównego i wykonaj polecenie:
 
 `sudo apt install python3-pip`
 
+Przejdź do folderu z projektem i stwórz środowisko wirtualne:
+
+`python3 -m venv venv`
+
+Aktywuj środowisko wirtualne:
+
+`source venv/bin/activate`
+
+(deaktywujemy je poprzez **deactivate**)
+
+Następnie zainstaluj niezbędne moduły:
+
 `pip install wheel==0.38.4`
 
 `pip install -r requirements.txt`
@@ -30,6 +42,8 @@ Przejdź do katalogu głównego i wykonaj polecenie:
 
 `sudo apt install libpq-dev`
 
+Za pomocą pgadmina połącz się z postgresem i stwórz bazę o nazwie **test_db**
+
 ### React
 
 `sudo apt install nodejs`
@@ -44,9 +58,13 @@ Przejdź do katalogu głównego i wykonaj polecenie:
 
 W folderze projektu:
 
-`python3 manage.py makemigrations`
+`python3 manage.py makemigrations defenseSchedule`
 
 `python3 manage.py migrate`
+
+Zmienamy jedną linijkę w swaggerze, bez tego nie zadziała:
+
+`RUN sed -i "2 s/staticfiles/static/" venv/lib/python3.10/site-packages/rest_framework_swagger/templates/rest_framework_swagger/index.html`
 
 Możliwe, że Django zainstaluje część skryptów w folderze użytkownika:
 

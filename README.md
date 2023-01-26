@@ -2,13 +2,13 @@
 
 Inżynierski projekt zespołowy System-PRI
 
-## Uruchomienie
+## Uruchomienie z Dockerem
 
 Przejdź do katalogu głównego i wykonaj polecenie:
 
 `docker-compose up --build &`
 
-## Instalacja bez Dockera
+## Uruchomienie bez Dockera
 
 `sudo apt install python`
 

@@ -34,11 +34,12 @@ export default function SheduleElement({
 
         {/* <p>{new Date(time_end).toISOString().replace('T', ' ').split('.')[0]}</p> */}
         {/* {time_start} */}
-        <p>
+        {/* <p>
           {moment(time_start).format("LT") +
             "-" +
             moment(time_end).format("LT")}
-        </p>
+        </p> */}
+        <p>{moment(time_start).format("LT")}</p>
       </div>
     </>
   );

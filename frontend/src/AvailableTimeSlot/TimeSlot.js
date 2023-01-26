@@ -18,7 +18,6 @@ export default function TimeSlot() {
       const { data } = await axios.get(
         "http://localhost:8000/api/coordinator-time-slot/"
       );
-      setContent(data);
 
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
@@ -76,25 +75,28 @@ export default function TimeSlot() {
         time_end,
       }),
     };
-    fetch("http://localhost:8000/api/available-time-slot/", requestOptions)
-      .then((response) => response.json())
-      .then(
-        swal({
-          text: "Dodano twoj zakres dostepności",
-          icon: "success",
-          buttons: false,
-          timer: 1000,
-        })
-      );
+    fetch(
+      "http://localhost:8000/api/available-time-slot/",
+      requestOptions
+    ).then((response) => response.json());
+    // .then(
+    //   swal({
+    //     text: "Dodano twoj zakres dostepności",
+    //     icon: "success",
+    //     buttons: false,
+    //     timer: 1000,
+    //   })
+    // );
   };
+
+  const [pickedTimeSlots, setPickedTimeSlots] = useState([]);
   useEffect(() => {
     const requestOptions = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        // Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
-      // credentials: "include", //to wystarczy by wyslac cookies
     };
     const fetch = async () => {
       const { data } = await axios(
@@ -102,10 +104,20 @@ export default function TimeSlot() {
         requestOptions
       );
 
-      console.log(data);
+      setPickedTimeSlots(data);
     };
     fetch();
   }, [changeHandleStatus]);
+
+  const reducedOptions = pickedTimeSlots?.reduce(function (filtered, option) {
+    let someNewValue = option.time_start;
+    filtered.push(someNewValue);
+
+    return filtered;
+  }, []);
+
+  console.log(reducedOptions);
+
   const days = Object.keys(schedule).map((day) => (
     <div key={day} className="day">
       <h3>{day.charAt(0).toUpperCase() + day.slice(1)}</h3>
@@ -124,6 +136,7 @@ export default function TimeSlot() {
           {/* <div>+</div> */}
           <TimeSlotElement
             time_start={item.time_start}
+            test={reducedOptions.includes(item.time_start)}
             // time_end={item.time_end}
           />
         </div>

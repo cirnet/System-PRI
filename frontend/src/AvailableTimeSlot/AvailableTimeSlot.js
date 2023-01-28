@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import "./style.css";
+import "./AvailableTimeSlot.css";
 import swal from "sweetalert";
 
 export default function AvailableTimeSlot() {
@@ -10,16 +10,16 @@ export default function AvailableTimeSlot() {
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
   const [content, setContent] = useState([]);
-  const [options, setOptions] = useState([]);
+  // const [options, setOptions] = useState([]);
 
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/user/");
-      console.log(data);
-      setOptions(data);
-    };
-    fetch();
-  }, []);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const { data } = await axios.get("http://localhost:8000/api/user/");
+  //     console.log(data);
+  //     setOptions(data);
+  //   };
+  //   fetch();
+  // }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -27,8 +27,6 @@ export default function AvailableTimeSlot() {
         "http://localhost:8000/api/coordinator-time-slot/"
       );
       setContent(data);
-      // console.log("format z backendu: ",data[0]?.time_start)
-      // console.log(data[0]?.time_end)
       setTime_start_min(
         new Date(data[0]?.time_start)
           .toISOString()
@@ -53,8 +51,6 @@ export default function AvailableTimeSlot() {
           .replace("T", " ")
           .split(".")[0]
       );
-      // console.log("format po formacie: ",time_start)
-      // console.log(time_end)
     };
     fetch();
   }, []);
@@ -69,7 +65,6 @@ export default function AvailableTimeSlot() {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
-      // credentials: "include",
       body: JSON.stringify({
         time_start,
         time_end,
@@ -88,24 +83,20 @@ export default function AvailableTimeSlot() {
   };
 
   //reduced only group 2
-  const reducedOptions = options.reduce(function (filtered, option) {
-    if (option.groups[0] === 2) {
-      let someNewValue = { email: option.email, id: option.id };
-      filtered.push(someNewValue);
-    }
-    return filtered;
-  }, []);
+  // const reducedOptions = options.reduce(function (filtered, option) {
+  //   if (option.groups[0] === 2) {
+  //     let someNewValue = { email: option.email, id: option.id };
+  //     filtered.push(someNewValue);
+  //   }
+  //   return filtered;
+  // }, []);
 
   return (
     <>
-      {/* <p>
-        Formularz wybrania daty przez profesorów. Data jest OD Do wynikająca z
-        tego co wybierze koordynator
-      </p> */}
-      <div className="Auth-form-container" onSubmit={handleSubmit}>
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Wybierz swój zakres dostępności</h3>
+      <div className="form-container" onSubmit={handleSubmit}>
+        <form className="form">
+          <div className="form-content">
+            <h3 className="form-title">Wybierz swój zakres dostępności</h3>
 
             <div className="form-group mt-3">
               <label>
@@ -133,20 +124,6 @@ export default function AvailableTimeSlot() {
                 />
               </label>
             </div>
-            {/* <div className="form-group mt-3">
-              <label>
-                Wybierz osobe:
-                <select
-                  className="form-control mt-1"
-                  onChange={(e) => setPerson(e.target.value)}
-                >
-                  {reducedOptions.map((option) => (
-                    <option value={option.id}>{option.email}</option>
-                  ))}
-                </select>
-              </label>
-            </div> */}
-
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
                 Wyslij
@@ -155,9 +132,6 @@ export default function AvailableTimeSlot() {
           </div>
         </form>
       </div>
-      {/* {dataOptions.map((item=>(
-        <p>{item.email} - {item.id}</p>
-        )))} */}
     </>
   );
 }

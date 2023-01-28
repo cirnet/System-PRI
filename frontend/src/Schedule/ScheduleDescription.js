@@ -109,16 +109,6 @@ export default function ScheduleDescription() {
   // }
 
   return (
-    // <div>
-    //   <p>id {content.id}</p>
-    //   <p> is_accepted {content.is_accepted?"tak":"nie"}</p>
-    //   <p> is_complete {content.is_complete?"tak":"nie"}</p>
-    //   <p> is_selected {content.is_selected?"tak":"nie"}</p>
-    //   <p> is_valid {content.is_valid?"tak":"nie"}</p>
-    //   <p> members {JSON.stringify(content.members)}</p>
-    //   <p> time_end {content.time_end}</p>
-    //   <p>time_start {content.time_start}</p>
-    // </div>
     <>
       <div className="centerH">
         <h1>{moment(time_start).format("LL")}</h1>
@@ -128,7 +118,7 @@ export default function ScheduleDescription() {
       </div>
       <br />
       <br />
-      <div className="dziel">
+      <div className="divide">
         <div>
           <h3>Opiekunowie obrony:</h3>
           {(() => {
@@ -160,7 +150,7 @@ export default function ScheduleDescription() {
 
         {/* <p>id {content.id}</p> */}
 
-        <form className="form" onSubmit={handle}>
+        <form onSubmit={handle}>
           <div>
             <label>
               Data od:

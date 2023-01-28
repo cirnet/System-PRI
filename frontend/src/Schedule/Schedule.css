@@ -1,4 +1,4 @@
-.box {
+.boxSchedule {
   height: 50px;
   border: 2px solid black;
   margin: 10px;
@@ -11,20 +11,18 @@
 .center-option-text {
   text-align: center;
 }
-.day {
+.daySchedule {
   width: 15%;
   text-align: center;
 }
-.hours {
+.hoursSchedule {
   border: 2px solid black;
   width: 50px;
 }
-.container {
+.containerSchedule {
   display: flex;
   flex-wrap: wrap;
-  /* align-items: center; */
-  /* justify-content: center; */
-  justify-content: space-between;
+  justify-content: center;
 }
 /* spinner */
 .loader {
@@ -68,15 +66,11 @@
   }
 }
 
-.dziel {
+.divide {
   display: flex;
   justify-content: space-evenly;
 }
 
-.form {
-  display: flex;
-  justify-content: space-around;
-}
 .centerH {
   text-align: center;
 }

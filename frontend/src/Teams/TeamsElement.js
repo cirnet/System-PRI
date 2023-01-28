@@ -1,32 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./style.css";
+import "./Teams.css";
 import { useNavigate } from "react-router-dom";
 
 export default function TeamsElement({ name, id, supervisor, project }) {
   const navigate = useNavigate();
 
   const [projects, setProjects] = useState([]);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      const  {data}  = await axios.get(
-        "http://localhost:8000/api/project/"
-      );
-      
+      const { data } = await axios.get("http://localhost:8000/api/project/");
+
       setProjects(data);
-      
     };
     fetch();
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/api/user/"
-      );
-     
+      const { data } = await axios.get("http://localhost:8000/api/user/");
+
       setUsers(data);
     };
     fetch();
@@ -46,16 +41,15 @@ export default function TeamsElement({ name, id, supervisor, project }) {
     window.location.reload(false);
   };
 
-
   const emailToDisplay = users
-  .filter(item => item.id === supervisor)
-  .map(user => user.email);
+    .filter((item) => item.id === supervisor)
+    .map((user) => user.email);
 
-   const projectToDisplay = projects
-  .filter(item => item.id === project)
-  .map(project => project.topic);
+  const projectToDisplay = projects
+    .filter((item) => item.id === project)
+    .map((project) => project.topic);
 
-// console.log("projectToDisplay" ,projectToDisplay)
+  // console.log("projectToDisplay" ,projectToDisplay)
 
   return (
     <>
@@ -64,8 +58,14 @@ export default function TeamsElement({ name, id, supervisor, project }) {
           <span>
             nazwa zespolu <b>{name.length ? `${name}` : " __________"}</b>
           </span>
-          <span>opiekun <b>{emailToDisplay.length ? `${emailToDisplay}` : " __________"}</b></span>
-          <span>project <b>{projectToDisplay.length? projectToDisplay : " __________"}</b></span>
+          <span>
+            opiekun{" "}
+            <b>{emailToDisplay.length ? `${emailToDisplay}` : " __________"}</b>
+          </span>
+          <span>
+            project{" "}
+            <b>{projectToDisplay.length ? projectToDisplay : " __________"}</b>
+          </span>
         </div>
         <button className="delete_button" onClick={() => deleteTeam(id)}>
           DELETE

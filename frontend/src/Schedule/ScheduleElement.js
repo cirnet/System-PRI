@@ -1,4 +1,4 @@
-import "./style.css";
+import "./Schedule.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import moment from "moment";
 export default function SheduleElement({
@@ -10,13 +10,11 @@ export default function SheduleElement({
   is_accepted,
 }) {
   const navigate = useNavigate();
-  const handle = (e) => {
-    console.log(e);
-  };
+
   return (
     <>
       <div
-        className="box"
+        className="boxSchedule"
         style={{
           background:
             is_complete && is_accepted
@@ -25,8 +23,7 @@ export default function SheduleElement({
               ? "#cc9900"
               : "rgb(255 107 107)",
         }}
-        onClick={(e) => handle(e.target)}
-        // onClick={() => navigate(`/schedule/${id}`)}
+        onClick={() => navigate(`/schedule/${id}`)}
       >
         {/* <span>{id}</span> */}
         {/* <span>{person}</span> */}
@@ -34,12 +31,12 @@ export default function SheduleElement({
 
         {/* <p>{new Date(time_end).toISOString().replace('T', ' ').split('.')[0]}</p> */}
         {/* {time_start} */}
-        {/* <p>
+        <p>
           {moment(time_start).format("LT") +
             "-" +
             moment(time_end).format("LT")}
-        </p> */}
-        <p>{moment(time_start).format("LT")}</p>
+        </p>
+        {/* <p>{moment(time_start).format("LT")}</p> */}
       </div>
     </>
   );

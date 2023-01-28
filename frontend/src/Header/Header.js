@@ -60,19 +60,6 @@ export default function Header() {
             <Nav.Link as={Link} to="/projects">
               Projekty
             </Nav.Link>
-            {/* <NavDropdown title="Zespoły" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/teams">Zobacz Zespoły</NavDropdown.Item>
-              <NavDropdown.Item href="/teamAdd">Dodaj zespół</NavDropdown.Item>
-            </NavDropdown>
-
-            <NavDropdown title="Project" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/projects">
-                Zobacz Projekty
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/projectAdd">
-                Dodaj projekt
-              </NavDropdown.Item>
-            </NavDropdown> */}
           </Nav>
           <Navbar.Text>
             <Nav.Link onClick={handleLogout}>Wyloguj </Nav.Link>

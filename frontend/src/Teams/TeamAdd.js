@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import "./style.css";
+import "./Teams.css";
 export default function TeamAdd() {
   const [name, setName] = useState("");
   const [supervisor, setSupervisor] = useState("");
@@ -64,7 +64,7 @@ export default function TeamAdd() {
 
   return (
     <>
-      <form className="form" onSubmit={handle}>
+      <form onSubmit={handle}>
         <label>
           Nazwa zespołu:
           <input

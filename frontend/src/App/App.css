@@ -40,14 +40,8 @@ button {
 button:hover {
   background-color: #0000000f;
 }
-.zapisy {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-}
 
 .App {
-  padding: 15px;
+  padding: 30px;
   min-height: 100vh;
-  position: relative;
 }

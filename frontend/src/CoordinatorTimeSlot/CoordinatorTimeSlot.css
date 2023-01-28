@@ -37,22 +37,6 @@ label {
 .link-primary {
   cursor: pointer;
 }
-.box {
-  height: 50px;
-  border: 2px solid black;
-  margin: 10px;
-  display: flex;
-  justify-content: space-evenly;
-  cursor: pointer;
-  align-content: stretch;
-  align-items: flex-end;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-}
-.day {
-  width: 10%;
-  text-align: center;
+.form-control {
+  min-width: 250px;
 }

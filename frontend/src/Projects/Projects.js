@@ -2,6 +2,7 @@ import ProjectsElement from "./ProjectsElement";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProjectAdd from "./ProjectAdd";
+import "./Projects.css";
 
 export default function Projects() {
   const [content, setContent] = useState();

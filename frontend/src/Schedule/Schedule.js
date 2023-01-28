@@ -2,10 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-import "./style.css";
-import ScheduleElement from "./SheduleElement";
+import "./Schedule.css";
+import ScheduleElement from "./ScheduleElement";
 import "moment/locale/pl";
-import socketIOClient from "socket.io-client";
 
 export default function Schedule() {
   const [hourStart, setHourStart] = useState("");
@@ -58,13 +57,9 @@ export default function Schedule() {
     schedule[dayOfWeek].push(item);
   });
 
-  const handle = (e) => {
-    console.log(e.currentTarget.getAttribute("time_start"));
-    console.log(e.currentTarget.getAttribute("time_end"));
-  };
   const days = Object.keys(schedule).map((day) => (
-    <div key={day} className="day">
-      <h3>{day.charAt(0).toUpperCase() + day.slice(1)}</h3>
+    <div key={day} className="daySchedule">
+      <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>
 
       {schedule[day].slice(0, 1).map((item) => (
         <h6 key={item}>{new Date(item.time_start).toLocaleDateString()}</h6>
@@ -75,10 +70,9 @@ export default function Schedule() {
           key={item.id}
           time_start={item.time_start}
           time_end={item.time_end}
-          onClick={handle}
+          // onClick={handle}
         >
           <ScheduleElement
-            // onClick={handle}
             id={item.id}
             // data-badges="test"
             // person={item.person}
@@ -120,7 +114,7 @@ export default function Schedule() {
         </label>
       </form>
 
-      <div className="container">
+      <div className="containerSchedule">
         {loading ? (
           <span class="loader"></span>
         ) : content.length !== 0 ? (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import "./Projects.css";
 export default function ProjectAdd() {
   const [topic, setTopic] = useState("");
 
@@ -29,7 +30,7 @@ export default function ProjectAdd() {
   };
 
   return (
-    <form className="form" onSubmit={handle}>
+    <form className="project_form" onSubmit={handle}>
       <h3>Dodaj projekt</h3>
 
       <input

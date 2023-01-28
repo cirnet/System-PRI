@@ -1,6 +1,6 @@
-.teams {
+.projects {
   width: 40%;
-  height: 100px;
+  height: 70px;
   border: 1px solid gray;
   display: flex;
   margin: 10px;
@@ -11,7 +11,7 @@
   cursor: pointer;
   align-items: center;
 }
-.teams:hover {
+.projects:hover {
   background-color: #f0f0f0;
 }
 .details {
@@ -26,25 +26,21 @@
   background-color: rgb(228, 38, 38);
   color: white;
 }
-.form-control {
-  min-width: 250px;
-}
 .division {
   display: flex;
 }
-.teamsrender {
+.projectsrender {
   width: 100%;
 }
 .content {
   width: 100%;
   padding: 30px;
 }
-.form {
+.project_form {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 .btn {
-  margin-top: 30px;
-  width: 100%;
+  margin-top: 10px;
 }

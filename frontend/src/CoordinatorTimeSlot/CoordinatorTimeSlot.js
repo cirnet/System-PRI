@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import "./CoordinatorTimeSlot.css";
 
 export default function CoordinatorTimeSlot() {
   const [time_start, setTime_start] = useState("");
@@ -58,11 +59,10 @@ export default function CoordinatorTimeSlot() {
 
   return (
     <>
-      <p>Formularz wybrania daty przez koordynatora</p>
-      <div className="Auth-form-container" onSubmit={handleSubmit}>
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Coordinator Time Slot</h3>
+      <div className="form-container" onSubmit={handleSubmit}>
+        <form className="form">
+          <div className="form-content">
+            <h3 className="form-title">Coordinator Time Slot</h3>
 
             <div className="form-group mt-3">
               <label>

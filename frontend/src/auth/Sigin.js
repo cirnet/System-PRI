@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
-import logo from "../Img/logo-sigin.svg"
+import logo from "../Img/logo-sigin.svg";
+
 async function loginUser(credentials) {
   return fetch("http://localhost:8000/dj-rest-auth/login/", {
     method: "POST",
@@ -67,7 +68,7 @@ export default function Signin() {
       <div className="Auth-form-container" onSubmit={handleSubmit}>
         <form className="Auth-form">
           <div className="Auth-form-content">
-            <img src={logo} alt="logo" width={300}/>
+            <img src={logo} alt="logo" width={300} />
             <h3 className="Auth-form-title">Zaloguj się</h3>
             <div className="text-center">
               Nie masz jeszcze konta?{" "}
@@ -100,7 +101,6 @@ export default function Signin() {
             </div>
             <div className="text-center mt-2">
               <a href="#">Zapomniałeś hasła?</a>
-  
             </div>
           </div>
         </form>
@@ -112,7 +112,7 @@ export default function Signin() {
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
-          <img src={logo} alt="logo" width={300}/>
+          <img src={logo} alt="logo" width={300} />
           <h3 className="Auth-form-title">Zarejestruj się</h3>
           <div className="text-center">
             Masz konto?{" "}

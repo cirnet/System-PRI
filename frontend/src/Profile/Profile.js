@@ -16,7 +16,7 @@ export default function Profile() {
     };
     const request = async () => {
       const data = await fetch(
-        process.env.REACT_APP_API_USER,
+        process.env.REACT_APP_API_AUTH_USER,
         requestOptions
       ).then((response) => response.json());
       setUser(data.email.split("@")[0]);

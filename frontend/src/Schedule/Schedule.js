@@ -71,17 +71,13 @@ export default function Schedule() {
           key={item.id}
           time_start={item.time_start}
           time_end={item.time_end}
-          // onClick={handle}
         >
           <ScheduleElement
             id={item.id}
-            // data-badges="test"
-            // person={item.person}
             is_complete={item.is_complete}
             time_start={item.time_start}
             time_end={item.time_end}
             is_accepted={item.is_accepted}
-            // onClick={(e) => handle(e.target)}
           />
         </div>
       ))}

@@ -22,16 +22,37 @@ export default function Comission() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [hourStart, setHourStart] = useState("");
+  const [hourEnd, setHourEnd] = useState("");
+  const [content, setContent] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
+      );
+      setHourStart(new Date(data[0]?.time_start).getHours());
+      setHourEnd(new Date(data[0]?.time_end).getHours());
+    };
+    fetch();
+  }, []);
+
+  function filterDates(e) {
+    return (e) =>
+      new Date(e.time_start).getHours() >= hourStart &&
+      new Date(e.time_start).getHours() <= hourEnd;
+  }
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
       setContent(data);
       setLoading(false);
-      console.log(data);
     };
     fetch();
+    const interval = setInterval(() => {
+      fetch();
+    }, 5000);
+    return () => clearInterval(interval);
   }, [refreshData]);
-  const [content, setContent] = useState([]);
 
   const Check = (value) => {
     if (value) {
@@ -204,7 +225,11 @@ export default function Comission() {
               width: "100%",
             }}
           >
-            <DataGrid rows={content} columns={columns} pageSize={100} />
+            <DataGrid
+              rows={content.filter(filterDates())}
+              columns={columns}
+              pageSize={100}
+            />
           </div>
         </>
       ) : (

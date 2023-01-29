@@ -1,10 +1,12 @@
-Build the Docker image:
+1. Stwórz plik .env na podstawie pliku .env_example.
+
+2. Build the Docker image:
 
 ```
 docker build . -t dockerized-react
 ```
 
-Run the image:
+3. Run the image:
 
 ```
 docker run -p 3000:80 -d dockerized-react

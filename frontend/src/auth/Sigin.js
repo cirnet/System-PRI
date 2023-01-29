@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import logo from "../Img/logo-sigin.svg";
-
+import "./Auth.css";
 async function loginUser(credentials) {
   return fetch("http://localhost:8000/dj-rest-auth/login/", {
     method: "POST",

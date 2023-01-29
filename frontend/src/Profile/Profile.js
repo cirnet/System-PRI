@@ -16,14 +16,13 @@ export default function Profile() {
     };
     const request = async () => {
       const data = await fetch(
-        "http://localhost:8000/dj-rest-auth/user",
+        process.env.REACT_APP_API_USER,
         requestOptions
       ).then((response) => response.json());
       setUser(data.email.split("@")[0]);
     };
     request();
   }, []);
-
   return (
     <>
       {user ? (
@@ -33,7 +32,6 @@ export default function Profile() {
       ) : (
         ""
       )}
-
       <AvailableTimeSlot />
       {/* <div className="comissionSetting">
         <Comission />

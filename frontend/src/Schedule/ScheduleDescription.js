@@ -13,7 +13,7 @@ export default function ScheduleDescription() {
   useEffect(() => {
     const commissionResponse = async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/api/commission/${id}/`
+        process.env.REACT_APP_API_COMMISSION + `${id}/`
       );
 
       setComisja(data.members);
@@ -24,7 +24,7 @@ export default function ScheduleDescription() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/user/");
+      const { data } = await axios.get(process.env.REACT_APP_API_USER);
       console.log(data);
       setUsers(data);
     };
@@ -61,7 +61,7 @@ export default function ScheduleDescription() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/api/commission/${id}/`
+        process.env.REACT_APP_API_COMMISSION + `${id}/`
       );
       setContent(data);
       setIs_accepted(data.is_accepted);
@@ -77,7 +77,7 @@ export default function ScheduleDescription() {
   }, []);
 
   const handle = (e) => {
-    fetch(`http://localhost:8000/api/commission/${id}/`, {
+    fetch(process.env.REACT_APP_API_COMMISSION + `${id}/`, {
       method: "PUT",
       body: JSON.stringify(dane),
       headers: {

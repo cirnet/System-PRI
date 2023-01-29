@@ -24,7 +24,7 @@ export default function Comission() {
   const navigate = useNavigate();
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/commission/");
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
       setContent(data);
       setLoading(false);
       console.log(data);
@@ -51,7 +51,7 @@ export default function Comission() {
     const is_valid = value.is_valid;
     const id = value.id;
     const request = async () => {
-      await fetch(`http://localhost:8000/api/commission/${id}/`, {
+      await fetch(process.env.REACT_APP_API_COMMISSION + `${id}/`, {
         method: "PUT",
         body: JSON.stringify({
           time_start,
@@ -79,7 +79,7 @@ export default function Comission() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/user/");
+      const { data } = await axios.get(process.env.REACT_APP_API_USER);
       console.log(data);
       setUsers(data);
     };

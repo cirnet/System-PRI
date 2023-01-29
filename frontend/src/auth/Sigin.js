@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import logo from "../Img/logo-sigin.svg";
 import "./Auth.css";
 async function loginUser(credentials) {
-  return fetch("http://localhost:8000/dj-rest-auth/login/", {
+  return fetch(process.env.REACT_APP_API_LOGIN, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

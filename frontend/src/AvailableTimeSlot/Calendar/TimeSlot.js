@@ -18,7 +18,7 @@ export default function TimeSlot() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/coordinator-time-slot/"
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
       );
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
@@ -28,7 +28,7 @@ export default function TimeSlot() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/commission/");
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
       setContent(data.sort((a, b) => (a.time_start > b.time_start ? 1 : -1)));
       setLoading(false);
       console.log("render");
@@ -70,10 +70,9 @@ export default function TimeSlot() {
         time_end,
       }),
     };
-    fetch(
-      "http://localhost:8000/api/available-time-slot/",
-      requestOptions
-    ).then((response) => response.json());
+    fetch(process.env.REACT_APP_API_AVAILABLE_TIME_SLOT, requestOptions).then(
+      (response) => response.json()
+    );
   };
 
   useEffect(() => {
@@ -86,7 +85,7 @@ export default function TimeSlot() {
     };
     const fetch = async () => {
       const { data } = await axios(
-        "http://localhost:8000/api/available-time-slot/",
+        process.env.REACT_APP_API_AVAILABLE_TIME_SLOT,
         requestOptions
       );
       console.log("fetch data: ", data);

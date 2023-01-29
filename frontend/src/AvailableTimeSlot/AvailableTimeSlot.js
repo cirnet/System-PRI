@@ -10,21 +10,11 @@ export default function AvailableTimeSlot() {
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
   const [content, setContent] = useState([]);
-  // const [options, setOptions] = useState([]);
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const { data } = await axios.get("http://localhost:8000/api/user/");
-  //     console.log(data);
-  //     setOptions(data);
-  //   };
-  //   fetch();
-  // }, []);
 
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/coordinator-time-slot/"
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
       );
       setContent(data);
       setTime_start_min(
@@ -70,7 +60,7 @@ export default function AvailableTimeSlot() {
         time_end,
       }),
     };
-    fetch("http://localhost:8000/api/available-time-slot/", requestOptions)
+    fetch(process.env.REACT_APP_API_AVAILABLE_TIME_SLOT, requestOptions)
       .then((response) => response.json())
       .then(
         swal({

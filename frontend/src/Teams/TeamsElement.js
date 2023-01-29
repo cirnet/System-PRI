@@ -11,7 +11,7 @@ export default function TeamsElement({ name, id, supervisor, project }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/project/");
+      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT);
 
       setProjects(data);
     };
@@ -20,7 +20,7 @@ export default function TeamsElement({ name, id, supervisor, project }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/user/");
+      const { data } = await axios.get(process.env.REACT_APP_API_USER);
 
       setUsers(data);
     };
@@ -28,7 +28,7 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   }, []);
 
   async function deleteFetch(id) {
-    const request = await fetch(`http://localhost:8000/api/team/${id}/`, {
+    const request = await fetch(process.env.REACT_APP_API_TEAM + `${id}/`, {
       method: "DELETE",
     });
   }

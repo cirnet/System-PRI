@@ -9,7 +9,9 @@ export default function Team() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(`http://localhost:8000/api/team/${id}/`);
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_TEAM + `${id}/`
+      );
       setContent(data);
       console.log(data);
     };

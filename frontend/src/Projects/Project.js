@@ -10,7 +10,7 @@ export default function Project() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/api/project/${id}/`
+        process.env.REACT_APP_API_PROJECT + `${id}/`
       );
       setContent(data);
       console.log(data);

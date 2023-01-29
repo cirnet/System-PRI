@@ -11,7 +11,7 @@ export default function TeamAdd() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/project/");
+      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT);
       console.log(data);
       setProjects(data);
     };
@@ -20,7 +20,7 @@ export default function TeamAdd() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/user/");
+      const { data } = await axios.get(process.env.REACT_APP_API_USER);
       console.log(data);
       setUsers(data);
     };
@@ -49,7 +49,7 @@ export default function TeamAdd() {
         project,
       }),
     };
-    fetch("http://localhost:8000/api/team/", requestOptions)
+    fetch(process.env.REACT_APP_API_TEAM, requestOptions)
       .then((response) => response.json())
       .then(
         swal({

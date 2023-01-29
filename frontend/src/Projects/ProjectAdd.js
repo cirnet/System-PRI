@@ -16,7 +16,7 @@ export default function ProjectAdd() {
         topic,
       }),
     };
-    fetch("http://localhost:8000/api/project/", requestOptions)
+    fetch(process.env.REACT_APP_API_PROJECT, requestOptions)
       .then((response) => response.json())
       .then(
         swal({

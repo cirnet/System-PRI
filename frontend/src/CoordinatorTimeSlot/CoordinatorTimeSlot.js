@@ -12,7 +12,7 @@ export default function CoordinatorTimeSlot() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/coordinator-time-slot/"
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
       );
       setContent(data);
       // console.log("format z backendu: ",data[0]?.time_start)
@@ -43,7 +43,7 @@ export default function CoordinatorTimeSlot() {
         person: 1,
       }),
     };
-    fetch("http://localhost:8000/api/coordinator-time-slot/", requestOptions)
+    fetch(process.env.REACT_APP_API_COORDINATOR_TIME_SLOT, requestOptions)
       .then((response) => response.json())
       .then(console.log(requestOptions))
       .then(

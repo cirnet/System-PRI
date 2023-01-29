@@ -29,7 +29,7 @@ export default function TimeSlotTable() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/available-time-slot/"
+        process.env.REACT_APP_API_AVAILABLE_TIME_SLOT
       );
       setContent(data);
       console.log(data);

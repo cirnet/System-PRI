@@ -17,7 +17,7 @@ export default function Schedule() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/coordinator-time-slot/"
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
       );
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
@@ -27,7 +27,7 @@ export default function Schedule() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/commission/");
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
       setContent(data.sort((a, b) => (a.time_start > b.time_start ? 1 : -1)));
       setLoading(false);
       console.log("render");

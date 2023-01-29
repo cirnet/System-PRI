@@ -6,7 +6,7 @@ export default function ProjectsElement({ topic, id }) {
   const navigate = useNavigate();
 
   async function deleteFetch(id) {
-    const request = await fetch(`http://localhost:8000/api/project/${id}/`, {
+    const request = await fetch(process.env.REACT_APP_API_PROJECT + `${id}/`, {
       method: "DELETE",
       //   headers: { "X-CSRFToken": csrftoken },
     });

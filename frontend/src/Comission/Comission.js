@@ -18,6 +18,7 @@ export default function Comission() {
   const [change, setChange] = useState(1);
   const [value, setValue] = useState("");
   const [refreshData, setRefreshData] = useState(false);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const fetch = async () => {
@@ -73,12 +74,22 @@ export default function Comission() {
     request();
   };
 
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get("http://localhost:8000/api/user/");
+      console.log(data);
+      setUsers(data);
+    };
+    fetch();
+  }, []);
+
   const columns = [
-    { field: "id", headerName: "ID" },
+    // { field: "id", headerName: "ID", width: 50 },
     {
-      field: "tak",
+      field: "time_end",
       headerName: "Data",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return <span>{moment(params.row.time_end).format("L")}</span>;
       },
@@ -86,7 +97,8 @@ export default function Comission() {
     {
       field: "time_start",
       headerName: "Godzina",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return <span>{moment(params.row.time_start).format("LT")}</span>;
       },
@@ -94,7 +106,8 @@ export default function Comission() {
     {
       field: "is_valid",
       headerName: "Valid",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return <span>{Check(params.row.is_valid)}</span>;
       },
@@ -102,7 +115,8 @@ export default function Comission() {
     {
       field: "is_complete",
       headerName: "Complete",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return <span>{Check(params.row.is_complete)}</span>;
       },
@@ -110,7 +124,8 @@ export default function Comission() {
     {
       field: "is_selected",
       headerName: "Selected",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return <span>{Check(params.row.is_selected)}</span>;
       },
@@ -118,7 +133,8 @@ export default function Comission() {
     {
       field: "is_accepted",
       headerName: "Accepted",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return (
           <>
@@ -138,12 +154,36 @@ export default function Comission() {
     {
       field: "",
       headerName: "Edycja",
-      width: 150,
+      headerAlign: "center",
+      width: 100,
       renderCell: (params) => {
         return (
           <span onClick={() => navigate(`/schedule/${params.row.id}`)}>
             <EditIcon className="edit" />
           </span>
+        );
+      },
+    },
+    {
+      field: "members",
+      headerName: "Opiekunowie ",
+      headerAlign: "center",
+      width: 800,
+      renderCell: (params) => {
+        // return <span>{params.row.members}</span>;
+        const reducedOptions = users
+          .filter((user) => params.row.members.includes(user.id))
+          .reduce(function (filtered, option) {
+            let someNewValue = { email: option.email, id: option.id };
+            filtered.push(someNewValue);
+            return filtered;
+          }, []);
+        return (
+          <div>
+            {reducedOptions.map((option) => (
+              <span className="emailShow">{option.email}</span>
+            ))}
+          </div>
         );
       },
     },

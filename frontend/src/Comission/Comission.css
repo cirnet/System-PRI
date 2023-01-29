@@ -1,9 +1,13 @@
-.green {
-  background-color: green;
-  color: aquamarine;
-  width: 50px;
+.yes {
+  color: green;
 }
 
-.red {
-  background-color: red;
+.no {
+  color: red;
+}
+
+.edit {
+  background-color: rgb(212, 212, 39);
+  cursor: pointer;
+  border-radius: 50%;
 }

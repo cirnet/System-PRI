@@ -64,7 +64,7 @@ export default function AvailableTimeSlot() {
       .then((response) => response.json())
       .then(
         swal({
-          text: "Dodano twoj zakres dostepności",
+          text: "Dodano Twoj zakres dostepności",
           icon: "success",
           buttons: false,
           timer: 1000,
@@ -86,39 +86,47 @@ export default function AvailableTimeSlot() {
       <div className="form-container" onSubmit={handleSubmit}>
         <form className="form">
           <div className="form-content">
-            <h3 className="form-title">Wybierz swój zakres dostępności</h3>
+            {content.length > 0 ? (
+              <>
+                <h3 className="form-title">Wybierz swój zakres dostępności</h3>
 
-            <div className="form-group mt-3">
-              <label>
-                Data od:
-                <input
-                  type="datetime-local"
-                  className="form-control mt-1"
-                  value={time_start}
-                  min={time_start_min}
-                  max={time_end_max}
-                  onChange={(event) => setTime_start(event.target.value)}
-                />
-              </label>
-            </div>
-            <div className="form-group mt-3">
-              <label>
-                Data do:
-                <input
-                  type="datetime-local"
-                  className="form-control mt-1"
-                  value={time_end}
-                  min={time_start_min}
-                  max={time_end_max}
-                  onChange={(event) => setTime_end(event.target.value)}
-                />
-              </label>
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Wyslij
-              </button>
-            </div>
+                <div className="form-group mt-3">
+                  <label>
+                    Data od:
+                    <input
+                      type="datetime-local"
+                      className="form-control mt-1"
+                      value={time_start}
+                      min={time_start_min}
+                      max={time_end_max}
+                      onChange={(event) => setTime_start(event.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="form-group mt-3">
+                  <label>
+                    Data do:
+                    <input
+                      type="datetime-local"
+                      className="form-control mt-1"
+                      value={time_end}
+                      min={time_start_min}
+                      max={time_end_max}
+                      onChange={(event) => setTime_end(event.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="d-grid gap-2 mt-3">
+                  <button type="submit" className="btn btn-primary">
+                    Wyslij
+                  </button>
+                </div>
+              </>
+            ) : (
+              <h4 style={{ textAlign: "center" }}>
+                Jeszcze nie ustalono terminów obron!
+              </h4>
+            )}
           </div>
         </form>
       </div>

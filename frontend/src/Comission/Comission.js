@@ -26,12 +26,8 @@ export default function Comission() {
       console.log(data);
     };
     fetch();
-  }, []);
-  const [content, setContent] = useState([]);
-
-  useEffect(() => {
-    Check();
   }, [refreshData]);
+  const [content, setContent] = useState([]);
 
   const Check = (value) => {
     if (value) {
@@ -41,21 +37,8 @@ export default function Comission() {
     }
   };
 
-  // const Check = (value) => {
-  //   useEffect(() => {
-  //     if (value) {
-  //       return <CheckCircleIcon className="yes" />;
-  //     } else {
-  //       return <DoNotDisturbOnIcon className="no" />;
-  //     }
-  //   }, [refreshData]);
-  // };
-
   const Handle = (value) => {
-    console.log(change);
-    Check(!value.is_accepted);
-    setChange(change + 1);
-    console.log(change);
+    setRefreshData(!refreshData);
     const time_start = value.time_start;
     const time_end = value.time_end;
     const is_accepted = !value.is_accepted;
@@ -88,7 +71,6 @@ export default function Comission() {
     };
 
     request();
-    // window.location.reload();
   };
 
   const columns = [
@@ -125,26 +107,6 @@ export default function Comission() {
         return <span>{Check(params.row.is_complete)}</span>;
       },
     },
-
-    {
-      field: "is_accepted",
-      headerName: "Accepted",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <span
-              onClick={() => {
-                Handle(params.row);
-                setRefreshData(!refreshData);
-              }}
-            >
-              {Check(params.row.is_accepted)}
-            </span>
-          </>
-        );
-      },
-    },
     {
       field: "is_selected",
       headerName: "Selected",
@@ -153,6 +115,26 @@ export default function Comission() {
         return <span>{Check(params.row.is_selected)}</span>;
       },
     },
+    {
+      field: "is_accepted",
+      headerName: "Accepted",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <span
+              className="accepted"
+              onClick={() => {
+                Handle(params.row);
+              }}
+            >
+              {Check(params.row.is_accepted)}
+            </span>
+          </>
+        );
+      },
+    },
+
     {
       field: "",
       headerName: "Edycja",

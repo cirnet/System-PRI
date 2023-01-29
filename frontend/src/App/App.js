@@ -7,7 +7,7 @@ import Teams from "../Teams/Teams";
 import "./App.css";
 import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
 import Signin from "../Auth/Sigin";
-import Profile from "../Profile";
+import Profile from "../Profile/Profile";
 import TimeSlot from "../AvailableTimeSlot/Calendar/TimeSlot";
 import Comission from "../Comission/Comission";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";

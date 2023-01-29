@@ -6,6 +6,7 @@ import "../AvailableTimeSlot.css";
 import TimeSlotElement from "./TimeSlotElement";
 import "moment/locale/pl";
 import swal from "sweetalert";
+import Loader from "../../Loader/Loader";
 export default function TimeSlot() {
   const [hourStart, setHourStart] = useState("");
   const [hourEnd, setHourEnd] = useState("");
@@ -132,7 +133,7 @@ export default function TimeSlot() {
     <>
       <div className="container">
         {loading ? (
-          <span class="loader"></span>
+          <Loader />
         ) : content.length !== 0 ? (
           <>{days}</>
         ) : (

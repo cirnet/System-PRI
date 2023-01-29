@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 // import LoginContext from "./Context/LoginContext";
-import AvailableTimeSlot from "./AvailableTimeSlot/AvailableTimeSlot";
-
+import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
+import Comission from "../Comission/Comission";
+import "./Profile.css";
+import Loader from "../Loader/Loader";
 export default function Profile() {
   const [user, setUser] = useState("");
   useEffect(() => {
@@ -33,6 +35,9 @@ export default function Profile() {
       )}
 
       <AvailableTimeSlot />
+      {/* <div className="comissionSetting">
+        <Comission />
+      </div> */}
     </>
   );
 }

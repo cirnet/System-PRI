@@ -7,6 +7,7 @@ import moment from "moment";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EditIcon from "@mui/icons-material/Edit";
+import Loader from "../Loader/Loader";
 
 export default function Comission() {
   const [is_accepted, setIs_accepted] = useState("");
@@ -19,11 +20,13 @@ export default function Comission() {
   const [value, setValue] = useState("");
   const [refreshData, setRefreshData] = useState(false);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get("http://localhost:8000/api/commission/");
       setContent(data);
+      setLoading(false);
       console.log(data);
     };
     fetch();
@@ -191,12 +194,14 @@ export default function Comission() {
 
   return (
     <div className="content">
-      {content.length > 0 ? (
+      {loading ? (
+        <Loader />
+      ) : content.length > 0 ? (
         <>
           <div
             style={{
-              height: "80vh",
-              width: "90vw",
+              height: "100%",
+              width: "100%",
             }}
           >
             <DataGrid rows={content} columns={columns} pageSize={100} />

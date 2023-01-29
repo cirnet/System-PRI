@@ -5,6 +5,7 @@ import moment from "moment";
 import "./Schedule.css";
 import ScheduleElement from "./ScheduleElement";
 import "moment/locale/pl";
+import Loader from "../Loader/Loader";
 
 export default function Schedule() {
   const [hourStart, setHourStart] = useState("");
@@ -116,7 +117,7 @@ export default function Schedule() {
 
       <div className="containerSchedule">
         {loading ? (
-          <span class="loader"></span>
+          <Loader />
         ) : content.length !== 0 ? (
           days
         ) : (

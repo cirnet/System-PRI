@@ -59,20 +59,35 @@ export default function TimeSlot() {
     const time_start = e.currentTarget.getAttribute("time_start");
     const time_end = e.currentTarget.getAttribute("time_end");
     setChangeHandleStatus((prev) => !prev);
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-      body: JSON.stringify({
-        time_start,
-        time_end,
-      }),
-    };
-    fetch(process.env.REACT_APP_API_AVAILABLE_TIME_SLOT, requestOptions).then(
-      (response) => response.json()
-    );
+    if (!reducedOptions.includes(time_start)) {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify({ time_start, time_end }),
+      };
+
+      fetch(process.env.REACT_APP_API_AVAILABLE_TIME_SLOT, requestOptions)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    } else {
+      const requestOptions = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify({ time_start, time_end }),
+      };
+      //id rekordu daty (+trzeba zmienic backend)
+      fetch(process.env.REACT_APP_API_AVAILABLE_TIME_SLOT, requestOptions)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    }
   };
 
   useEffect(() => {
@@ -101,8 +116,7 @@ export default function TimeSlot() {
     return filtered;
   }, []);
 
-  console.log(reducedOptions);
-
+  // console.log(reducedOptions);
   const days = Object.keys(schedule).map((day) => (
     <div key={day} className="day">
       <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>

@@ -9,7 +9,7 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function NavHeader() {
   // const user = JSON.parse(localStorage.getItem('user'));
 
   const navigate = useNavigate();
@@ -42,12 +42,6 @@ export default function Header() {
             <Nav.Link as={Link} to="/schedule">
               Harmonogram
             </Nav.Link>
-            <Nav.Link as={Link} to="/coordinatorTimeSlot">
-              CoordinatorTimeSlot
-            </Nav.Link>
-            {/* <Nav.Link as={Link} to="/availableTimeSlot">
-              AvailableTimeSlot
-            </Nav.Link> */}
             <Nav.Link as={Link} to="/timeslot">
               Godziny opiekunów
             </Nav.Link>

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import React, { useState } from "react";
-import Header from "../Header/Header";
+import NavHeader from "../NavHeader/NavHeader";
 import Footer from "../Footer/Footer";
 import Teams from "../Teams/Teams";
 import "./App.css";
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <NavHeader />
 
       <div className="App">
         <Routes>

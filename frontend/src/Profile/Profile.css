@@ -1,3 +1,8 @@
 .comissionSetting {
   width: 1000px;
 }
+
+.data_pick {
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -2,10 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 // import LoginContext from "./Context/LoginContext";
 import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
 import Comission from "../Comission/Comission";
+import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import "./Profile.css";
 import Loader from "../Loader/Loader";
 export default function Profile() {
   const [user, setUser] = useState("");
+  const [pk, setPk] = useState("");
+  let num = 0;
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -20,9 +23,13 @@ export default function Profile() {
         requestOptions
       ).then((response) => response.json());
       setUser(data.email.split("@")[0]);
+      setPk(data.pk);
+      console.log(data.pk);
+      console.log(data);
     };
     request();
   }, []);
+  console.log(pk);
   return (
     <>
       {user ? (
@@ -32,7 +39,11 @@ export default function Profile() {
       ) : (
         ""
       )}
-      <AvailableTimeSlot />
+      <div className="data_pick">
+        <AvailableTimeSlot />
+        <CoordinatorTimeSlot pk={pk} />
+      </div>
+
       {/* <div className="comissionSetting">
         <Comission />
       </div> */}

@@ -3,25 +3,29 @@ import axios from "axios";
 import swal from "sweetalert";
 import "./CoordinatorTimeSlot.css";
 
-export default function CoordinatorTimeSlot() {
+export default function CoordinatorTimeSlot(pk) {
   const [time_start, setTime_start] = useState("");
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
   const [content, setContent] = useState([]);
-
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
         process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
       );
       setContent(data);
-      // console.log("format z backendu: ",data[0]?.time_start)
-      // console.log(data[0]?.time_end)
-      // setTime_start(new Date(data[0]?.time_start).toISOString().replace('T', ' ').split('.')[0])
-      // setTime_end(new Date(data[0]?.time_end).toISOString().replace('T', ' ').split('.')[0])
-
-      // console.log("format po formacie: ",time_start)
-      // console.log(time_end)
+      setTime_start(
+        new Date(data[0]?.time_start)
+          .toISOString()
+          .replace("T", " ")
+          .split(".")[0]
+      );
+      setTime_end(
+        new Date(data[0]?.time_end)
+          .toISOString()
+          .replace("T", " ")
+          .split(".")[0]
+      );
     };
     fetch();
   }, []);
@@ -56,45 +60,48 @@ export default function CoordinatorTimeSlot() {
       );
     window.location.reload(false);
   };
+  if (pk.pk !== 8) {
+    return;
+  } else {
+    return (
+      <>
+        <div className="form-container" onSubmit={handleSubmit}>
+          <form className="form">
+            <div className="form-content">
+              <h3 className="form-title">Zakres obron</h3>
 
-  return (
-    <>
-      <div className="form-container" onSubmit={handleSubmit}>
-        <form className="form">
-          <div className="form-content">
-            <h3 className="form-title">Coordinator Time Slot</h3>
+              <div className="form-group mt-3">
+                <label>
+                  Data od:
+                  <input
+                    type="datetime-local"
+                    className="form-control mt-1"
+                    value={time_start}
+                    onChange={(event) => setTime_start(event.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="form-group mt-3">
+                <label>
+                  Data do:
+                  <input
+                    type="datetime-local"
+                    className="form-control mt-1"
+                    value={time_end}
+                    onChange={(event) => setTime_end(event.target.value)}
+                  />
+                </label>
+              </div>
 
-            <div className="form-group mt-3">
-              <label>
-                Data od:
-                <input
-                  type="datetime-local"
-                  className="form-control mt-1"
-                  value={time_start}
-                  onChange={(event) => setTime_start(event.target.value)}
-                />
-              </label>
+              <div className="d-grid gap-2 mt-3">
+                <button type="submit" className="btn btn-primary">
+                  Wyślij
+                </button>
+              </div>
             </div>
-            <div className="form-group mt-3">
-              <label>
-                Data do:
-                <input
-                  type="datetime-local"
-                  className="form-control mt-1"
-                  value={time_end}
-                  onChange={(event) => setTime_end(event.target.value)}
-                />
-              </label>
-            </div>
-
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Wyślij
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </>
-  );
+          </form>
+        </div>
+      </>
+    );
+  }
 }

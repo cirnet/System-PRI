@@ -19,6 +19,7 @@ import Error404 from "../Error404";
 import Project from "../Projects/Project";
 import Projects from "../Projects/Projects";
 import ProjectAdd from "../Projects/ProjectAdd";
+import TimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
 // import { LoginContext } from "./context/LoginContext";
 function App() {
   // const [usertest, setUsertest] = useState('')
@@ -49,6 +50,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Profile />} />
           <Route path="/timeslot" element={<TimeSlot />} />
+          <Route path="/timeslotTEST" element={<TimeSlotTEST />} />
           <Route path="/comission" element={<Comission />} />
           <Route path="/availableTimeSlot" element={<AvailableTimeSlot />} />
           <Route

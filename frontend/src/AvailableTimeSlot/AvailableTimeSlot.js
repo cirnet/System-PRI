@@ -88,7 +88,7 @@ export default function AvailableTimeSlot() {
           <div className="form-content">
             {content.length > 0 ? (
               <>
-                <h3 className="form-title">Wybierz swój zakres dostępności</h3>
+                <h3 className="form-title">Twój zakres dostępności</h3>
 
                 <div className="form-group mt-3">
                   <label>

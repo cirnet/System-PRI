@@ -62,15 +62,30 @@ export default function Comission() {
     }
   };
 
-  const Handle = (value) => {
+  const Handle = (...value) => {
+    console.log(value);
+    let is_accepted = value[0].is_accepted;
+    let is_complete = value[0].is_complete;
+    let is_selected = value[0].is_selected;
+    let is_valid = value[0].is_valid;
+
+    if (value[1] === "is_accepted") {
+      is_accepted = !value[0].is_accepted;
+    }
+    if (value[1] === "is_complete") {
+      is_complete = !value[0].is_complete;
+    }
+    if (value[1] === "is_selected") {
+      is_selected = !value[0].is_selected;
+    }
+    if (value[1] === "is_valid") {
+      is_valid = !value[0].is_valid;
+    }
     setRefreshData(!refreshData);
-    const time_start = value.time_start;
-    const time_end = value.time_end;
-    const is_accepted = !value.is_accepted;
-    const is_complete = value.is_complete;
-    const is_selected = value.is_selected;
-    const is_valid = value.is_valid;
-    const id = value.id;
+    const time_start = value[0].time_start;
+    const time_end = value[0].time_end;
+
+    const id = value[0].id;
     const request = async () => {
       await fetch(process.env.REACT_APP_API_COMMISSION + `${id}/`, {
         method: "PUT",
@@ -133,7 +148,19 @@ export default function Comission() {
       headerAlign: "center",
       width: 100,
       renderCell: (params) => {
-        return <span>{Check(params.row.is_valid)}</span>;
+        const name_field = "is_valid";
+        return (
+          <>
+            <span
+              className="pointer"
+              onClick={() => {
+                Handle(params.row, name_field);
+              }}
+            >
+              {Check(params.row.is_valid)}
+            </span>
+          </>
+        );
       },
     },
     {
@@ -142,7 +169,19 @@ export default function Comission() {
       headerAlign: "center",
       width: 100,
       renderCell: (params) => {
-        return <span>{Check(params.row.is_complete)}</span>;
+        const name_field = "is_complete";
+        return (
+          <>
+            <span
+              className="pointer"
+              onClick={() => {
+                Handle(params.row, name_field);
+              }}
+            >
+              {Check(params.row.is_complete)}
+            </span>
+          </>
+        );
       },
     },
     {
@@ -151,7 +190,19 @@ export default function Comission() {
       headerAlign: "center",
       width: 100,
       renderCell: (params) => {
-        return <span>{Check(params.row.is_selected)}</span>;
+        const name_field = "is_selected";
+        return (
+          <>
+            <span
+              className="pointer"
+              onClick={() => {
+                Handle(params.row, name_field);
+              }}
+            >
+              {Check(params.row.is_selected)}
+            </span>
+          </>
+        );
       },
     },
     {
@@ -160,12 +211,13 @@ export default function Comission() {
       headerAlign: "center",
       width: 100,
       renderCell: (params) => {
+        const name_field = "is_accepted";
         return (
           <>
             <span
               className="accepted"
               onClick={() => {
-                Handle(params.row);
+                Handle(params.row, name_field);
               }}
             >
               {Check(params.row.is_accepted)}

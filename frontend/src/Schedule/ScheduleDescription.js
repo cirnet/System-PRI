@@ -52,10 +52,10 @@ export default function ScheduleDescription() {
   const dane = {
     time_start: time_start,
     time_end: time_end,
-    is_accepted: is_accepted,
-    is_complete: is_complete,
-    is_selected: is_selected,
-    is_valid: is_valid,
+    // is_accepted: is_accepted,
+    // is_complete: is_complete,
+    // is_selected: is_selected,
+    // is_valid: is_valid,
   };
 
   useEffect(() => {
@@ -64,10 +64,10 @@ export default function ScheduleDescription() {
         process.env.REACT_APP_API_COMMISSION + `${id}/`
       );
       setContent(data);
-      setIs_accepted(data.is_accepted);
-      setIs_complete(data.is_complete);
-      setIs_selected(data.is_selected);
-      setIs_valid(data.is_valid);
+      // setIs_accepted(data.is_accepted);
+      // setIs_complete(data.is_complete);
+      // setIs_selected(data.is_selected);
+      // setIs_valid(data.is_valid);
       setTime_start(moment(data.time_start).format("YYYY-MM-DDTkk:mm"));
       setTime_end(moment(data.time_end).format("YYYY-MM-DDTkk:mm"));
 
@@ -172,7 +172,7 @@ export default function ScheduleDescription() {
               />
             </label>
           </div>
-          <br />
+          {/* <br />
           <br />
           <div>
             <label>
@@ -212,8 +212,8 @@ export default function ScheduleDescription() {
             </label>
           </div>
           <br />
-          <br />
-          <button type="submit">Wyślij</button>
+          <br /> */}
+          <button type="submit">Zapisz</button>
         </form>
       </div>
     </>

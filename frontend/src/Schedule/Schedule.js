@@ -83,14 +83,14 @@ export default function Schedule() {
       ))}
     </div>
   ));
-  const styleForm = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "end",
-  };
+  // const styleForm = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "end",
+  // };
   return (
     <>
-      <form style={styleForm}>
+      {/* <form style={styleForm}>
         <label>
           OD:
           <input
@@ -109,7 +109,7 @@ export default function Schedule() {
             }}
           ></input>
         </label>
-      </form>
+      </form> */}
 
       <div className="containerSchedule">
         {loading ? (

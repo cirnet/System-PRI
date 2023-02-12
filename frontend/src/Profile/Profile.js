@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 // import LoginContext from "./Context/LoginContext";
 import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
+import AvailableTimeSlotCalendar from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
 import Comission from "../Comission/Comission";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import "./Profile.css";
@@ -42,6 +43,25 @@ export default function Profile() {
       <div className="data_pick">
         <AvailableTimeSlot />
         <CoordinatorTimeSlot pk={pk} />
+      </div>
+      <br />
+      <br />
+      <div className="AvailableTimeSlotCalendar">
+        <div className="children">
+          <AvailableTimeSlotCalendar />
+        </div>
+        <div className="children">
+          <AvailableTimeSlotCalendar />
+        </div>
+        <div className="children">
+          <AvailableTimeSlotCalendar />
+        </div>
+        <div className="children">
+          <AvailableTimeSlotCalendar />
+        </div>
+        <div className="children">
+          <AvailableTimeSlotCalendar />
+        </div>
       </div>
 
       {/* <div className="comissionSetting">

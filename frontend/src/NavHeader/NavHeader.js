@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../Img/logo-header.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link } from "react-router-dom";
-
+import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 import { useNavigate } from "react-router-dom";
 
 export default function NavHeader() {
@@ -53,6 +53,9 @@ export default function NavHeader() {
             </Nav.Link>
             <Nav.Link as={Link} to="/projects">
               Projekty
+            </Nav.Link>
+            <Nav.Link as={Link} to="/ProjectGradeCards">
+              ProjectGradeCards
             </Nav.Link>
           </Nav>
           <Navbar.Text>

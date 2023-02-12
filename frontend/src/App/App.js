@@ -21,6 +21,7 @@ import Project from "../Projects/Project";
 import Projects from "../Projects/Projects";
 import ProjectAdd from "../Projects/ProjectAdd";
 import TimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
+import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 // import { LoginContext } from "./context/LoginContext";
 function App() {
   // const [usertest, setUsertest] = useState('')
@@ -45,7 +46,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projectadd" element={<ProjectAdd />} />
           <Route path="/projects/:id" element={<Project />} />
-
+          <Route path="ProjectGradeCards" element={<ProjectGradeCards />} />
           {/* <Route path="/:id" element={<Tools />} /> */}
           {/* <Route path="/:id/:id" element={<Home />} /> */}
           <Route path="/profile" element={<Profile />} />

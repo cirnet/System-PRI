@@ -42,9 +42,9 @@ export default function NavHeader() {
             <Nav.Link as={Link} to="/schedule">
               Harmonogram
             </Nav.Link>
-            <Nav.Link as={Link} to="/timeslot">
+            {/* <Nav.Link as={Link} to="/timeslot">
               Godziny opiekunów
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={Link} to="/comission">
               Komisje
             </Nav.Link>

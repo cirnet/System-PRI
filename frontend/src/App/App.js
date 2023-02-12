@@ -13,6 +13,7 @@ import Comission from "../Comission/Comission";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import Schedule from "../Schedule/Schedule";
 import ScheduleDescription from "../Schedule/ScheduleDescription";
+import DefenseAdd from "../Schedule/DefenseAdd/DefenseAdd";
 import Team from "../Teams/Team";
 import TeamAdd from "../Teams/TeamAdd";
 import Error404 from "../Error404";
@@ -59,6 +60,7 @@ function App() {
           />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/schedule/:id" element={<ScheduleDescription />} />
+          <Route path="/schedule2/:id" element={<DefenseAdd />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

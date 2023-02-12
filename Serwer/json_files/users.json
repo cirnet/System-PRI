@@ -4,7 +4,7 @@
     "fields": {
       "password": "pbkdf2_sha256$320000$aYsrSW1SwVVjlpszoQ4Oeo$4ZRu9srlAaBSqAuPGvM/mCd8qBVq9SkGpjI0sjsZhU8=",
       "last_login": "2022-09-05T16:57:23.600Z",
-      "is_superuser": false,
+      "is_superuser": true,
       "email": "admin@admin.pl",
       "is_active": true,
       "is_admin": true,

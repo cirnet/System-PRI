@@ -8,6 +8,8 @@ export default function ScheduleDescription() {
   const { id } = useParams();
   const [comisja, setComisja] = useState([]);
   const [users, setUsers] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [team, setTeam] = useState();
 
   useEffect(() => {
     const commissionResponse = async () => {
@@ -38,14 +40,23 @@ export default function ScheduleDescription() {
       return filtered;
     }, []);
 
+  const reducedTeams = teams.reduce(function (filtered, option) {
+    let someNewValue = { email: option.name, id: option.id };
+    filtered.push(someNewValue);
+    return filtered;
+  }, []);
+
+  console.log(reducedTeams);
   const navigate = useNavigate();
   const [content, setContent] = useState({});
   const [time_start, setTime_start] = useState("");
   const [time_end, setTime_end] = useState("");
 
   const dane = {
-    time_start: time_start,
-    time_end: time_end,
+    defense_type: 0, // defence 0-half, 1-full
+    grade: 0,
+    commission: id,
+    team: team,
   };
 
   useEffect(() => {
@@ -63,8 +74,8 @@ export default function ScheduleDescription() {
   }, []);
 
   const handle = (e) => {
-    fetch(process.env.REACT_APP_API_COMMISSION + `${id}/`, {
-      method: "PUT",
+    fetch(process.env.REACT_APP_API_DEFENSE, {
+      method: "POST",
       body: JSON.stringify(dane),
       headers: {
         "Content-Type": "application/json",
@@ -77,9 +88,18 @@ export default function ScheduleDescription() {
       .catch((error) => {
         console.error(error);
       });
-    navigate("/schedule");
+    navigate(`/schedule2/${id}`);
     window.location.reload();
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(process.env.REACT_APP_API_TEAM);
+      setTeams(data);
+      console.log(data);
+    };
+    fetch();
+  }, []);
 
   return (
     <>
@@ -94,34 +114,38 @@ export default function ScheduleDescription() {
       <div className="divide">
         <div>
           <h3>Opiekunowie obrony:</h3>
-          {(() => {
-            const arr = [];
-            for (let i = 0; i < comisja.length + 1; i++) {
-              arr.push(
-                <div>
-                  <label>
-                    <select
-                      className="form-control mt-1 center-option-text"
-                      // onChange={(e) => setPerson(e.target.value)}
-                    >
-                      {/* <option value="">--------Wybierz osobe--------</option> */}
-                      {reducedOptions.map((option, index) => (
-                        <option value={option.id} selected={index === i}>
-                          {option.email}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <br />
-                  <br />
-                </div>
-              );
-            }
-            return arr;
-          })()}
+
+          <div>
+            <label>
+              <div className="form-control mt-1 center-option-text">
+                {reducedOptions.map((option, index) => (
+                  <p value={option.id}>{option.email}</p>
+                ))}
+              </div>
+            </label>
+            <br />
+            <br />
+          </div>
         </div>
 
         <form onSubmit={handle}>
+          <h3>Wybierz swój zespół:</h3>
+          <div>
+            <label>
+              <select
+                className="form-control mt-1 center-option-text"
+                onChange={(e) => setTeam(e.target.value)}
+              >
+                <option value="">--------Wybierz zespół--------</option>
+                {reducedTeams.map((option) => (
+                  <option value={option.id}>{option.email}</option>
+                ))}
+              </select>
+            </label>
+            <br />
+            <br />
+          </div>
+
           <button type="submit">Zapisz się</button>
         </form>
       </div>

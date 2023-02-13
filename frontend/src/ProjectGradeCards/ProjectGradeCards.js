@@ -1,7 +1,36 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "./ProjectGradeCards.css";
 export default function ProjectGradeCards() {
-  const [points, setPoints] = useState({});
+  const [points, setPoints] = useState();
+  const [projectGradeCards, setProjectGradeCards] = useState({});
+  const [teams, setTeams] = useState([]);
+  const [pickedTeam, setPickedTeam] = useState("");
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(process.env.REACT_APP_API_TEAM);
+      setTeams(data);
+      console.log(data);
+    };
+    fetch();
+  }, []);
+
+  const readuceTeams = teams.reduce(function (filter, option) {
+    let tempValue = { id: option.id, name: option.name };
+    filter.push(tempValue);
+    return filter;
+  }, []);
+
+  useEffect(() => {
+    const request = async () => {
+      const { data } = await axios.get("http://localhost:3000/PPPPP");
+      console.log(data);
+      // setProjectGradeCards(request);
+    };
+    request();
+  }, []);
+
   const dane = [
     "Czy przeprowadzono i udokumentowano testy?",
     "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
@@ -30,15 +59,30 @@ export default function ProjectGradeCards() {
     "Dokument wizji projektu",
     "Czy prezentacja zawierała wszystkie wymagane treści",
   ];
+
   const handle = (e) => {
+    axios.post("http://localhost:3000/PPPPP", { pickedTeam, points });
     e.preventDefault();
+    console.log(pickedTeam);
     console.log(points);
-    console.log(e);
   };
   return (
     <>
       <h1>ProjectGradeCards</h1>
       <br />
+      <div>
+        <select
+          className="form-control mt-1 center-option-text"
+          onChange={(e) => {
+            setPickedTeam(e.target.value);
+          }}
+        >
+          <option value="">Wybierz zespoł </option>
+          {readuceTeams.map((item) => (
+            <option value={item.id}>{item.name}</option>
+          ))}
+        </select>
+      </div>
       <div className="gradeForm">
         <form onSubmit={handle}>
           {dane.map((item, index) => (

@@ -5,13 +5,13 @@ export default function ProjectGradeCards() {
   const [points, setPoints] = useState();
   const [projectGradeCards, setProjectGradeCards] = useState({});
   const [teams, setTeams] = useState([]);
-  const [pickedTeam, setPickedTeam] = useState("");
+  const [pickedTeam, setPickedTeam] = useState(1);
 
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(process.env.REACT_APP_API_TEAM);
       setTeams(data);
-      console.log(data);
+      // console.log(data);
     };
     fetch();
   }, []);
@@ -24,13 +24,16 @@ export default function ProjectGradeCards() {
 
   useEffect(() => {
     const request = async () => {
-      const { data } = await axios.get("http://localhost:3000/PPPPP");
-      console.log(data);
-      // setProjectGradeCards(request);
+      const { data } = await axios.get(
+        `http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`
+      );
+      console.log("dane po fetchu: ", data);
+      setPoints(data[0].points);
     };
     request();
-  }, []);
-
+  }, [pickedTeam]);
+  console.log("pickedTeam: ", pickedTeam);
+  console.log("points: ", points);
   const dane = [
     "Czy przeprowadzono i udokumentowano testy?",
     "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
@@ -77,7 +80,7 @@ export default function ProjectGradeCards() {
             setPickedTeam(e.target.value);
           }}
         >
-          <option value="">Wybierz zespoł </option>
+          <option value="33">Wybierz zespoł 33 </option>
           {readuceTeams.map((item) => (
             <option value={item.id}>{item.name}</option>
           ))}
@@ -90,6 +93,7 @@ export default function ProjectGradeCards() {
               <p>{item}</p>
               <input
                 type="number"
+                value={points && points[`question${index}`]}
                 onChange={(e) => {
                   setPoints({
                     ...points,

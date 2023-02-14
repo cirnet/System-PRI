@@ -83,7 +83,7 @@ export default function AvailableTimeSlot() {
 
   return (
     <>
-      <div className="form-container" onSubmit={handleSubmit}>
+      <div className="available_form-container" onSubmit={handleSubmit}>
         <form className="form">
           <div className="form-content">
             {content.length > 0 ? (

@@ -11,7 +11,12 @@ export default function SwitchFunction(pk) {
   return (
     <>
       <div className="switchContent">
-        <button onClick={handle}>Zmień widok</button>
+        <div className="button">
+          <button onClick={handle}>
+            {pick ? "Zmień na kalendarz" : "Zmień na formularz"}
+          </button>
+        </div>
+
         {pick ? <AvailableTimeSlot /> : <TimeSlot />}
       </div>
     </>

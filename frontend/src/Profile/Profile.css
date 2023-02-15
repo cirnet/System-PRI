@@ -5,4 +5,11 @@
 .data_pick {
   display: flex;
   justify-content: space-evenly;
+  align-items: flex-start;
+  margin-bottom: 100px;
+}
+
+.AvailableTimeSlotCalendar {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 // import LoginContext from "./Context/LoginContext";
 import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
+import AvailableTimeSlotCalendar from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
 import Comission from "../Comission/Comission";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import "./Profile.css";
+import SwitchComponent from "../AvailableTimeSlot/SwitchComponent";
 import Loader from "../Loader/Loader";
 export default function Profile() {
   const [user, setUser] = useState("");
@@ -32,6 +34,7 @@ export default function Profile() {
   console.log(pk);
   return (
     <>
+      <span>Dla pk=8 ustawiony tryb koordynatora dla pk=9 tryb opiekuna</span>
       {user ? (
         <h1>
           Witaj <b> {user}!</b>
@@ -39,10 +42,36 @@ export default function Profile() {
       ) : (
         ""
       )}
+
       <div className="data_pick">
-        <AvailableTimeSlot />
+        {pk === 8 || pk === 9 ? <SwitchComponent /> : ""}
+
         <CoordinatorTimeSlot pk={pk} />
       </div>
+      <br />
+      <br />
+
+      {pk === 8 ? (
+        <div className="AvailableTimeSlotCalendar">
+          <div className="children">
+            <AvailableTimeSlotCalendar />
+          </div>
+          <div className="children">
+            <AvailableTimeSlotCalendar />
+          </div>
+          <div className="children">
+            <AvailableTimeSlotCalendar />
+          </div>
+          <div className="children">
+            <AvailableTimeSlotCalendar />
+          </div>
+          <div className="children">
+            <AvailableTimeSlotCalendar />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* <div className="comissionSetting">
         <Comission />

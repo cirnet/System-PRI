@@ -1,8 +1,8 @@
-.form-container {
+.available_form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .form {
@@ -55,4 +55,14 @@ label {
 .day {
   width: 10%;
   text-align: center;
+}
+
+.switchContent {
+  width: 70%;
+}
+
+.button {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
 }

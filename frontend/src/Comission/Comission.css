@@ -15,9 +15,13 @@
 .pointer {
   cursor: pointer;
 }
-
+.displayEmails {
+  min-width: 1000px;
+  display: flex;
+}
 .emailShow {
-  padding-right: 30px;
+  /* padding-right: 30px; */
+  width: 200px;
 }
 
 .css-1e2bxag-MuiDataGrid-root

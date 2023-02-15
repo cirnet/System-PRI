@@ -215,7 +215,7 @@ export default function Comission() {
         return (
           <>
             <span
-              className="accepted"
+              className="pointer"
               onClick={() => {
                 Handle(params.row, name_field);
               }}
@@ -228,7 +228,7 @@ export default function Comission() {
     },
 
     {
-      field: "",
+      field: "Edycja",
       headerName: "Edycja",
       headerAlign: "center",
       width: 100,
@@ -244,7 +244,7 @@ export default function Comission() {
       field: "members",
       headerName: "Opiekunowie ",
       headerAlign: "center",
-      width: 800,
+      width: 1000,
       renderCell: (params) => {
         // return <span>{params.row.members}</span>;
         const reducedOptions = users
@@ -255,7 +255,7 @@ export default function Comission() {
             return filtered;
           }, []);
         return (
-          <div>
+          <div className="displayEmails">
             {reducedOptions.map((option) => (
               <span className="emailShow">{option.email}</span>
             ))}

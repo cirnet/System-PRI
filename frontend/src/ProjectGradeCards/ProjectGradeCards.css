@@ -1,0 +1,9 @@
+.gradeField {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gradeForm {
+  width: 900px;
+}

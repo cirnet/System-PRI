@@ -65,7 +65,7 @@ export default function CoordinatorTimeSlot(pk) {
   } else {
     return (
       <>
-        <div className="form-container" onSubmit={handleSubmit}>
+        <div className="coordinator_form-container" onSubmit={handleSubmit}>
           <form className="form">
             <div className="form-content">
               <h3 className="form-title">Zakres obron</h3>

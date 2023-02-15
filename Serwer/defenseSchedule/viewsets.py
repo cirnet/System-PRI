@@ -20,9 +20,8 @@ class DefenseViewset(viewsets.ModelViewSet):
     serializer_class = serializers.DefenseSerializer
 
 class AvailableTimeSlotViewset(viewsets.ModelViewSet):
-    queryset = models.AvailableTimeSlot.objects.all()
     serializer_class = serializers.AvailableTimeSlotSerializerCreate
-
+    # queryset = models.AvailableTimeSlot.objects.all()
     # def create(self, request):
     #     result = super().create(request)
     #     print(result)
@@ -30,6 +29,14 @@ class AvailableTimeSlotViewset(viewsets.ModelViewSet):
     #     result.person = current_user
     #     result.save()
     #     return result
+
+    def get_queryset(self):
+        user = self.request.user
+ #        queryset = models.AvailableTimeSlot.objects.all()
+ #       if(user.is_authenticated):
+        queryset = models.AvailableTimeSlot.objects.filter(person=user)
+        return queryset
+    
 
     def perform_create(self, serializer):
         serializer.save(person=self.request.user)

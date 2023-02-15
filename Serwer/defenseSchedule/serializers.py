@@ -77,13 +77,13 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = '__all__'
 
+class ProjectCardEvaluationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectCardEvaluation
+        fields = '__all__'
+
 class ProjectGradeCardSerializer(serializers.ModelSerializer):
+    grades = ProjectCardEvaluationSerializer(many=True, read_only=False)
     class Meta:
         model = ProjectGradeCard
         fields = '__all__'
-
-
-
-
-
-

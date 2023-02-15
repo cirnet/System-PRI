@@ -66,7 +66,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    team_membership = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True) #członek jakiego zespołu
+    team_membership = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True) #członek jakiego zespołu (jako student)
 
     objects = MyUserManager()
 
@@ -227,7 +227,7 @@ class Project(models.Model):
 class ProjectGradeCard(models.Model):
     #topic = models.CharField(max_length=100)
     #project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='grade_card')
-    members = models.ManyToManyField('EvaluationCriteria', through='ProjectCardEvaluation')
+    #members = models.ManyToManyField('EvaluationCriteria', through='ProjectCardEvaluation')
     project = models.OneToOneField(
         'Project',
         on_delete=models.CASCADE,
@@ -268,9 +268,9 @@ class EvaluationCriteria(models.Model):
 
 class ProjectCardEvaluation(models.Model):
     criteria = models.ForeignKey(EvaluationCriteria, on_delete=models.DO_NOTHING)
-    project_card = models.ForeignKey(ProjectGradeCard, on_delete=models.CASCADE)
-    points_1 = models.IntegerField(null=True, blank=True)
-    points_2 = models.IntegerField(null=True, blank=True)
+    project_card = models.ForeignKey(ProjectGradeCard, on_delete=models.CASCADE, related_name="grades")
+    points_1 = models.IntegerField(blank=True, default=0)
+    points_2 = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.criteria.name

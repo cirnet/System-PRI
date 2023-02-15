@@ -9,7 +9,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 import { useNavigate } from "react-router-dom";
 
-export default function NavHeader() {
+export default function NavHeader(pk) {
   // const user = JSON.parse(localStorage.getItem('user'));
 
   const navigate = useNavigate();
@@ -45,18 +45,24 @@ export default function NavHeader() {
             {/* <Nav.Link as={Link} to="/timeslot">
               Godziny opiekunów
             </Nav.Link> */}
-            <Nav.Link as={Link} to="/comission">
-              Komisje
-            </Nav.Link>
             <Nav.Link as={Link} to="/teams">
               Zespoły
             </Nav.Link>
             <Nav.Link as={Link} to="/projects">
               Projekty
             </Nav.Link>
-            <Nav.Link as={Link} to="/ProjectGradeCards">
-              ProjectGradeCards
-            </Nav.Link>
+            {pk.pk === 8 ? (
+              <>
+                <Nav.Link as={Link} to="/comission">
+                  Komisje
+                </Nav.Link>
+                <Nav.Link as={Link} to="/ProjectGradeCards">
+                  ProjectGradeCards
+                </Nav.Link>
+              </>
+            ) : (
+              ""
+            )}
           </Nav>
           <Navbar.Text>
             <Nav.Link onClick={handleLogout}>Wyloguj </Nav.Link>

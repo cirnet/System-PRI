@@ -14,6 +14,25 @@ export default function Schedule() {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [pk, setPk] = useState("");
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    };
+    const request = async () => {
+      const data = await fetch(
+        process.env.REACT_APP_API_AUTH_USER,
+        requestOptions
+      ).then((response) => response.json());
+      setPk(data.pk);
+    };
+    request();
+  }, []);
+
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
@@ -78,6 +97,7 @@ export default function Schedule() {
             time_start={item.time_start}
             time_end={item.time_end}
             is_accepted={item.is_accepted}
+            pk={pk}
           />
         </div>
       ))}

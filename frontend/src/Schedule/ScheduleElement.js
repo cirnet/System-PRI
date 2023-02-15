@@ -8,36 +8,51 @@ export default function SheduleElement({
   time_end,
   is_complete,
   is_accepted,
+  pk,
 }) {
   const navigate = useNavigate();
 
   return (
     <>
-      <div
-        className="boxSchedule"
-        style={{
-          background:
-            is_complete && is_accepted
-              ? "#3ca832"
-              : is_complete
-              ? "#cc9900"
-              : "rgb(255 107 107)",
-        }}
-        onClick={() => navigate(`/schedule/${id}`)}
-      >
-        {/* <span>{id}</span> */}
-        {/* <span>{person}</span> */}
-        {/* <p>{new Date(time_start).toISOString().replace('T', ' ').split('.')[0]}</p> */}
-
-        {/* <p>{new Date(time_end).toISOString().replace('T', ' ').split('.')[0]}</p> */}
-        {/* {time_start} */}
-        <p>
-          {moment(time_start).format("LT") +
-            "-" +
-            moment(time_end).format("LT")}
-        </p>
-        {/* <p>{moment(time_start).format("LT")}</p> */}
-      </div>
+      {pk === 8 ? (
+        <div
+          className="boxSchedule"
+          style={{
+            background:
+              is_complete && is_accepted
+                ? "#3ca832"
+                : is_complete
+                ? "#cc9900"
+                : "rgb(255 107 107)",
+          }}
+          onClick={() => navigate(`/schedule/${id}`)}
+        >
+          <p>
+            {moment(time_start).format("LT") +
+              "-" +
+              moment(time_end).format("LT")}
+          </p>
+        </div>
+      ) : (
+        <div
+          className="boxSchedule"
+          style={{
+            background:
+              is_complete && is_accepted
+                ? "#3ca832"
+                : is_complete
+                ? "#cc9900"
+                : "rgb(255 107 107)",
+          }}
+          onClick={() => navigate(`/DefenseAdd/${id}`)}
+        >
+          <p>
+            {moment(time_start).format("LT") +
+              "-" +
+              moment(time_end).format("LT")}
+          </p>
+        </div>
+      )}
     </>
   );
 }

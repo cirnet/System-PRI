@@ -28,7 +28,13 @@ export default function Comission() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
@@ -43,7 +49,12 @@ export default function Comission() {
   }
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       setContent(data);
       setLoading(false);
     };
@@ -99,6 +110,7 @@ export default function Comission() {
         }),
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       })
         .then((response) => response.json())
@@ -115,7 +127,12 @@ export default function Comission() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_USER);
+      const { data } = await axios.get(process.env.REACT_APP_API_USER, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       console.log(data);
       setUsers(data);
     };

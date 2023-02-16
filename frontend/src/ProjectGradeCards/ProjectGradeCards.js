@@ -9,7 +9,12 @@ export default function ProjectGradeCards() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_TEAM);
+      const { data } = await axios.get(process.env.REACT_APP_API_TEAM, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       setTeams(data);
       // console.log(data);
     };

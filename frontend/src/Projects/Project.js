@@ -10,7 +10,13 @@ export default function Project() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_PROJECT + `${id}/`
+        process.env.REACT_APP_API_PROJECT + `${id}/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setContent(data);
       console.log(data);

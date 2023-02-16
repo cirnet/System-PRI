@@ -44,7 +44,7 @@ export default function Profile() {
       )}
 
       <div className="data_pick">
-        {pk === 8 || pk === 9 ? <SwitchComponent /> : ""}
+        {pk === 8 || pk === 9 || pk === 11 ? <SwitchComponent /> : ""}
 
         <CoordinatorTimeSlot pk={pk} />
       </div>

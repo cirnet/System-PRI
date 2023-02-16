@@ -13,7 +13,13 @@ export default function ScheduleDescription() {
   useEffect(() => {
     const commissionResponse = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COMMISSION + `${id}/`
+        process.env.REACT_APP_API_COMMISSION + `${id}/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
 
       setComisja(data.members);
@@ -24,7 +30,12 @@ export default function ScheduleDescription() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_USER);
+      const { data } = await axios.get(process.env.REACT_APP_API_USER, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       console.log(data);
       setUsers(data);
     };
@@ -61,7 +72,13 @@ export default function ScheduleDescription() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COMMISSION + `${id}/`
+        process.env.REACT_APP_API_COMMISSION + `${id}/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setContent(data);
       // setIs_accepted(data.is_accepted);
@@ -82,6 +99,7 @@ export default function ScheduleDescription() {
       body: JSON.stringify(dane),
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     })
       .then((response) => response.json())

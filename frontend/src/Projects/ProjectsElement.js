@@ -8,7 +8,10 @@ export default function ProjectsElement({ topic, id }) {
   async function deleteFetch(id) {
     const request = await fetch(process.env.REACT_APP_API_PROJECT + `${id}/`, {
       method: "DELETE",
-      //   headers: { "X-CSRFToken": csrftoken },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
     });
   }
 

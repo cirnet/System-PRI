@@ -32,9 +32,14 @@ class AvailableTimeSlotViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
- #        queryset = models.AvailableTimeSlot.objects.all()
- #       if(user.is_authenticated):
-        queryset = models.AvailableTimeSlot.objects.filter(person=user)
+
+ #      if(user.is_authenticated):
+
+        if user.groups.filter(name='Koordynatorzy').exists():
+            queryset = models.AvailableTimeSlot.objects.all()
+        else:
+            queryset = models.AvailableTimeSlot.objects.filter(person=user)
+
         return queryset
     
 

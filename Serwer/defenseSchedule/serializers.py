@@ -91,11 +91,16 @@ class ProjectGradeCardSerializer(serializers.ModelSerializer):
         model = ProjectGradeCard
         fields = '__all__'
 
+class ProjectGradeCardListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectGradeCard
+        fields = '__all__'
+
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['id', 'name']
-        
+
 class UserWithGroupDetailsSerializer(UserDetailsSerializer):
     #profile = Profile(source='userprofile')
     groups = GroupSerializer(many=True)

@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 from . import models
 from . import serializers
@@ -67,3 +68,8 @@ class ProjectViewset(viewsets.ModelViewSet):
 class ProjectGradeCardViewset(viewsets.ModelViewSet):
     queryset = models.ProjectGradeCard.objects.all()
     serializer_class = serializers.ProjectGradeCardSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = models.ProjectGradeCard.objects.all()
+        serializer = serializers.ProjectGradeCardListSerializer(queryset, many=True)
+        return Response(serializer.data)

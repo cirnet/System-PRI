@@ -8,13 +8,13 @@ export default function SheduleElement({
   time_end,
   is_complete,
   is_accepted,
-  pk,
+  group_id,
 }) {
   const navigate = useNavigate();
 
   return (
     <>
-      {pk === 8 ? (
+      {group_id === 1 ? (
         <div
           className="boxSchedule"
           style={{

@@ -26,7 +26,7 @@ import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 function App() {
   // const [usertest, setUsertest] = useState('')
   const token = localStorage.getItem("accessToken");
-  const [pk, setPk] = useState("");
+  const [group_id, setGroup_id] = useState("");
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -40,7 +40,7 @@ function App() {
         process.env.REACT_APP_API_AUTH_USER,
         requestOptions
       ).then((response) => response.json());
-      setPk(data.pk);
+      setGroup_id(data.groups[0].id);
     };
     request();
   }, []);
@@ -50,11 +50,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavHeader pk={pk} />
+      <NavHeader group_id={group_id} />
 
       <div className="App">
         <Routes>
-          {pk === 8 ? (
+          {group_id === 1 ? (
             <>
               <Route path="/schedule/:id" element={<ScheduleDescription />} />
               <Route path="/comission" element={<Comission />} />

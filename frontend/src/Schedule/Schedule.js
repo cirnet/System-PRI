@@ -14,7 +14,7 @@ export default function Schedule() {
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [pk, setPk] = useState("");
+  const [group_id, setGroup_id] = useState("");
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -28,7 +28,7 @@ export default function Schedule() {
         process.env.REACT_APP_API_AUTH_USER,
         requestOptions
       ).then((response) => response.json());
-      setPk(data.pk);
+      setGroup_id(data.groups[0].id);
     };
     request();
   }, []);
@@ -108,7 +108,7 @@ export default function Schedule() {
             time_start={item.time_start}
             time_end={item.time_end}
             is_accepted={item.is_accepted}
-            pk={pk}
+            group_id={group_id}
           />
         </div>
       ))}

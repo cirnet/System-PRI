@@ -4,12 +4,16 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 
-export default function ScheduleDescription() {
+export default function DefenseAdd() {
   const { id } = useParams();
   const [comisja, setComisja] = useState([]);
   const [users, setUsers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [team, setTeam] = useState();
+  const navigate = useNavigate();
+  const [content, setContent] = useState({});
+  const [time_start, setTime_start] = useState("");
+  const [time_end, setTime_end] = useState("");
 
   useEffect(() => {
     const commissionResponse = async () => {
@@ -22,7 +26,9 @@ export default function ScheduleDescription() {
           },
         }
       );
-
+      setTime_start(moment(data.time_start).format("YYYY-MM-DDTkk:mm"));
+      setTime_end(moment(data.time_end).format("YYYY-MM-DDTkk:mm"));
+      console.log("data z comisji: ", data);
       setComisja(data.members);
       console.log(comisja);
     };
@@ -58,10 +64,6 @@ export default function ScheduleDescription() {
   }, []);
 
   console.log(reducedTeams);
-  const navigate = useNavigate();
-  const [content, setContent] = useState({});
-  const [time_start, setTime_start] = useState("");
-  const [time_end, setTime_end] = useState("");
 
   const dane = {
     defense_type: 0, // defence 0-half, 1-full
@@ -69,20 +71,6 @@ export default function ScheduleDescription() {
     commission: id,
     team: team,
   };
-
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get(
-        process.env.REACT_APP_API_COMMISSION + `${id}/`
-      );
-      setContent(data);
-      setTime_start(moment(data.time_start).format("YYYY-MM-DDTkk:mm"));
-      setTime_end(moment(data.time_end).format("YYYY-MM-DDTkk:mm"));
-
-      console.log(data);
-    };
-    fetch();
-  }, []);
 
   const handle = (e) => {
     fetch(process.env.REACT_APP_API_DEFENSE, {
@@ -100,7 +88,7 @@ export default function ScheduleDescription() {
       .catch((error) => {
         console.error(error);
       });
-    navigate(`/schedule2/${id}`);
+    navigate(`/DefenseAdd/${id}`);
     window.location.reload();
   };
 

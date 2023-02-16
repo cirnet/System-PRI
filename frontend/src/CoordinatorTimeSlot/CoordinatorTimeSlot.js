@@ -3,7 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import "./CoordinatorTimeSlot.css";
 
-export default function CoordinatorTimeSlot(pk) {
+export default function CoordinatorTimeSlot(group_id) {
   const [time_start, setTime_start] = useState("");
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
@@ -66,7 +66,7 @@ export default function CoordinatorTimeSlot(pk) {
       );
     window.location.reload(false);
   };
-  if (pk.pk !== 8) {
+  if (group_id.group_id !== 1) {
     return;
   } else {
     return (

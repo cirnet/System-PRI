@@ -159,5 +159,9 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=2)
 }
 
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'defenseSchedule.serializers.UserWithGroupDetailsSerializer',
+}
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static") 

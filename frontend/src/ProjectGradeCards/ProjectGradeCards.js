@@ -67,9 +67,14 @@ export default function ProjectGradeCards() {
     "Dokument wizji projektu",
     "Czy prezentacja zawierała wszystkie wymagane treści",
   ];
+  //muszą byc points_1 oraz points_2
+  const date = {
+    pickedTeam: pickedTeam,
+    grade: points,
+  };
 
   const handle = (e) => {
-    axios.post("http://localhost:3000/PPPPP", { pickedTeam, points });
+    axios.post("http://localhost:3000/PPPPP", date);
     e.preventDefault();
     console.log(pickedTeam);
     console.log(points);
@@ -96,16 +101,30 @@ export default function ProjectGradeCards() {
           {dane.map((item, index) => (
             <div key={index} className="gradeField">
               <p>{item}</p>
-              <input
-                type="number"
-                value={points && points[`question${index}`]}
-                onChange={(e) => {
-                  setPoints({
-                    ...points,
-                    [`question${index}`]: e.target.value,
-                  });
-                }}
-              ></input>
+              <div className="inputs">
+                <input
+                  type="number"
+                  value={points && points[`question${index}_1`]}
+                  onChange={(e) => {
+                    setPoints({
+                      ...points,
+                      [`question${index}`]: {
+                        sem: e.target.value,
+                      },
+                    });
+                  }}
+                ></input>
+                <input
+                  type="number"
+                  value={points && points[`question${index}_2`]}
+                  onChange={(e) => {
+                    setPoints({
+                      ...points,
+                      [`question${index}`]: { sem: e.target.value },
+                    });
+                  }}
+                ></input>
+              </div>
             </div>
           ))}
           <button>Zapisz punkty</button>

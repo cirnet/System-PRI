@@ -7,3 +7,7 @@
 .gradeForm {
   width: 900px;
 }
+
+.inputs {
+  display: flex;
+}

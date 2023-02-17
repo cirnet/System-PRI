@@ -2,10 +2,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./ProjectGradeCards.css";
 export default function ProjectGradeCards() {
-  const [points, setPoints] = useState();
+  const [points, setPoints] = useState([]);
   const [projectGradeCards, setProjectGradeCards] = useState({});
   const [teams, setTeams] = useState([]);
-  const [pickedTeam, setPickedTeam] = useState(1);
+  const [pickedTeam, setPickedTeam] = useState();
+
+  const [grades, setGrades] = useState({
+    question0: { points_1: "", points_2: "" },
+  });
+
+  const handleGradeChange = (event) => {
+    const { name, value } = event.target;
+    const [question, semester] = name.split("-");
+    setGrades((prevGrades) => ({
+      ...prevGrades,
+      [question]: { ...prevGrades[question], [semester]: parseInt(value) },
+    }));
+  };
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,13 +45,11 @@ export default function ProjectGradeCards() {
       const { data } = await axios.get(
         `http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`
       );
-      console.log("dane po fetchu: ", data);
-      setPoints(data[0].points);
+      setPoints(data[0]?.grade);
     };
     request();
   }, [pickedTeam]);
-  console.log("pickedTeam: ", pickedTeam);
-  console.log("points: ", points);
+
   const dane = [
     "Czy przeprowadzono i udokumentowano testy?",
     "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
@@ -67,17 +78,16 @@ export default function ProjectGradeCards() {
     "Dokument wizji projektu",
     "Czy prezentacja zawierała wszystkie wymagane treści",
   ];
+
   //muszą byc points_1 oraz points_2
   const date = {
     pickedTeam: pickedTeam,
-    grade: points,
+    grade: grades,
   };
 
   const handle = (e) => {
     axios.post("http://localhost:3000/PPPPP", date);
-    e.preventDefault();
-    console.log(pickedTeam);
-    console.log(points);
+    e.preventdefault();
   };
   return (
     <>
@@ -90,7 +100,7 @@ export default function ProjectGradeCards() {
             setPickedTeam(e.target.value);
           }}
         >
-          <option value="33">Wybierz zespoł 33 </option>
+          <option value="">Wybierz zespoł </option>
           {readuceTeams.map((item) => (
             <option value={item.id}>{item.name}</option>
           ))}
@@ -99,33 +109,27 @@ export default function ProjectGradeCards() {
       <div className="gradeForm">
         <form onSubmit={handle}>
           {dane.map((item, index) => (
-            <div key={index} className="gradeField">
-              <p>{item}</p>
-              <div className="inputs">
-                <input
-                  type="number"
-                  value={points && points[`question${index}_1`]}
-                  onChange={(e) => {
-                    setPoints({
-                      ...points,
-                      [`question${index}`]: {
-                        sem: e.target.value,
-                      },
-                    });
-                  }}
-                ></input>
-                <input
-                  type="number"
-                  value={points && points[`question${index}_2`]}
-                  onChange={(e) => {
-                    setPoints({
-                      ...points,
-                      [`question${index}`]: { sem: e.target.value },
-                    });
-                  }}
-                ></input>
+            <>
+              <div key={index} className="gradeField">
+                <p>{item}</p>
+                <div className="inputs">
+                  <input
+                    key={index + "_1"}
+                    name={"question" + index + "-points_1"}
+                    type="number"
+                    value={points && points[`question${index}`]?.points_1}
+                    onChange={handleGradeChange}
+                  ></input>
+                  <input
+                    type="number"
+                    key={index + "_2"}
+                    name={"question" + index + "-points_2"}
+                    value={points && points[`question${index}`]?.points_2}
+                    onChange={handleGradeChange}
+                  ></input>
+                </div>
               </div>
-            </div>
+            </>
           ))}
           <button>Zapisz punkty</button>
         </form>

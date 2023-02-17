@@ -129,7 +129,7 @@ export default function TimeSlot() {
 
   // console.log(reducedOptions);
   const days = Object.keys(schedule).map((day) => (
-    <div key={day} className="day">
+    <div key={day} className="dayOrignal">
       <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>
 
       {schedule[day].slice(0, 1).map((item) => (

@@ -171,10 +171,14 @@ export default function TimeSlotTEST() {
   // console.log(reducedOptions);
   const days = Object.keys(schedule).map((day) => (
     <div key={day} className="day">
-      <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>
-
+      <span className="spanDay">
+        {day.charAt(0).toUpperCase() + day.slice(1)}
+      </span>
+      <br />
       {schedule[day].slice(0, 1).map((item) => (
-        <h6 key={item}>{new Date(item.time_start).toLocaleDateString()}</h6>
+        <span className="spanData" key={item}>
+          {new Date(item.time_start).toLocaleDateString()}
+        </span>
       ))}
 
       {schedule[day].map((item) => (

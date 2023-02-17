@@ -5,7 +5,7 @@ export default function TimeSlotElementTEST({ id, time_start, test }) {
   return (
     <>
       <div
-        className="box"
+        className="box, boxOriginal"
         style={{ backgroundColor: test ? "#3ca832" : "rgb(255 107 107)" }}
       >
         <p>{moment(time_start).format("LT")}</p>

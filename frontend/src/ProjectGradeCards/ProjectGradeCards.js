@@ -53,7 +53,8 @@ export default function ProjectGradeCards() {
   const dane = [
     "Czy przeprowadzono i udokumentowano testy?",
     "Czy przygotowano prototyp projektu zgodnie ze sztuką?",
-    "Czy projekt jest użyteczny dla grupy docelowej; Czy spełnia kryteria użyteczności i został przetestowany pod tym kątem?",
+    "Czy projekt jest użyteczny dla grupy docelowej",
+    "Czy spełnia kryteria użyteczności i został przetestowany pod tym kątem?",
     "Czy projekt został wdrożony?",
     "Czy projekt dobrze rokuje?",
     "Czy wdrożone zostały wszystkie zakładane na dany semestr funkcjonalności (ocenia prowadzący)?",
@@ -61,7 +62,8 @@ export default function ProjectGradeCards() {
     "Dostęp do produktu projektu dla komisji do testów dwa tygodnie przed prezentacją",
     "Brak krytycznych błędów w tym: bezpieczeństwa oraz uniemożliwiających korzystanie z systemu",
     "Dostęp do produktu projektu dla komisji do testów podczas prezentacji * (obowiązkowe w II sem)",
-    "Czy złożoność produktu projektu odpowiada wielkości zespołu? Czy jakość produktu odpowiada wielkości projektu DevOps",
+    "Czy złożoność produktu projektu odpowiada wielkości zespołu?",
+    "Czy jakość produktu odpowiada wielkości projektu DevOps",
     "Zarządzanie kodem źródłowym",
     "Metodyka pracy i narzędzia ją wspierające",
     "Zarządzanie ryzykiem i zakresem projektu",
@@ -93,19 +95,22 @@ export default function ProjectGradeCards() {
     <>
       <h1>ProjectGradeCards</h1>
       <br />
-      <div>
+      <div className="flexinputteam">
         <select
           className="form-control mt-1 center-option-text"
           onChange={(e) => {
             setPickedTeam(e.target.value);
           }}
         >
-          <option value="">Wybierz zespoł </option>
+          <option value="">
+            -- Wybierz zespoł, któremu zmienisz punkty --
+          </option>
           {readuceTeams.map((item) => (
             <option value={item.id}>{item.name}</option>
           ))}
         </select>
       </div>
+      <br />
       <div className="gradeForm">
         <form onSubmit={handle}>
           {dane.map((item, index) => (
@@ -114,6 +119,7 @@ export default function ProjectGradeCards() {
                 <p>{item}</p>
                 <div className="inputs">
                   <input
+                    className="point1Input"
                     key={index + "_1"}
                     name={"question" + index + "-points_1"}
                     type="number"

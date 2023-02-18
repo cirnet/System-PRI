@@ -23,7 +23,7 @@ export default function SheduleElement({
                 ? "#3ca832"
                 : is_complete
                 ? "#cc9900"
-                : "rgb(255 107 107)",
+                : "#FF6B6B",
           }}
           onClick={() => navigate(`/schedule/${id}`)}
         >

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AvailableTimeSlotCalendar from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
-
+import Projects from "../Projects/Projects";
+import Teams from "../Teams/Teams";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import "./Profile.css";
 import SwitchComponent from "../AvailableTimeSlot/SwitchComponent";
@@ -47,20 +48,34 @@ export default function Profile() {
       {group_id === 1 ? (
         <div className="AvailableTimeSlotCalendar">
           <div className="children">
+            <h5>Opiekun 1</h5>
             <AvailableTimeSlotCalendar />
           </div>
           <div className="children">
+            <h5>Opiekun 2</h5>
             <AvailableTimeSlotCalendar />
           </div>
           <div className="children">
+            <h5>Opiekun 3</h5>
             <AvailableTimeSlotCalendar />
           </div>
           <div className="children">
+            <h5>Opiekun 4</h5>
             <AvailableTimeSlotCalendar />
           </div>
           <div className="children">
+            <h5>Opiekun 5</h5>
             <AvailableTimeSlotCalendar />
           </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {group_id === 3 ? (
+        <div className="studentDiv">
+          <Projects />
+          <Teams />
         </div>
       ) : (
         ""

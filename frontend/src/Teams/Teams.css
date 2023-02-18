@@ -1,5 +1,5 @@
 .teams {
-  width: 40%;
+  width: 80%;
   height: 100px;
   border: 1px solid gray;
   display: flex;
@@ -36,6 +36,11 @@
   width: 100%;
 }
 
+.team_form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .btn {
   margin-top: 30px;
   width: 100%;

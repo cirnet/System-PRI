@@ -77,7 +77,7 @@ export default function TeamAdd() {
 
   return (
     <>
-      <form onSubmit={handle}>
+      <form onSubmit={handle} className="team_form">
         <label>
           Nazwa zespołu:
           <input

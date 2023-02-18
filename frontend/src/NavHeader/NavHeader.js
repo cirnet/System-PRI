@@ -45,12 +45,19 @@ export default function NavHeader(group_id) {
             {/* <Nav.Link as={Link} to="/timeslot">
               Godziny opiekunów
             </Nav.Link> */}
-            <Nav.Link as={Link} to="/teams">
-              Zespoły
-            </Nav.Link>
-            <Nav.Link as={Link} to="/projects">
-              Projekty
-            </Nav.Link>
+            {group_id.group_id !== 3 ? (
+              <>
+                <Nav.Link as={Link} to="/teams">
+                  Zespoły
+                </Nav.Link>
+                <Nav.Link as={Link} to="/projects">
+                  Projekty
+                </Nav.Link>
+              </>
+            ) : (
+              ""
+            )}
+
             {group_id.group_id === 1 ? (
               <>
                 <Nav.Link as={Link} to="/comission">

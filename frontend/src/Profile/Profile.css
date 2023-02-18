@@ -13,3 +13,6 @@
   display: flex;
   flex-wrap: wrap;
 }
+.studentDiv {
+  display: flex;
+}

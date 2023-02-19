@@ -195,7 +195,7 @@ class Team(models.Model):
         return self.name
     name = models.CharField(max_length=100)
     supervisor = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING) #Opiekun projektu
-    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True)
+    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True, related_name="teams")
 
 class Project(models.Model):
     topic = models.CharField(max_length=100)

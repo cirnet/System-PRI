@@ -83,13 +83,23 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectCardEvaluationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectCardEvaluation
-        fields = '__all__'
+        fields = ['criteria', 'points_1', 'points_2']
 
+class TeamPGCSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['id']
+class ProjectGradeCardTeamsSerializer(serializers.ModelSerializer):
+    teams = TeamPGCSerializer(many=True)
+    class Meta:
+        model = Project
+        fields = ['teams']
 class ProjectGradeCardSerializer(serializers.ModelSerializer):
     grades = ProjectCardEvaluationSerializer(many=True, read_only=False)
+    project = ProjectGradeCardTeamsSerializer(many=False)
     class Meta:
         model = ProjectGradeCard
-        fields = '__all__'
+        fields = ['project', 'grades', 'id']
 
 class ProjectGradeCardListSerializer(serializers.ModelSerializer):
     class Meta:

@@ -195,11 +195,11 @@ class Team(models.Model):
         return self.name
     name = models.CharField(max_length=100)
     supervisor = models.ForeignKey('MyUser', on_delete=models.DO_NOTHING) #Opiekun projektu
-    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True, related_name="teams")
 
 class Project(models.Model):
     topic = models.CharField(max_length=100)
     #grade_card = models.ForeignKey('ProjectGradeCard', on_delete=models.DO_NOTHING, null=True, blank=True)
+    team = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True, blank=True, related_name="projects")
 
 
 
@@ -217,10 +217,11 @@ class Project(models.Model):
 
     def save(self, **kwargs):
         super(Project, self).save(**kwargs)
-        pgc = ProjectGradeCard(project=self) #stworzenie karty oceny projektu i przypisanie jej projektu
-        pgc.save()
-        self.grade_card = pgc
-        self.prepare_pgc_content(pgc)
+        if not self.grade_card:
+            pgc = ProjectGradeCard(project=self) #stworzenie karty oceny projektu i przypisanie jej projektu
+            pgc.save()
+            self.grade_card = pgc
+            self.prepare_pgc_content(pgc)
         
 
 

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 export default function ProjectGradeCardsTEST() {
   const [pickedTeam, setPickedTeam] = useState("");
   const [teams, setTeams] = useState([]);
+  const [ifPost, setifPost] = useState(true);
+  const [idObjectTeam, setIdObjectTeam] = useState("");
+  console.log("idObjectTeam: ", idObjectTeam);
   // const [question, setQuestion] = useState([
   //   { criteria: "", first: "", second: "" },
   //   { criteria: "", first: "", second: "" },
@@ -22,14 +26,18 @@ export default function ProjectGradeCardsTEST() {
   }));
   const [question, setQuestion] = useState(generateObjecs);
   console.log("test: ", generateObjecs);
+  console.log("pickedTeam: ", pickedTeam);
+  console.log("ifPost: ", ifPost);
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const formData = {
       pickedTeam,
       question,
     };
     console.log(formData);
-    try {
+    if (ifPost) {
+      console.log("post");
       const response = await fetch("http://localhost:3000/PPPPP", {
         method: "POST",
         body: JSON.stringify(formData),
@@ -37,11 +45,40 @@ export default function ProjectGradeCardsTEST() {
           "Content-Type": "application/json",
         },
       });
+
+      swal({
+        text: "Dodano punkty",
+        icon: "success",
+        buttons: false,
+        timer: 1000,
+      });
       const data = await response.json();
       console.log(data);
-    } catch (error) {
-      console.error(error);
+    } else {
+      console.log("put");
+      const response = await fetch(
+        `http://localhost:3000/PPPPP/${idObjectTeam}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      swal({
+        text: "Zmodyfikowano punkty",
+        icon: "success",
+        buttons: false,
+        timer: 1000,
+      });
+      const data = await response.json();
+      console.log(data);
     }
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+    // window.location.reload();
   };
 
   useEffect(() => {
@@ -62,12 +99,15 @@ export default function ProjectGradeCardsTEST() {
       const { data } = await axios.get(
         `http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`
       );
-      console.log(data);
+      console.log("pobranie danych z picketeam: ", data);
       if (data.length === 0) {
         console.log("pusto");
+        setifPost(true);
         setQuestion(generateObjecs);
       } else {
+        setifPost(false);
         setQuestion(data[0].question);
+        setIdObjectTeam(data[0].id);
       }
 
       // setQuestion(data[0].question);
@@ -97,7 +137,7 @@ export default function ProjectGradeCardsTEST() {
         {inputList}
       </div> */}
 
-      <form onSubmit={handleSubmit}>
+      <form method="POST" onSubmit={handleSubmit}>
         <div className="flexinputteam">
           <select
             className="form-control mt-1 center-option-text"

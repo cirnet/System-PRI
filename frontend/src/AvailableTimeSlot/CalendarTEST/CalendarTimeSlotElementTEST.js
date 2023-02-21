@@ -1,6 +1,6 @@
 import "../AvailableTimeSlot.css";
 import moment from "moment";
-export default function TimeSlotElementTEST({ id, time_start, test }) {
+export default function CalendarTimeSlotElementTEST({ id, time_start, test }) {
   // console.log(time_start);
   return (
     <>

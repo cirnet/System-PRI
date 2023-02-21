@@ -73,6 +73,7 @@ export default function DefenseAdd() {
   };
 
   const handle = (e) => {
+    // e.preventdefault();
     fetch(process.env.REACT_APP_API_DEFENSE, {
       method: "POST",
       body: JSON.stringify(dane),
@@ -88,8 +89,9 @@ export default function DefenseAdd() {
       .catch((error) => {
         console.error(error);
       });
-    navigate(`/DefenseAdd/${id}`);
-    window.location.reload();
+
+    // navigate(`/DefenseAdd/${id}`);
+    // window.location.reload();
   };
 
   useEffect(() => {

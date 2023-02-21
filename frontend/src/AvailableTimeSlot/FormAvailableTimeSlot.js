@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AvailableTimeSlot.css";
 import swal from "sweetalert";
 
-export default function AvailableTimeSlot() {
+export default function FormAvailableTimeSlot() {
   const [time_start_min, setTime_start_min] = useState("");
   const [time_end_max, setTime_end_max] = useState("");
   const [time_start, setTime_start] = useState("");

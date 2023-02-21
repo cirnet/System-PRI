@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./ProjectGradeCards.css";
+
+import ProjectGradeCardsTEST from "./ProjectGradeCardsTEST";
 export default function ProjectGradeCards() {
   const [points, setPoints] = useState([]);
   const [projectGradeCards, setProjectGradeCards] = useState({});
@@ -14,10 +16,13 @@ export default function ProjectGradeCards() {
   const handleGradeChange = (event) => {
     const { name, value } = event.target;
     const [question, semester] = name.split("-");
+    console.log(question, " ", semester, " ", value);
     setGrades((prevGrades) => ({
       ...prevGrades,
-      [question]: { ...prevGrades[question], [semester]: parseInt(value) },
+      // [question]: { ...prevGrades[question], [semester]: parseInt(value) },
+      [question]: { question, [semester]: parseInt(value) },
     }));
+    console.log(grades);
   };
 
   useEffect(() => {
@@ -45,6 +50,7 @@ export default function ProjectGradeCards() {
       const { data } = await axios.get(
         `http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`
       );
+      setGrades(data[0]?.grade);
       setPoints(data[0]?.grade);
     };
     request();
@@ -88,12 +94,29 @@ export default function ProjectGradeCards() {
   };
 
   const handle = (e) => {
-    axios.post("http://localhost:3000/PPPPP", date);
+    // axios.post(`http://localhost:3000/PPPPP/`, date);
+
+    // fetch(`http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(date),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+
     e.preventdefault();
   };
+  function handleSubmit(e) {
+    // Prevent the browser from reloading the page
+    e.preventDefault();
+  }
   return (
     <>
-      <h1>ProjectGradeCards</h1>
+      {/* <h1>ProjectGradeCards</h1>
       <br />
       <div className="flexinputteam">
         <select
@@ -123,14 +146,14 @@ export default function ProjectGradeCards() {
                     key={index + "_1"}
                     name={"question" + index + "-points_1"}
                     type="number"
-                    value={points && points[`question${index}`]?.points_1}
+                    value={grades && grades[`question${index}`]?.points_1}
                     onChange={handleGradeChange}
                   ></input>
                   <input
                     type="number"
                     key={index + "_2"}
                     name={"question" + index + "-points_2"}
-                    value={points && points[`question${index}`]?.points_2}
+                    value={grades && grades[`question${index}`]?.points_2}
                     onChange={handleGradeChange}
                   ></input>
                 </div>
@@ -139,7 +162,24 @@ export default function ProjectGradeCards() {
           ))}
           <button>Zapisz punkty</button>
         </form>
-      </div>
+      </div> */}
+      {/* <div className="gradeForm">
+        <form method="post" onSubmit={handleSubmit}>
+          <select name="team" className="form-control mt-1 center-option-text">
+            <option value="">
+              -- Wybierz zespoł, któremu zmienisz punkty --
+            </option>
+            {teams.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+          <OneFiled options={["Opcja 1", "Opcja 2", "Opcja 3"]} />
+          <button type="submit">Submit form</button>
+        </form>
+      </div> */}
+      <ProjectGradeCardsTEST />
     </>
   );
 }

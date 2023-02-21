@@ -1,8 +1,8 @@
-import TimeSlot from "./Calendar/TimeSlot";
-import AvailableTimeSlot from "./AvailableTimeSlot";
+import CalendarTimeSlot from "./Calendar/CalendarTimeSlot";
+import FormAvailableTimeSlot from "./FormAvailableTimeSlot";
 import { useState } from "react";
 
-export default function SwitchFunction(pk) {
+export default function SwitchFunction() {
   let [pick, setPick] = useState(true);
   const handle = () => {
     setPick((prev) => !prev);
@@ -17,7 +17,7 @@ export default function SwitchFunction(pk) {
           </button>
         </div>
 
-        {pick ? <AvailableTimeSlot /> : <TimeSlot />}
+        {pick ? <FormAvailableTimeSlot /> : <CalendarTimeSlot />}
       </div>
     </>
   );

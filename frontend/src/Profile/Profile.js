@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import AvailableTimeSlotCalendar from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
+import CalendarTimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/CalendarTimeSlotTEST";
 import Projects from "../Projects/Projects";
 import Teams from "../Teams/Teams";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
@@ -49,23 +49,23 @@ export default function Profile() {
         <div className="AvailableTimeSlotCalendar">
           <div className="children">
             <h5>Opiekun 1</h5>
-            <AvailableTimeSlotCalendar />
+            <CalendarTimeSlotTEST id_opiekun="1" />
           </div>
           <div className="children">
             <h5>Opiekun 2</h5>
-            <AvailableTimeSlotCalendar />
+            <CalendarTimeSlotTEST id_opiekun="2" />
           </div>
           <div className="children">
             <h5>Opiekun 3</h5>
-            <AvailableTimeSlotCalendar />
+            <CalendarTimeSlotTEST id_opiekun="3" />
           </div>
           <div className="children">
             <h5>Opiekun 4</h5>
-            <AvailableTimeSlotCalendar />
+            <CalendarTimeSlotTEST id_opiekun="4" />
           </div>
           <div className="children">
             <h5>Opiekun 5</h5>
-            <AvailableTimeSlotCalendar />
+            <CalendarTimeSlotTEST id_opiekun="5" />
           </div>
         </div>
       ) : (

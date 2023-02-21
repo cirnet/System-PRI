@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import "../AvailableTimeSlot.css";
-import TimeSlotElement from "./TimeSlotElement";
+import CalendarTimeSlotElement from "./CalendarTimeSlotElement";
 import "moment/locale/pl";
 import swal from "sweetalert";
 import Loader from "../../Loader/Loader";
-export default function TimeSlot() {
+export default function CalendarTimeSlot() {
   const [hourStart, setHourStart] = useState("");
   const [hourEnd, setHourEnd] = useState("");
   const [content, setContent] = useState([]);
@@ -143,7 +143,7 @@ export default function TimeSlot() {
           time_end={item.time_end}
           onClick={handle}
         >
-          <TimeSlotElement
+          <CalendarTimeSlotElement
             time_start={item.time_start}
             test={reducedOptions.includes(item.time_start)}
             // time_end={item.time_end}

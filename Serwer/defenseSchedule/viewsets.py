@@ -73,3 +73,7 @@ class ProjectGradeCardViewset(viewsets.ModelViewSet):
         queryset = models.ProjectGradeCard.objects.all()
         serializer = serializers.ProjectGradeCardListSerializer(queryset, many=True)
         return Response(serializer.data)
+
+class EvaluationCriteriaViewset(viewsets.ModelViewSet):
+    queryset = models.EvaluationCriteria.objects.all()
+    serializer_class = serializers.EvaluationCriteriaSerializer

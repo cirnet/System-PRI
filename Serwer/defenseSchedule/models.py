@@ -215,14 +215,21 @@ class Project(models.Model):
             pce.project_card = pgc
             pce.save()
 
+    def has_pgc(self):
+        has_pgc = False
+        try:
+            has_pgc = (self.grade_card is not None)
+        except ProjectGradeCard.DoesNotExist:
+            pass
+        return has_pgc
     def save(self, **kwargs):
         super(Project, self).save(**kwargs)
-        if not self.grade_card:
+        if not self.has_pgc():
             pgc = ProjectGradeCard(project=self) #stworzenie karty oceny projektu i przypisanie jej projektu
             pgc.save()
             self.grade_card = pgc
             self.prepare_pgc_content(pgc)
-        
+            self.save()
 
 
 class ProjectGradeCard(models.Model):

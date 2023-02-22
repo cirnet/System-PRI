@@ -80,10 +80,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = '__all__'
 
-class ProjectTeamSerializer(serializers.ModelSerializer):
+class ProjectIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['team']
+        fields = ['id']
 
 class ProjectCardEvaluationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -94,7 +94,7 @@ class ProjectGradeCardSerializer(serializers.ModelSerializer):
     grades = ProjectCardEvaluationSerializer(many=True, read_only=False, label='question')
     #grades = serializers.ListField(child=ProjectCardEvaluationSerializer(many=False, read_only=False, label='question'))
     #team = TeamSerializer(many=False, read_only=False)
-    project = ProjectTeamSerializer(many=False, read_only=False)
+    project = ProjectIDSerializer(source='dupa', many=False, read_only=False)
     #project = ProjectGradeCardTeamsSerializer(many=False)
     class Meta:
         model = ProjectGradeCard

@@ -2,38 +2,48 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 export default function ProjectGradeCardsTEST() {
-  const [pickedTeam, setPickedTeam] = useState("");
-  const [teams, setTeams] = useState([]);
+  const [project, setProject] = useState("");
+  const [projects, setProjects] = useState([]);
   const [ifPost, setifPost] = useState(true);
-  const [idObjectTeam, setIdObjectTeam] = useState("");
-  console.log("idObjectTeam: ", idObjectTeam);
-  // const [question, setQuestion] = useState([
-  //   { criteria: "", first: "", second: "" },
-  //   { criteria: "", first: "", second: "" },
-  //   { criteria: "", first: "", second: "" },
-  //   { criteria: "", first: "", second: "" },
-  // ]);
-  // const [howMuch, setHowMuch] = useState(3);
-  const questions = [
-    { id: 1, value: "Czy przeprowadzono i udokumentowano testy?" },
-    { id: 2, value: "Czy przygotowano prototyp projektu zgodnie ze sztuką?" },
-    { id: 3, value: "Czy projekt jest użyteczny dla grupy docelowej" },
-  ];
+  const [idObjectProject, setIdObjectProject] = useState("");
+  const [questionsFetch, setQuestionsFetch] = useState([]);
+  const [questions, setQuestions] = useState([
+    1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29, 30,
+  ]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/evaluation-criteria/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      setQuestions(data);
+      console.log(data);
+      console.log("questions w useeffect: ", questions);
+    };
+    fetch();
+  }, []);
+
   const generateObjecs = questions.map((e) => ({
     criteria: "",
-    first: "",
-    second: "",
+    points_1: "",
+    points_2: "",
   }));
-  const [question, setQuestion] = useState(generateObjecs);
-  console.log("test: ", generateObjecs);
-  console.log("pickedTeam: ", pickedTeam);
-  console.log("ifPost: ", ifPost);
+
+  const [grades, setGrades] = useState(generateObjecs);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = {
-      pickedTeam,
-      question,
+      project: { id: project },
+      grades,
     };
     console.log(formData);
     if (ifPost) {
@@ -57,7 +67,7 @@ export default function ProjectGradeCardsTEST() {
     } else {
       console.log("put");
       const response = await fetch(
-        `http://localhost:3000/PPPPP/${idObjectTeam}`,
+        `http://localhost:3000/PPPPP/${idObjectProject}`,
         {
           method: "PUT",
           body: JSON.stringify(formData),
@@ -83,45 +93,48 @@ export default function ProjectGradeCardsTEST() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_TEAM, {
+      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       });
-      setTeams(data);
-      // console.log(data);
+      setProjects(data);
+      console.log(data);
     };
     fetch();
   }, []);
   useEffect(() => {
     const request = async () => {
       const { data } = await axios.get(
-        `http://localhost:3000/PPPPP/?pickedTeam=${pickedTeam}`
+        `http://localhost:3000/PPPPP/?project.id=${project}`
       );
       console.log("pobranie danych z picketeam: ", data);
       if (data.length === 0) {
         console.log("pusto");
         setifPost(true);
-        setQuestion(generateObjecs);
+        setGrades(generateObjecs);
       } else {
         setifPost(false);
-        setQuestion(data[0].question);
-        setIdObjectTeam(data[0].id);
+        setGrades(data[0].grades);
+        setIdObjectProject(data[0].id);
       }
 
       // setQuestion(data[0].question);
     };
     request();
-  }, [pickedTeam]);
+  }, [project]);
 
-  const readuceTeams = teams.reduce(function (filter, option) {
-    let tempValue = { id: option.id, name: option.name };
+  const readuceProjects = projects.reduce(function (filter, option) {
+    let tempValue = { id: option.id, topic: option.topic };
     filter.push(tempValue);
     return filter;
   }, []);
-
-  const dane = [1, 2, 3];
+  // const dane = [1, 1, 1];
+  const dane = [
+    1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29, 30,
+  ];
   // const inputList = [];
   // for (let i = 0; i < howMuch; i++) {
   //   inputList.push(<input key={i} type="text" />);
@@ -142,14 +155,14 @@ export default function ProjectGradeCardsTEST() {
           <select
             className="form-control mt-1 center-option-text"
             onChange={(e) => {
-              setPickedTeam(e.target.value);
+              setProject(e.target.value);
             }}
           >
             <option value="">
               -- Wybierz zespoł, któremu zmienisz punkty --
             </option>
-            {readuceTeams.map((item) => (
-              <option value={item.id}>{item.name}</option>
+            {readuceProjects.map((item) => (
+              <option value={item.id}>{item.topic}</option>
             ))}
           </select>
         </div>
@@ -160,22 +173,22 @@ export default function ProjectGradeCardsTEST() {
               <div key={index} className="gradeField">
                 <select
                   name="pytanie"
-                  value={question[index].criteria}
+                  value={grades[index].criteria}
                   onChange={(e) =>
-                    setQuestion([
-                      ...question.slice(0, index),
+                    setGrades([
+                      ...grades.slice(0, index),
                       {
-                        ...question[index],
+                        ...grades[index],
                         criteria: e.target.value,
                       },
-                      ...question.slice(index + 1),
+                      ...grades.slice(index + 1),
                     ])
                   }
                 >
                   <option value="">-- Wybierz pytanie--</option>
                   {questions.map((item) => (
                     <option key={item.id} value={item.id}>
-                      {item.value}
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -183,30 +196,30 @@ export default function ProjectGradeCardsTEST() {
                   <input
                     type="number"
                     className="point1Input"
-                    value={question[index].first}
+                    value={grades[index].points_1}
                     onChange={(e) =>
-                      setQuestion([
-                        ...question.slice(0, index),
+                      setGrades([
+                        ...grades.slice(0, index),
                         {
-                          ...question[index],
-                          first: e.target.value,
+                          ...grades[index],
+                          points_1: e.target.value,
                         },
-                        ...question.slice(index + 1),
+                        ...grades.slice(index + 1),
                       ])
                     }
                   />
 
                   <input
                     type="number"
-                    value={question[index].second}
+                    value={grades[index].points_2}
                     onChange={(e) =>
-                      setQuestion([
-                        ...question.slice(0, index),
+                      setGrades([
+                        ...grades.slice(0, index),
                         {
-                          ...question[index],
-                          second: e.target.value,
+                          ...grades[index],
+                          points_2: e.target.value,
                         },
-                        ...question.slice(index + 1),
+                        ...grades.slice(index + 1),
                       ])
                     }
                   />

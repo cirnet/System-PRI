@@ -11,7 +11,12 @@ export default function TeamAdd() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT);
+      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       console.log(data);
       setProjects(data);
     };
@@ -20,7 +25,12 @@ export default function TeamAdd() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_USER);
+      const { data } = await axios.get(process.env.REACT_APP_API_USER, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       console.log(data);
       setUsers(data);
     };
@@ -42,7 +52,10 @@ export default function TeamAdd() {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
       body: JSON.stringify({
         name,
         supervisor,
@@ -64,7 +77,7 @@ export default function TeamAdd() {
 
   return (
     <>
-      <form onSubmit={handle}>
+      <form onSubmit={handle} className="team_form">
         <label>
           Nazwa zespołu:
           <input

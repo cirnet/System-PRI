@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import "../AvailableTimeSlot.css";
-import TimeSlotElement from "./TimeSlotElement";
+import CalendarTimeSlotElement from "./CalendarTimeSlotElement";
 import "moment/locale/pl";
 import swal from "sweetalert";
 import Loader from "../../Loader/Loader";
-export default function TimeSlot() {
+export default function CalendarTimeSlot() {
   const [hourStart, setHourStart] = useState("");
   const [hourEnd, setHourEnd] = useState("");
   const [content, setContent] = useState([]);
@@ -18,7 +18,13 @@ export default function TimeSlot() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setHourStart(new Date(data[0]?.time_start).getHours());
       setHourEnd(new Date(data[0]?.time_end).getHours());
@@ -28,7 +34,12 @@ export default function TimeSlot() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       setContent(data.sort((a, b) => (a.time_start > b.time_start ? 1 : -1)));
       setLoading(false);
       console.log("render");
@@ -95,7 +106,7 @@ export default function TimeSlot() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     };
     const fetch = async () => {
@@ -118,7 +129,7 @@ export default function TimeSlot() {
 
   // console.log(reducedOptions);
   const days = Object.keys(schedule).map((day) => (
-    <div key={day} className="day">
+    <div key={day} className="dayOrignal">
       <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>
 
       {schedule[day].slice(0, 1).map((item) => (
@@ -132,7 +143,7 @@ export default function TimeSlot() {
           time_end={item.time_end}
           onClick={handle}
         >
-          <TimeSlotElement
+          <CalendarTimeSlotElement
             time_start={item.time_start}
             test={reducedOptions.includes(item.time_start)}
             // time_end={item.time_end}

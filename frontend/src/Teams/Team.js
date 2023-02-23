@@ -10,7 +10,13 @@ export default function Team() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_TEAM + `${id}/`
+        process.env.REACT_APP_API_TEAM + `${id}/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setContent(data);
       console.log(data);

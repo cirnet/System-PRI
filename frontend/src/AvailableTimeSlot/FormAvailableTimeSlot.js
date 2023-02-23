@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AvailableTimeSlot.css";
 import swal from "sweetalert";
 
-export default function AvailableTimeSlot() {
+export default function FormAvailableTimeSlot() {
   const [time_start_min, setTime_start_min] = useState("");
   const [time_end_max, setTime_end_max] = useState("");
   const [time_start, setTime_start] = useState("");
@@ -14,7 +14,13 @@ export default function AvailableTimeSlot() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setContent(data);
       setTime_start_min(

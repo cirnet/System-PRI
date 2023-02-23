@@ -5,10 +5,10 @@ import NavHeader from "../NavHeader/NavHeader";
 import Footer from "../Footer/Footer";
 import Teams from "../Teams/Teams";
 import "./App.css";
-import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
+import FormAvailableTimeSlot from "../AvailableTimeSlot/FormAvailableTimeSlot";
 import Signin from "../Auth/Sigin";
 import Profile from "../Profile/Profile";
-import TimeSlot from "../AvailableTimeSlot/Calendar/TimeSlot";
+import CalendarTimeSlot from "../AvailableTimeSlot/Calendar/CalendarTimeSlot";
 import Comission from "../Comission/Comission";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import Schedule from "../Schedule/Schedule";
@@ -20,13 +20,13 @@ import Error404 from "../Error404/Error404";
 import Project from "../Projects/Project";
 import Projects from "../Projects/Projects";
 import ProjectAdd from "../Projects/ProjectAdd";
-import TimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
+import CalendarTimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/CalendarTimeSlotTEST";
 import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 // import { LoginContext } from "./context/LoginContext";
 function App() {
   // const [usertest, setUsertest] = useState('')
   const token = localStorage.getItem("accessToken");
-  const [pk, setPk] = useState("");
+  const [group_id, setGroup_id] = useState("");
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -40,7 +40,7 @@ function App() {
         process.env.REACT_APP_API_AUTH_USER,
         requestOptions
       ).then((response) => response.json());
-      setPk(data.pk);
+      setGroup_id(data.groups[0].id);
     };
     request();
   }, []);
@@ -50,11 +50,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavHeader pk={pk} />
+      <NavHeader group_id={group_id} />
 
       <div className="App">
         <Routes>
-          {pk === 8 ? (
+          {group_id === 1 ? (
             <>
               <Route path="/schedule/:id" element={<ScheduleDescription />} />
               <Route path="/comission" element={<Comission />} />

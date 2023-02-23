@@ -3,7 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import "./CoordinatorTimeSlot.css";
 
-export default function CoordinatorTimeSlot(pk) {
+export default function CoordinatorTimeSlot(group_id) {
   const [time_start, setTime_start] = useState("");
   const [time_end, setTime_end] = useState("");
   const [person, setPerson] = useState("");
@@ -11,7 +11,13 @@ export default function CoordinatorTimeSlot(pk) {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await axios.get(
-        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       setContent(data);
       setTime_start(
@@ -39,7 +45,7 @@ export default function CoordinatorTimeSlot(pk) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
       body: JSON.stringify({
         time_start: a,
@@ -60,7 +66,7 @@ export default function CoordinatorTimeSlot(pk) {
       );
     window.location.reload(false);
   };
-  if (pk.pk !== 8) {
+  if (group_id.group_id !== 1) {
     return;
   } else {
     return (

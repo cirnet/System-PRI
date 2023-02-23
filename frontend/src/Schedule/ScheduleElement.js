@@ -8,13 +8,13 @@ export default function SheduleElement({
   time_end,
   is_complete,
   is_accepted,
-  pk,
+  group_id,
 }) {
   const navigate = useNavigate();
 
   return (
     <>
-      {pk === 8 ? (
+      {group_id === 1 ? (
         <div
           className="boxSchedule"
           style={{
@@ -23,7 +23,7 @@ export default function SheduleElement({
                 ? "#3ca832"
                 : is_complete
                 ? "#cc9900"
-                : "rgb(255 107 107)",
+                : "#FF6B6B",
           }}
           onClick={() => navigate(`/schedule/${id}`)}
         >

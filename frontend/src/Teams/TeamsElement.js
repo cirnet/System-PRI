@@ -11,7 +11,12 @@ export default function TeamsElement({ name, id, supervisor, project }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT);
+      const { data } = await axios.get(process.env.REACT_APP_API_PROJECT, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
 
       setProjects(data);
     };
@@ -20,7 +25,12 @@ export default function TeamsElement({ name, id, supervisor, project }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_USER);
+      const { data } = await axios.get(process.env.REACT_APP_API_USER, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
 
       setUsers(data);
     };
@@ -30,6 +40,10 @@ export default function TeamsElement({ name, id, supervisor, project }) {
   async function deleteFetch(id) {
     const request = await fetch(process.env.REACT_APP_API_TEAM + `${id}/`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
     });
   }
 

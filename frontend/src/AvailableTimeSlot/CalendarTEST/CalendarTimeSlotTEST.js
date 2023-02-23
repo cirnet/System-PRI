@@ -3,80 +3,50 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import "../AvailableTimeSlot.css";
-import TimeSlotElementTEST from "./TimeSlotElementTEST";
+import CalendarTimeSlotElementTEST from "./CalendarTimeSlotElementTEST";
 import "moment/locale/pl";
 import swal from "sweetalert";
 import Loader from "../../Loader/Loader";
-export default function TimeSlotTEST() {
-  const [hourStart, setHourStart] = useState(9);
-  const [hourEnd, setHourEnd] = useState(12);
+export default function CalendarTimeSlotTEST(id_opiekun) {
+  const [hourStart, setHourStart] = useState("");
+  const [hourEnd, setHourEnd] = useState("");
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [changeHandleStatus, setChangeHandleStatus] = useState(false);
   const [pickedTimeSlots, setPickedTimeSlots] = useState([]);
 
-  const dates = [
-    {
-      id: 145,
-      time_start: "2023-02-06T09:00:00+01:00",
-      time_end: "2023-02-06T09:30:00+01:00",
-      is_complete: false,
-      is_accepted: true,
-      is_selected: false,
-      is_valid: true,
-      members: [8],
-    },
-    {
-      id: 146,
-      time_start: "2023-02-06T09:30:00+01:00",
-      time_end: "2023-02-06T10:00:00+01:00",
-      is_complete: false,
-      is_accepted: true,
-      is_selected: false,
-      is_valid: true,
-      members: [8],
-    },
-    {
-      id: 147,
-      time_start: "2023-02-06T10:00:00+01:00",
-      time_end: "2023-02-06T10:30:00+01:00",
-      is_complete: false,
-      is_accepted: true,
-      is_selected: false,
-      is_valid: true,
-      members: [],
-    },
-    {
-      id: 151,
-      time_start: "2023-02-06T12:00:00+01:00",
-      time_end: "2023-02-06T12:30:00+01:00",
-      is_complete: false,
-      is_accepted: false,
-      is_selected: false,
-      is_valid: true,
-      members: [],
-    },
-  ];
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const { data } = await axios.get(
-  //       process.env.REACT_APP_API_COORDINATOR_TIME_SLOT
-  //     );
-  //     setHourStart(new Date(data[0]?.time_start).getHours());
-  //     setHourEnd(new Date(data[0]?.time_end).getHours());
-  //   };
-  //   fetch();
-  // }, []);
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await axios.get(
+        process.env.REACT_APP_API_COORDINATOR_TIME_SLOT,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      setHourStart(new Date(data[0]?.time_start).getHours());
+      setHourEnd(new Date(data[0]?.time_end).getHours());
+    };
+
+    fetch();
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION);
+      const { data } = await axios.get(process.env.REACT_APP_API_COMMISSION, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
       setContent(data.sort((a, b) => (a.time_start > b.time_start ? 1 : -1)));
       setLoading(false);
       console.log("render");
     };
     fetch();
-  }, [hourStart, hourEnd]);
+  });
 
   function filterDates() {
     return (e) =>
@@ -99,7 +69,6 @@ export default function TimeSlotTEST() {
 
   const handle = (e) => {
     console.log("pickedTimeSlots: ", pickedTimeSlots);
-    console.log("dates: ", dates);
     const time_start = e.currentTarget.getAttribute("time_start");
     const time_end = e.currentTarget.getAttribute("time_end");
     const id = e.currentTarget.getAttribute("date_id");
@@ -142,15 +111,16 @@ export default function TimeSlotTEST() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     };
     const fetch = async () => {
       const { data } = await axios(
-        "http://localhost:3000/AVAILABLE_TIME_SLOT_PICKED",
+        `http://localhost:3000/AVAILABLE_TIME_SLOT_PICKED/?id_opiekun=${id_opiekun.id_opiekun}`,
+        // "http://localhost:3000/AVAILABLE_TIME_SLOT_PICKED",
         requestOptions
       );
-      console.log("fetch data: ", data);
+      console.log(`fetch data dla ${id_opiekun.id_opiekun}: `, data);
 
       setPickedTimeSlots(data);
     };
@@ -166,10 +136,14 @@ export default function TimeSlotTEST() {
   // console.log(reducedOptions);
   const days = Object.keys(schedule).map((day) => (
     <div key={day} className="day">
-      <h5>{day.charAt(0).toUpperCase() + day.slice(1)}</h5>
-
+      <span className="spanDay">
+        {day.charAt(0).toUpperCase() + day.slice(1)}
+      </span>
+      <br />
       {schedule[day].slice(0, 1).map((item) => (
-        <h6 key={item}>{new Date(item.time_start).toLocaleDateString()}</h6>
+        <span className="spanData" key={item}>
+          {new Date(item.time_start).toLocaleDateString()}
+        </span>
       ))}
 
       {schedule[day].map((item) => (
@@ -180,7 +154,7 @@ export default function TimeSlotTEST() {
           date_id={item.id}
           onClick={handle}
         >
-          <TimeSlotElementTEST
+          <CalendarTimeSlotElementTEST
             time_start={item.time_start}
             test={reducedOptions.includes(item.time_start)}
           />

@@ -1,16 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-// import LoginContext from "./Context/LoginContext";
-import AvailableTimeSlot from "../AvailableTimeSlot/AvailableTimeSlot";
-import AvailableTimeSlotCalendar from "../AvailableTimeSlot/CalendarTEST/TimeSlotTEST";
-import Comission from "../Comission/Comission";
+import CalendarTimeSlotTEST from "../AvailableTimeSlot/CalendarTEST/CalendarTimeSlotTEST";
+import Projects from "../Projects/Projects";
+import Teams from "../Teams/Teams";
 import CoordinatorTimeSlot from "../CoordinatorTimeSlot/CoordinatorTimeSlot";
 import "./Profile.css";
 import SwitchComponent from "../AvailableTimeSlot/SwitchComponent";
-import Loader from "../Loader/Loader";
+
 export default function Profile() {
   const [user, setUser] = useState("");
-  const [pk, setPk] = useState("");
-  let num = 0;
+  const [group_id, setGroup_id] = useState("");
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -25,16 +23,12 @@ export default function Profile() {
         requestOptions
       ).then((response) => response.json());
       setUser(data.email.split("@")[0]);
-      setPk(data.pk);
-      console.log(data.pk);
-      console.log(data);
+      setGroup_id(data.groups[0].id);
     };
     request();
   }, []);
-  console.log(pk);
   return (
     <>
-      <span>Dla pk=8 ustawiony tryb koordynatora dla pk=9 tryb opiekuna</span>
       {user ? (
         <h1>
           Witaj <b> {user}!</b>
@@ -44,30 +38,44 @@ export default function Profile() {
       )}
 
       <div className="data_pick">
-        {pk === 8 || pk === 9 ? <SwitchComponent /> : ""}
+        {group_id === 2 || group_id === 1 ? <SwitchComponent /> : ""}
 
-        <CoordinatorTimeSlot pk={pk} />
+        <CoordinatorTimeSlot group_id={group_id} />
       </div>
       <br />
       <br />
 
-      {pk === 8 ? (
+      {group_id === 1 ? (
         <div className="AvailableTimeSlotCalendar">
           <div className="children">
-            <AvailableTimeSlotCalendar />
+            <h5>Opiekun 1</h5>
+            <CalendarTimeSlotTEST id_opiekun="1" />
           </div>
           <div className="children">
-            <AvailableTimeSlotCalendar />
+            <h5>Opiekun 2</h5>
+            <CalendarTimeSlotTEST id_opiekun="2" />
           </div>
           <div className="children">
-            <AvailableTimeSlotCalendar />
+            <h5>Opiekun 3</h5>
+            <CalendarTimeSlotTEST id_opiekun="3" />
           </div>
           <div className="children">
-            <AvailableTimeSlotCalendar />
+            <h5>Opiekun 4</h5>
+            <CalendarTimeSlotTEST id_opiekun="4" />
           </div>
           <div className="children">
-            <AvailableTimeSlotCalendar />
+            <h5>Opiekun 5</h5>
+            <CalendarTimeSlotTEST id_opiekun="5" />
           </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {group_id === 3 ? (
+        <div className="studentDiv">
+          <Projects />
+          <Teams />
         </div>
       ) : (
         ""

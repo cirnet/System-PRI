@@ -9,7 +9,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import ProjectGradeCards from "../ProjectGradeCards/ProjectGradeCards";
 import { useNavigate } from "react-router-dom";
 
-export default function NavHeader(pk) {
+export default function NavHeader(group_id) {
   // const user = JSON.parse(localStorage.getItem('user'));
 
   const navigate = useNavigate();
@@ -45,13 +45,20 @@ export default function NavHeader(pk) {
             {/* <Nav.Link as={Link} to="/timeslot">
               Godziny opiekunów
             </Nav.Link> */}
-            <Nav.Link as={Link} to="/teams">
-              Zespoły
-            </Nav.Link>
-            <Nav.Link as={Link} to="/projects">
-              Projekty
-            </Nav.Link>
-            {pk.pk === 8 ? (
+            {group_id.group_id !== 3 ? (
+              <>
+                <Nav.Link as={Link} to="/teams">
+                  Zespoły
+                </Nav.Link>
+                <Nav.Link as={Link} to="/projects">
+                  Projekty
+                </Nav.Link>
+              </>
+            ) : (
+              ""
+            )}
+
+            {group_id.group_id === 1 ? (
               <>
                 <Nav.Link as={Link} to="/comission">
                   Komisje
